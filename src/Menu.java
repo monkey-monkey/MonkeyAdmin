@@ -34,7 +34,7 @@ public class Menu extends JFrame {
 	private JTextField textField;
 	private ImageIcon nonSelect = new ImageIcon("ic_radio_button_off_black_36dp.png");
 	private ImageIcon select = new ImageIcon("ic_radio_button_on_black_36dp.png");
-	private JRadioButton rdbtnFull, rdbtnSkill, rdbtnTest, rdbtnVdo, rdbtnHw;
+	private JRadioButton rdbtnFull, rdbtnSkill, rdbtnTest, rdbtnVdo, rdbtnHw, rdbtnMk, rdbtnMj, rdbtnMh, rdbtnPj, rdbtnPh;
 	
 
 	/**
@@ -210,6 +210,56 @@ public class Menu extends JFrame {
 		});
 		rdbtnHw.setBounds(759, 335, 139, 41);
 		contentPane.add(rdbtnHw);
+		
+		rdbtnMk = new JRadioButton("MK");
+		rdbtnMk.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+			}
+		});
+		rdbtnMk.setFont(new Font("Dialog", Font.PLAIN, 35));
+		rdbtnMk.setBounds(366, 63, 123, 38);
+		contentPane.add(rdbtnMk);
+		
+		rdbtnMj = new JRadioButton("MJ");
+		rdbtnMj.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+			}
+		});
+		rdbtnMj.setFont(new Font("Dialog", Font.PLAIN, 35));
+		rdbtnMj.setBounds(366, 141, 123, 38);
+		contentPane.add(rdbtnMj);
+		
+		rdbtnMh = new JRadioButton("MH");
+		rdbtnMh.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+			}
+		});
+		rdbtnMh.setFont(new Font("Dialog", Font.PLAIN, 35));
+		rdbtnMh.setBounds(366, 222, 123, 38);
+		contentPane.add(rdbtnMh);
+		
+		rdbtnPj = new JRadioButton("PJ");
+		rdbtnPj.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+			}
+		});
+		rdbtnPj.setFont(new Font("Dialog", Font.PLAIN, 35));
+		rdbtnPj.setBounds(366, 291, 123, 38);
+		contentPane.add(rdbtnPj);
+		
+		rdbtnPh = new JRadioButton("PH");
+		rdbtnPh.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+			}
+		});
+		rdbtnPh.setFont(new Font("Dialog", Font.PLAIN, 35));
+		rdbtnPh.setBounds(366, 352, 123, 38);
+		contentPane.add(rdbtnPh);
 		
 	}
 	
