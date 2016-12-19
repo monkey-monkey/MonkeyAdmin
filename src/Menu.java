@@ -15,18 +15,18 @@ limitations under the License.
  */
 
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import java.awt.Font;
-import javax.swing.JTextField;
+import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 public class Menu extends JFrame {
 
@@ -34,6 +34,7 @@ public class Menu extends JFrame {
 	private JTextField textField;
 	private ImageIcon nonSelect = new ImageIcon("ic_radio_button_off_black_36dp.png");
 	private ImageIcon select = new ImageIcon("ic_radio_button_on_black_36dp.png");
+	private JRadioButton rdbtnFull, rdbtnSkill, rdbtnTest, rdbtnVdo, rdbtnHw;
 	
 
 	/**
@@ -43,7 +44,7 @@ public class Menu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Menu frame = new Menu(args[0]);
+					Menu frame = new Menu("Hello");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -80,15 +81,15 @@ public class Menu extends JFrame {
 		lblId.setBounds(52, 43, 257, 41);
 		contentPane.add(lblId);
 		
-		JRadioButton rdbtnFull = new JRadioButton("FULL");
+		rdbtnFull = new JRadioButton("FULL");
 		rdbtnFull.setFont(new Font("Cordia New", Font.PLAIN, 35));
-		JRadioButton rdbtnSkill = new JRadioButton("SKILL");
+		rdbtnSkill = new JRadioButton("SKILL");
 		rdbtnSkill.setFont(new Font("Cordia New", Font.PLAIN, 35));
-		JRadioButton rdbtnTest = new JRadioButton("TEST");
+		rdbtnTest = new JRadioButton("TEST");
 		rdbtnTest.setFont(new Font("Cordia New", Font.PLAIN, 35));
-		JRadioButton rdbtnVdo = new JRadioButton("VDO");
+		rdbtnVdo = new JRadioButton("VDO");
 		rdbtnVdo.setFont(new Font("Cordia New", Font.PLAIN, 35));
-		JRadioButton rdbtnHw = new JRadioButton("HW");
+		rdbtnHw = new JRadioButton("HW");
 		rdbtnHw.setFont(new Font("Cordia New", Font.PLAIN, 35));
 		
 		/**
@@ -116,9 +117,10 @@ public class Menu extends JFrame {
 				rdbtnTest.setSelected(false);
 				rdbtnVdo.setSelected(false);
 				rdbtnHw.setSelected(false);
+				setText();
 			}
 		});
-		rdbtnFull.setBounds(437, 113, 123, 38);
+		rdbtnFull.setBounds(759, 59, 123, 38);
 		contentPane.add(rdbtnFull);
 		
 		
@@ -137,9 +139,10 @@ public class Menu extends JFrame {
 				rdbtnTest.setSelected(false);
 				rdbtnVdo.setSelected(false);
 				rdbtnHw.setSelected(false);
+				setText();
 			}
 		});
-		rdbtnSkill.setBounds(574, 112, 109, 41);
+		rdbtnSkill.setBounds(758, 205, 109, 41);
 		contentPane.add(rdbtnSkill);
 		
 		
@@ -158,9 +161,10 @@ public class Menu extends JFrame {
 				rdbtnSkill.setSelected(false);
 				rdbtnVdo.setSelected(false);
 				rdbtnHw.setSelected(false);
+				setText();
 			}
 		});
-		rdbtnTest.setBounds(707, 121, 123, 41);
+		rdbtnTest.setBounds(759, 274, 123, 41);
 		contentPane.add(rdbtnTest);
 		
 		
@@ -179,9 +183,10 @@ public class Menu extends JFrame {
 				rdbtnSkill.setSelected(false);
 				rdbtnTest.setSelected(false);
 				rdbtnHw.setSelected(false);
+				setText();
 			}
 		});
-		rdbtnVdo.setBounds(414, 273, 146, 41);
+		rdbtnVdo.setBounds(759, 124, 146, 41);
 		contentPane.add(rdbtnVdo);
 		
 		
@@ -200,9 +205,31 @@ public class Menu extends JFrame {
 				rdbtnSkill.setSelected(false);
 				rdbtnTest.setSelected(false);
 				rdbtnVdo.setSelected(false);
+				setText();
 			}
 		});
-		rdbtnHw.setBounds(671, 273, 139, 41);
+		rdbtnHw.setBounds(759, 335, 139, 41);
 		contentPane.add(rdbtnHw);
+		
+	}
+	
+	public void setText() {
+		String text = "";
+		if (rdbtnFull.isSelected()) {
+			text += "FULL";
+		}
+		if (rdbtnSkill.isSelected()) {
+			text += "SKILL";
+		}
+		if (rdbtnTest.isSelected()) {
+			text += "TEST";
+		}
+		if (rdbtnVdo.isSelected()) {
+			text += "VDO";
+		}
+		if (rdbtnHw.isSelected()) {
+			text += "HW";
+		}
+		textField.setText(text);
 	}
 }
