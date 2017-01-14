@@ -1,5 +1,5 @@
 /**
-Copyright [2016] [Chutipon]
+Copyright [2017] [Chutipon]
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -28,6 +28,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+@SuppressWarnings("serial")
 public class Index extends JFrame {
 
 	private JPanel contentPane;
@@ -55,16 +56,16 @@ public class Index extends JFrame {
 	 */
 	public Index() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1011, 521);
+		setBounds(100, 100, 1920, 1080);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Scan Student ID");
-		lblNewLabel.setFont(new Font("Cordia New", Font.PLAIN, 55));
+		lblNewLabel.setFont(new Font("Cordia New", Font.PLAIN, 90));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(360, 116, 281, 51);
+		lblNewLabel.setBounds(654, 321, 558, 104);
 		contentPane.add(lblNewLabel);
 		
 		textField = new JTextField();
@@ -78,7 +79,7 @@ public class Index extends JFrame {
 				}
 			}
 		});
-		textField.setBounds(244, 264, 513, 75);
+		textField.setBounds(514, 495, 839, 95);
 		contentPane.add(textField);
 		textField.setColumns(10);
 	}
