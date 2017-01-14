@@ -24,6 +24,9 @@ public class Menu extends JFrame {
 	private ArrayList<JToggleButton> levelBtn = new ArrayList<JToggleButton>();
 	private ArrayList<JToggleButton> subLevelBtn = new ArrayList<JToggleButton>();
 	private ArrayList<JButton> numpadBtn = new ArrayList<JButton>();
+	private ArrayList<JToggleButton> subSheetBtn = new ArrayList<JToggleButton>();
+	private ArrayList<JToggleButton> sheetSetBtn = new ArrayList<JToggleButton>();
+	private String sheetNum = "";
 	
 	/**
 	 * Launch the application.
@@ -240,11 +243,15 @@ public class Menu extends JFrame {
 						@Override
 						public void mouseClicked(MouseEvent e) {
 							if (numpadBtn.get(temp).getLabel().equals("C")) {
-								textField.setText("");
-								setText();
+								sheetNum = "";
 							} else {
-								textField.setText(textField.getText() + numpadBtn.get(temp).getLabel());
+								if (sheetNum.length() < 2) {
+									sheetNum += numpadBtn.get(temp).getLabel();
+								}else {
+									sheetNum = sheetNum.substring(1) + numpadBtn.get(temp).getLabel();
+								}
 							}
+							setText();
 						}
 					});
 					contentPane.add(numpadBtn.get(index));
@@ -254,20 +261,62 @@ public class Menu extends JFrame {
 			}
 		}
 		
+		/**
+		 * Create object sub sheet button
+		 */
+		for (int i = 0; i < 3; i++) {
+			subSheetBtn.add(new JToggleButton(Character.toString((char)(i + 97))));
+		}
+		
+		/**
+		 * Set attribute, position, event listener to sub sheet button
+		 */
+		for (int i = 0; i < subSheetBtn.size(); i++) {
+			subSheetBtn.get(i).setBackground(Color.WHITE);
+			subSheetBtn.get(i).setFont(new Font("Cordia New", Font.PLAIN, 70));
+			subSheetBtn.get(i).setBounds(1400 + (i * 110), 700, 100, 100);
+			final int temp = i;
+			subSheetBtn.get(i).addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					for (int j = 0; j < subSheetBtn.size(); j++) {
+						if (j == temp) continue;
+						subSheetBtn.get(j).setSelected(false);
+					}
+					setText();
+				}
+			});
+			contentPane.add(subSheetBtn.get(i));
+		}
+		
+		/**
+		 * Create object sheet set button
+		 */
+		sheetSetBtn.add(new JToggleButton("VDO"));
+		sheetSetBtn.add(new JToggleButton("SKILL"));
+		sheetSetBtn.add(new JToggleButton("HW"));
+		
+		/**
+		 * Set attribute, position, event listener to sheet set button
+		 */
 	}
 	
 	@SuppressWarnings("deprecation")
 	private void setText() {
 		String temp = "";
 		for (int i = 0; i < subjectBtn.size(); i++) {
-			if(subjectBtn.get(i).isSelected()) temp += subjectBtn.get(i).getLabel();
+			if (subjectBtn.get(i).isSelected()) temp += subjectBtn.get(i).getLabel();
 		}
 		temp += "-";
 		for (int i = 0; i < levelBtn.size(); i++) {
-			if(levelBtn.get(i).isSelected()) temp += levelBtn.get(i).getLabel();
+			if (levelBtn.get(i).isSelected()) temp += levelBtn.get(i).getLabel();
 		}
 		for (int i = 0; i < subLevelBtn.size(); i++) {
-			if(subLevelBtn.get(i).isSelected()) temp += subLevelBtn.get(i).getLabel();
+			if (subLevelBtn.get(i).isSelected()) temp += subLevelBtn.get(i).getLabel();
+		}
+		temp += sheetNum;
+		for (int i = 0; i < subSheetBtn.size(); i++) {
+			if (subSheetBtn.get(i).isSelected()) temp += subSheetBtn.get(i).getLabel();
 		}
 		textField.setText(temp);
 	}
