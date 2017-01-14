@@ -11,13 +11,18 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JToggleButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+@SuppressWarnings("serial")
 public class Menu extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
 	private ArrayList<JButton> actionBtn = new ArrayList<JButton>();
+	private ArrayList<JToggleButton> subjectBtn = new ArrayList<JToggleButton>();
 	private ArrayList<JToggleButton> levelBtn = new ArrayList<JToggleButton>();
+	private ArrayList<JToggleButton> subLevelBtn = new ArrayList<JToggleButton>();
 	
 	/**
 	 * Launch the application.
@@ -38,6 +43,7 @@ public class Menu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	@SuppressWarnings("deprecation")
 	public Menu(String id) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1920, 1080);
@@ -63,43 +69,13 @@ public class Menu extends JFrame {
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
-//		JToggleButton tglbtnMj = new JToggleButton("MJ");
-//		tglbtnMj.setBackground(new Color(255, 204, 0));
-//		tglbtnMj.setFont(new Font("Cordia New", Font.PLAIN, 80));
-//		tglbtnMj.setBounds(100, 250, 114, 96);
-//		contentPane.add(tglbtnMj);
-		
-		
-		levelBtn.add(new JToggleButton("MK"));
-		levelBtn.add(new JToggleButton("MJ"));
-		levelBtn.add(new JToggleButton("MH"));
-		levelBtn.add(new JToggleButton("MI"));
-		levelBtn.add(new JToggleButton("PJ"));
-		levelBtn.add(new JToggleButton("PH"));
-		levelBtn.add(new JToggleButton("PI"));
-		
-		for (int i = 0; i < levelBtn.size(); i++) {
-			levelBtn.get(i).setBackground(new Color(255, 204, 0));
-			levelBtn.get(i).setFont(new Font("Cordia New", Font.PLAIN, 80));
-			levelBtn.get(i).setBounds(100, 200 + (i * 110), 120, 90);
-			contentPane.add(levelBtn.get(i));
-		}
-		
 		
 		/**
-		 * Create object action Button
+		 * Create object action button
 		 */
 		actionBtn.add(new JButton("Print & VDO"));
 		actionBtn.add(new JButton("Print"));
 		actionBtn.add(new JButton("VDO"));
-		
-		/**
-		 * Set attribute for action button
-		 */
-		for (int i = 0; i < actionBtn.size(); i++) {
-			actionBtn.get(i).setFont(new Font("Cordia New", Font.PLAIN, 40));
-			actionBtn.get(i).setBackground(Color.WHITE);
-		}
 		
 		/**
 		 * Set position of action button
@@ -108,15 +84,145 @@ public class Menu extends JFrame {
 		actionBtn.get(1).setBounds(1451, 60, 151, 50);
 		actionBtn.get(2).setBounds(1692, 60, 151, 50);
 		
-		
 		/**
-		 * Add action button to content pane
+		 * Set attribute for action button and add to content pane
 		 */
 		for (int i = 0; i < actionBtn.size(); i++) {
+			actionBtn.get(i).setFont(new Font("Cordia New", Font.PLAIN, 40));
+			actionBtn.get(i).setBackground(Color.WHITE);
 			contentPane.add(actionBtn.get(i));
 		}
 		
+		/**
+		 * Create object subject button
+		 */
+		subjectBtn.add(new JToggleButton("MK"));
+		subjectBtn.add(new JToggleButton("MJ"));
+		subjectBtn.add(new JToggleButton("MH"));
+		subjectBtn.add(new JToggleButton("MI"));
+		subjectBtn.add(new JToggleButton("PJ"));
+		subjectBtn.add(new JToggleButton("PH"));
+		subjectBtn.add(new JToggleButton("PI"));
 		
+		/**
+		 * Set attribute, position, event listener to level button
+		 */
+		for (int i = 0; i < subjectBtn.size(); i++) {
+			subjectBtn.get(i).setBackground((subjectBtn.get(i).getLabel().charAt(0) == 'M') ? new Color(239, 163, 21) : new Color(208, 137, 244));
+			subjectBtn.get(i).setFont(new Font("Cordia New", Font.PLAIN, 80));
+			subjectBtn.get(i).setBounds(100, 200 + (i * 110), 120, 90);
+			final int temp = i;
+			subjectBtn.get(i).addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					for (int j = 0; j < subjectBtn.size(); j++) {
+						if (temp == j) continue;
+						subjectBtn.get(j).setSelected(false);
+						setText();
+					}
+				}
+			});
+			contentPane.add(subjectBtn.get(i));
+		}
 		
+		/**
+		 * Create object level button
+		 */
+		for (int i = 0; i < 26; i++) {
+			levelBtn.add(new JToggleButton(Character.toString((char)(65 + i))));
+		}
+		levelBtn.add(new JToggleButton("XC"));
+		levelBtn.add(new JToggleButton("XCA"));
+		levelBtn.add(new JToggleButton("XCN"));
+		levelBtn.add(new JToggleButton("XEL"));
+		levelBtn.add(new JToggleButton("XF"));
+		levelBtn.add(new JToggleButton("XG"));
+		levelBtn.add(new JToggleButton("XL"));
+		levelBtn.add(new JToggleButton("XM"));
+		levelBtn.add(new JToggleButton("XN"));
+		levelBtn.add(new JToggleButton("XP"));
+		levelBtn.add(new JToggleButton("XR"));
+		levelBtn.add(new JToggleButton("XS"));
+		levelBtn.add(new JToggleButton("XSS"));
+		levelBtn.add(new JToggleButton("XST"));
+		levelBtn.add(new JToggleButton("XT"));
+		levelBtn.add(new JToggleButton("XV"));
+		
+		/**
+		 * Set attribute, position, event listener to level button
+		 */
+		int index = 0;
+		for (int i = 0; i < 5; i++) {
+			for (int j = 0; j < 9; j++) {
+				try {
+					levelBtn.get(index).setBackground(Color.WHITE);
+					levelBtn.get(index).setFont(new Font("Cordia New", Font.PLAIN, 70));
+					levelBtn.get(index).setBounds(300 + (i * 160), 200 + (j * 90), 150, 80);
+					final int temp = index;
+					levelBtn.get(index).addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							for (int k = 0; k < levelBtn.size(); k++) {
+								if (temp == k) continue;
+								levelBtn.get(k).setSelected(false);
+							}
+							setText();
+						}
+					});
+					contentPane.add(levelBtn.get(index));
+					index++;
+				} catch (Exception e) {
+				}
+			}
+		}
+		
+		/**
+		 * Create object sub level button
+		 */
+		subLevelBtn.add(new JToggleButton("B"));
+		subLevelBtn.add(new JToggleButton("I"));
+		subLevelBtn.add(new JToggleButton("E"));
+		subLevelBtn.add(new JToggleButton("P"));
+		subLevelBtn.add(new JToggleButton("A"));
+		
+		System.out.println(subLevelBtn.size());
+		/**
+		 * Set attribute, position, event listener to sub level button
+		 */
+		
+		for (int i = 0; i < subLevelBtn.size(); i++) {
+			subLevelBtn.get(i).setBackground(Color.WHITE);
+			subLevelBtn.get(i).setFont(new Font("Cordia New", Font.PLAIN, 70));
+			subLevelBtn.get(i).setBounds(1150, 200 + (i * 110), 100, 80);
+			final int temp = i;
+			subLevelBtn.get(i).addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					for (int j = 0; j < subLevelBtn.size(); j++) {
+						if (j == temp) continue;
+						subLevelBtn.get(j).setSelected(false);
+					}
+					setText();
+				}
+			});
+			contentPane.add(subLevelBtn.get(i));
+		}
+		
+	}
+	
+	@SuppressWarnings("deprecation")
+	private void setText() {
+		String temp = "";
+		for (int i = 0; i < subjectBtn.size(); i++) {
+			if(subjectBtn.get(i).isSelected()) temp += subjectBtn.get(i).getLabel();
+		}
+		temp += "-";
+		for (int i = 0; i < levelBtn.size(); i++) {
+			if(levelBtn.get(i).isSelected()) temp += levelBtn.get(i).getLabel();
+		}
+		for (int i = 0; i < subLevelBtn.size(); i++) {
+			if(subLevelBtn.get(i).isSelected()) temp += subLevelBtn.get(i).getLabel();
+		}
+		textField.setText(temp);
 	}
 }
