@@ -23,6 +23,7 @@ public class Menu extends JFrame {
 	private ArrayList<JToggleButton> subjectBtn = new ArrayList<JToggleButton>();
 	private ArrayList<JToggleButton> levelBtn = new ArrayList<JToggleButton>();
 	private ArrayList<JToggleButton> subLevelBtn = new ArrayList<JToggleButton>();
+	private ArrayList<JButton> numpadBtn = new ArrayList<JButton>();
 	
 	/**
 	 * Launch the application.
@@ -58,14 +59,14 @@ public class Menu extends JFrame {
 		contentPane.add(lblId);
 		
 		JLabel lblWorksheetSet = new JLabel("Worksheet Set");
-		lblWorksheetSet.setFont(new Font("Cordia New", Font.PLAIN, 45));
-		lblWorksheetSet.setBounds(496, 60, 196, 50);
+		lblWorksheetSet.setFont(new Font("Cordia New", Font.PLAIN, 55));
+		lblWorksheetSet.setBounds(445, 60, 247, 50);
 		contentPane.add(lblWorksheetSet);
 		
 		textField = new JTextField();
-		textField.setFont(new Font("Cordia New", Font.PLAIN, 40));
+		textField.setFont(new Font("Cordia New", Font.PLAIN, 90));
 		textField.setEditable(false);
-		textField.setBounds(702, 63, 271, 50);
+		textField.setBounds(702, 33, 400, 80);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
@@ -184,8 +185,9 @@ public class Menu extends JFrame {
 		subLevelBtn.add(new JToggleButton("E"));
 		subLevelBtn.add(new JToggleButton("P"));
 		subLevelBtn.add(new JToggleButton("A"));
+		subLevelBtn.add(new JToggleButton("T"));
 		
-		System.out.println(subLevelBtn.size());
+		
 		/**
 		 * Set attribute, position, event listener to sub level button
 		 */
@@ -206,6 +208,50 @@ public class Menu extends JFrame {
 				}
 			});
 			contentPane.add(subLevelBtn.get(i));
+		}
+		
+		/**
+		 * Create object number pad button
+		 */
+		numpadBtn.add(new JButton("7"));
+		numpadBtn.add(new JButton("4"));
+		numpadBtn.add(new JButton("1"));
+		numpadBtn.add(new JButton("C"));
+		numpadBtn.add(new JButton("8"));
+		numpadBtn.add(new JButton("5"));
+		numpadBtn.add(new JButton("2"));
+		numpadBtn.add(new JButton("0"));
+		numpadBtn.add(new JButton("9"));
+		numpadBtn.add(new JButton("6"));
+		numpadBtn.add(new JButton("3"));
+		
+		/**
+		 * Set attribute, position, event listener to sub level button
+		 */
+		index = 0;
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 4; j++) {
+				try {
+					numpadBtn.get(index).setBackground(Color.WHITE);
+					numpadBtn.get(index).setFont(new Font("Cordia New", Font.PLAIN, 70));
+					numpadBtn.get(index).setBounds(1400 + (i * 110), 200 + (j * 110), 100, 100);
+					final int temp = index;
+					numpadBtn.get(index).addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							if (numpadBtn.get(temp).getLabel().equals("C")) {
+								textField.setText("");
+								setText();
+							} else {
+								textField.setText(textField.getText() + numpadBtn.get(temp).getLabel());
+							}
+						}
+					});
+					contentPane.add(numpadBtn.get(index));
+					index++;
+				} catch (Exception e) {
+				}
+			}
 		}
 		
 	}
