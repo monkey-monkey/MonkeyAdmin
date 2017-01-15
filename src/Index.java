@@ -33,8 +33,8 @@ public class Index extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
-	public final String VDO_LOCATION = "\\\\192.168.1.150\\vdo\\";
-	public static String DB_LOCATION = "\\\\192.168.1.150\\database\\";
+	public static final String VDO_LOCATION = "\\\\192.168.1.150\\vdo\\";
+	public static final String DB_LOCATION = "\\\\192.168.1.150\\database\\";
 
 	/**
 	 * Launch the application.

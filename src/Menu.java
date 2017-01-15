@@ -89,6 +89,16 @@ public class Menu extends JFrame {
 		actionBtn.get(2).setBounds(1692, 60, 151, 50);
 		
 		/**
+		 * Add action to action button
+		 */
+		actionBtn.get(0).addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
+		
+		/**
 		 * Set attribute for action button and add to content pane
 		 */
 		for (int i = 0; i < actionBtn.size(); i++) {

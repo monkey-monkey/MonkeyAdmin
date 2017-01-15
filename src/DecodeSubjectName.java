@@ -18,12 +18,12 @@ public class DecodeSubjectName {
 		path += "\\" + levelName.substring(0, levelName.indexOf('-')) + "\\";
 		FileUtil tempFolder = new FileUtil(path);
 		try {
-			path += tempFolder.getMapFromFolder().get(levelName.substring(0, levelName.indexOf('0') - 1)) + "\\";
+			path += tempFolder.getMapFullNameFromFolder().get(levelName.substring(0, levelName.indexOf('0') - 1)) + "\\";
 		} catch (FileNotFoundException e) {
 		}
 		FileUtil revGetter = new FileUtil(path);
 		path += levelName + revGetter.getRev(levelName) + "\\" + levelName + "VDO.mp4";
-		
+		System.out.println(path);
 	}
 	
 	@Override
