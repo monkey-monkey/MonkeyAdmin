@@ -33,7 +33,8 @@ public class Index extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
-	public final String DB_LOCATION = "\\\\192.168.1.150\\vdo\\";
+	public final String VDO_LOCATION = "\\\\192.168.1.150\\vdo\\";
+	public static String DB_LOCATION = "\\\\192.168.1.150\\database\\";
 
 	/**
 	 * Launch the application.
@@ -97,15 +98,15 @@ public class Index extends JFrame {
 	}
 	
 	public boolean isValid(String id) {
-		if (id.length() == 6 && (id.charAt(id.length() - 1) == '1' || id.charAt(id.length() - 1) == '2') && checkInDB(id)) {
+		if (id.length() == 6 && (id.charAt(id.length() - 1) == '1' || id.charAt(id.length() - 1) == '2') && isInDB(id)) {
 			return true;
 		}
 		return false;
 	}
 	
-	public boolean checkInDB(String id) {
+	public boolean isInDB(String id) {
 		try {
-			File folder = new File(DB_LOCATION + id);
+			File folder = new File(VDO_LOCATION + id);
 			File[] listOfFiles = folder.listFiles();
 			for (int i = 0; i < listOfFiles.length; i++) {
 				if (listOfFiles[i].isFile()) {
