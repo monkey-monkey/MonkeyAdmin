@@ -63,13 +63,13 @@ public class Menu extends JFrame {
 		
 		JLabel lblWorksheetSet = new JLabel("Worksheet Set");
 		lblWorksheetSet.setFont(new Font("Cordia New", Font.PLAIN, 55));
-		lblWorksheetSet.setBounds(445, 60, 247, 50);
+		lblWorksheetSet.setBounds(368, 61, 247, 50);
 		contentPane.add(lblWorksheetSet);
 		
 		textField = new JTextField();
-		textField.setFont(new Font("Cordia New", Font.PLAIN, 90));
+		textField.setFont(new Font("Cordia New", Font.PLAIN, 85));
 		textField.setEditable(false);
-		textField.setBounds(702, 33, 400, 80);
+		textField.setBounds(625, 33, 477, 80);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
@@ -295,10 +295,28 @@ public class Menu extends JFrame {
 		sheetSetBtn.add(new JToggleButton("VDO"));
 		sheetSetBtn.add(new JToggleButton("SKILL"));
 		sheetSetBtn.add(new JToggleButton("HW"));
+		sheetSetBtn.add(new JToggleButton("TEST"));
 		
 		/**
 		 * Set attribute, position, event listener to sheet set button
 		 */
+		for (int i = 0; i < sheetSetBtn.size(); i++) {
+			sheetSetBtn.get(i).setBackground(Color.WHITE);
+			sheetSetBtn.get(i).setFont(new Font("Cordia New", Font.PLAIN, 60));
+			sheetSetBtn.get(i).setBounds(1100 + (200 * i), 880, 180, 80);
+			final int temp = i;
+			sheetSetBtn.get(i).addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					for (int j = 0; j < sheetSetBtn.size(); j++) {
+						if (j == temp) continue;
+						sheetSetBtn.get(j).setSelected(false);
+					}
+					setText();
+				}
+			});
+			contentPane.add(sheetSetBtn.get(i));
+		}
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -317,6 +335,9 @@ public class Menu extends JFrame {
 		temp += sheetNum;
 		for (int i = 0; i < subSheetBtn.size(); i++) {
 			if (subSheetBtn.get(i).isSelected()) temp += subSheetBtn.get(i).getLabel();
+		}
+		for (int i = 0; i < sheetSetBtn.size(); i++) {
+			if (sheetSetBtn.get(i).isSelected()) temp += sheetSetBtn.get(i).getLabel();
 		}
 		textField.setText(temp);
 	}
