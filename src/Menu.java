@@ -146,7 +146,7 @@ public class Menu extends JFrame {
 					}else {
 						for (int j = 0; j < levelBtn.size(); j++) {
 							levelBtn.get(j).setBackground(Color.WHITE);
-							levelBtn.get(j).setEnabled(true);
+							levelBtn.get(j).setEnabled(false);
 						}
 					}
 					
@@ -188,6 +188,7 @@ public class Menu extends JFrame {
 					levelBtn.get(index).setBackground(Color.WHITE);
 					levelBtn.get(index).setFont(new Font("Cordia New", Font.PLAIN, 70));
 					levelBtn.get(index).setBounds(300 + (i * 160), 200 + (j * 90), 150, 80);
+					levelBtn.get(index).setEnabled(false);
 					final int temp = index;
 					levelBtn.get(index).addMouseListener(new MouseAdapter() {
 						@Override
@@ -373,11 +374,10 @@ public class Menu extends JFrame {
 		try {
 			for (int i = 0; i < levelBtn.size(); i++) {
 				levelBtn.get(i).setBackground(Color.WHITE);
-				levelBtn.get(i).setEnabled(true);
+				levelBtn.get(i).setEnabled(false);
 				if (listAvailableLevel.contains(levelBtn.get(i).getLabel())) {
 					levelBtn.get(i).setBackground(new Color(119, 234, 173));
-				}else {
-					levelBtn.get(i).setEnabled(false);
+					levelBtn.get(i).setEnabled(true);
 				}
 			}
 		} catch (Exception e) {
