@@ -40,25 +40,12 @@ public class FileUtil {
 		return fileFullNameMap;
 	}
 	
-//	public HashMap<String, String> getMapNameFromFolder() throws FileNotFoundException {
-//		fileNameMap = new HashMap<String, String>();
-//		ArrayList<String> fileNameList = getFileNameList();
-//		for (int i = 0; i < fileNameList.size(); i++) {
-//			try {
-//				System.out.println(fileNameList.get(i).substring(0, fileNameList.get(i).indexOf('-')) + " " + fileNameList.get(i).substring(fileNameList.get(i).indexOf('-') + 1, fileNameList.get(i).indexOf('_')));
-//				fileNameMap.put(fileNameList.get(i).substring(0, fileNameList.get(i).indexOf('-')), fileNameList.get(i).substring(fileNameList.get(i).indexOf('-') + 1, fileNameList.get(i).indexOf('_')));
-//			} catch (Exception e) {
-//			}
-//		}
-//		return fileNameMap;
-//	}
-	
 	public ArrayList<String> getListNameFromFolder() throws FileNotFoundException {
 		folderNameList = new ArrayList<String>();
 		ArrayList<String> fileNameList = getFileNameList();
 		for (int i = 0; i < fileNameList.size(); i++) {
 			try {
-				System.out.println(fileNameList.get(i).substring(fileNameList.get(i).indexOf('-') + 1, fileNameList.get(i).indexOf('_')));
+//				System.out.println(fileNameList.get(i).substring(fileNameList.get(i).indexOf('-') + 1, fileNameList.get(i).indexOf('_')));
 				folderNameList.add(fileNameList.get(i).substring(fileNameList.get(i).indexOf('-') + 1, fileNameList.get(i).indexOf('_')));
 			} catch (Exception e) {
 			}

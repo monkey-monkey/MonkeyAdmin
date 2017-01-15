@@ -13,6 +13,7 @@ import java.awt.Color;
 import javax.swing.JToggleButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileNotFoundException;
 
 @SuppressWarnings("serial")
 public class Menu extends JFrame {
@@ -26,6 +27,7 @@ public class Menu extends JFrame {
 	private ArrayList<JButton> numpadBtn = new ArrayList<JButton>();
 	private ArrayList<JToggleButton> subSheetBtn = new ArrayList<JToggleButton>();
 	private ArrayList<JToggleButton> sheetSetBtn = new ArrayList<JToggleButton>();
+	private ArrayList<String> listAvailableLevel;
 	private String sheetNum = "";
 	
 	/**
@@ -116,7 +118,7 @@ public class Menu extends JFrame {
 //		subjectBtn.add(new JToggleButton("MI"));
 		subjectBtn.add(new JToggleButton("PJ"));
 		subjectBtn.add(new JToggleButton("PH"));
-		subjectBtn.add(new JToggleButton("PI"));
+//		subjectBtn.add(new JToggleButton("PI"));
 		
 		/**
 		 * Set attribute, position, event listener to level button
@@ -132,8 +134,22 @@ public class Menu extends JFrame {
 					for (int j = 0; j < subjectBtn.size(); j++) {
 						if (temp == j) continue;
 						subjectBtn.get(j).setSelected(false);
-						setText();
 					}
+					setText();
+					FileUtil getList = new FileUtil(Index.DB_LOCATION + ((subjectBtn.get(temp).getLabel().charAt(0) == 'M') ? "MATH_DB" : "PHYSICS_DB") + "\\" + subjectBtn.get(temp).getLabel() + "\\");
+					try {
+						listAvailableLevel = getList.getListNameFromFolder();
+					} catch (FileNotFoundException e1) {
+					}
+					if (subjectBtn.get(temp).isSelected()) {
+						setColor();
+					}else {
+						for (int j = 0; j < levelBtn.size(); j++) {
+							levelBtn.get(j).setBackground(Color.WHITE);
+							levelBtn.get(j).setEnabled(true);
+						}
+					}
+					
 				}
 			});
 			contentPane.add(subjectBtn.get(i));
@@ -350,5 +366,21 @@ public class Menu extends JFrame {
 			if (sheetSetBtn.get(i).isSelected()) temp += sheetSetBtn.get(i).getLabel();
 		}
 		textField.setText(temp);
+	}
+	
+	@SuppressWarnings("deprecation")
+	private void setColor() {
+		try {
+			for (int i = 0; i < levelBtn.size(); i++) {
+				levelBtn.get(i).setBackground(Color.WHITE);
+				levelBtn.get(i).setEnabled(true);
+				if (listAvailableLevel.contains(levelBtn.get(i).getLabel())) {
+					levelBtn.get(i).setBackground(new Color(119, 234, 173));
+				}else {
+					levelBtn.get(i).setEnabled(false);
+				}
+			}
+		} catch (Exception e) {
+		}
 	}
 }
