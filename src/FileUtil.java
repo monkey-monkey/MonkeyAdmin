@@ -12,7 +12,7 @@ public class FileUtil {
 	private String path;
 	private File[] folderList;
 	private HashMap<String, String> fileFullNameMap;
-	private HashMap<String, String> fileNameMap;
+	private ArrayList<String> folderNameList;
 	
 	
 	public FileUtil(String path) {
@@ -40,17 +40,30 @@ public class FileUtil {
 		return fileFullNameMap;
 	}
 	
-	public HashMap<String, String> getMapNameFromFolder() throws FileNotFoundException {
-		fileNameMap = new HashMap<String, String>();
+//	public HashMap<String, String> getMapNameFromFolder() throws FileNotFoundException {
+//		fileNameMap = new HashMap<String, String>();
+//		ArrayList<String> fileNameList = getFileNameList();
+//		for (int i = 0; i < fileNameList.size(); i++) {
+//			try {
+//				System.out.println(fileNameList.get(i).substring(0, fileNameList.get(i).indexOf('-')) + " " + fileNameList.get(i).substring(fileNameList.get(i).indexOf('-') + 1, fileNameList.get(i).indexOf('_')));
+//				fileNameMap.put(fileNameList.get(i).substring(0, fileNameList.get(i).indexOf('-')), fileNameList.get(i).substring(fileNameList.get(i).indexOf('-') + 1, fileNameList.get(i).indexOf('_')));
+//			} catch (Exception e) {
+//			}
+//		}
+//		return fileNameMap;
+//	}
+	
+	public ArrayList<String> getListNameFromFolder() throws FileNotFoundException {
+		folderNameList = new ArrayList<String>();
 		ArrayList<String> fileNameList = getFileNameList();
 		for (int i = 0; i < fileNameList.size(); i++) {
 			try {
-				System.out.println(fileNameList.get(i).substring(0, fileNameList.get(i).indexOf('-')) + " " + fileNameList.get(i).substring(fileNameList.get(i).indexOf('-') + 1, fileNameList.get(i).indexOf('_')));
-				fileNameMap.put(fileNameList.get(i).substring(0, fileNameList.get(i).indexOf('-')), fileNameList.get(i).substring(fileNameList.get(i).indexOf('-') + 1, fileNameList.get(i).indexOf('_')));
+				System.out.println(fileNameList.get(i).substring(fileNameList.get(i).indexOf('-') + 1, fileNameList.get(i).indexOf('_')));
+				folderNameList.add(fileNameList.get(i).substring(fileNameList.get(i).indexOf('-') + 1, fileNameList.get(i).indexOf('_')));
 			} catch (Exception e) {
 			}
 		}
-		return fileNameMap;
+		return folderNameList;
 	}
 	
 	/**
@@ -111,12 +124,10 @@ public class FileUtil {
 	}
 	
 	public static void main(String[] args) {
-		FileUtil test = new FileUtil("\\\\192.169.1.150\\database\\MATH_DB\\MJ");
+		FileUtil test = new FileUtil("\\\\192.168.1.150\\database\\MATH_DB\\MJ\\");
 		try {
-			test.getMapNameFromFolder();
+			test.getListNameFromFolder();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 }

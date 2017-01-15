@@ -23,7 +23,6 @@ public class DecodeSubjectName {
 		}
 		FileUtil revGetter = new FileUtil(path);
 		path += levelName + revGetter.getRev(levelName) + "\\" + levelName + "VDO.mp4";
-		System.out.println(path);
 	}
 	
 	@Override
