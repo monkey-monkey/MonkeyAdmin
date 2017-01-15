@@ -147,7 +147,9 @@ public class Menu extends JFrame {
 						for (int j = 0; j < levelBtn.size(); j++) {
 							levelBtn.get(j).setBackground(Color.WHITE);
 							levelBtn.get(j).setEnabled(false);
+							levelBtn.get(j).setSelected(false);
 						}
+						setText();
 					}
 					
 				}
