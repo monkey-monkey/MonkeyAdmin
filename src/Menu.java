@@ -103,7 +103,7 @@ public class Menu extends JFrame {
 		subjectBtn.add(new JToggleButton("MK"));
 		subjectBtn.add(new JToggleButton("MJ"));
 		subjectBtn.add(new JToggleButton("MH"));
-		subjectBtn.add(new JToggleButton("MI"));
+//		subjectBtn.add(new JToggleButton("MI"));
 		subjectBtn.add(new JToggleButton("PJ"));
 		subjectBtn.add(new JToggleButton("PH"));
 		subjectBtn.add(new JToggleButton("PI"));
