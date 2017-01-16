@@ -22,11 +22,16 @@ public class DecodeSubjectName {
 		} catch (FileNotFoundException e) {
 		}
 		FileUtil revGetter = new FileUtil(path);
-		path += levelName + revGetter.getRev(levelName) + "\\" + levelName + "VDO.mp4";
+		path += levelName + revGetter.getRev(levelName) + "\\" + levelName;
 	}
 	
 	@Override
 	public String toString() {
 		return path;
+	}
+	
+	public static void main(String[] args) {
+		DecodeSubjectName test = new DecodeSubjectName("MH-BB01");
+		System.out.println(test);
 	}
 }

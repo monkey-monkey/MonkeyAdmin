@@ -14,7 +14,10 @@ public class FileUtil {
 	private HashMap<String, String> fileFullNameMap;
 	private ArrayList<String> folderNameList;
 	
-	
+	/**
+	 * Constructor of class
+	 * @param path 
+	 */
 	public FileUtil(String path) {
 		this.path = path;
 	}
@@ -40,6 +43,11 @@ public class FileUtil {
 		return fileFullNameMap;
 	}
 	
+	/**
+	 * Get list of level in subject
+	 * @return ArrayList of all available name in subject
+	 * @throws FileNotFoundException error occur from invalid file location
+	 */
 	public ArrayList<String> getListNameFromFolder() throws FileNotFoundException {
 		folderNameList = new ArrayList<String>();
 		ArrayList<String> fileNameList = getFileNameList();
@@ -76,6 +84,11 @@ public class FileUtil {
 		return commonFolderName.get(index);
 	}
 	
+	/**
+	 * call method copyFileUsingFileChannels for copying file using file channel
+	 * @param destinationPath location of file to be copied to
+	 * @return boolean if file is copy success
+	 */
 	public boolean copy(String destinationPath) {
 		try {
 			copyFileUsingFileChannels(new File(path), new File(destinationPath));
@@ -106,15 +119,10 @@ public class FileUtil {
 		return new FileInputStream(source);
 	}
 	
+	/**
+	 * List file if folder and store in array
+	 */
 	private void listFile() {
 		folderList = (new File(path)).listFiles();
-	}
-	
-	public static void main(String[] args) {
-		FileUtil test = new FileUtil("\\\\192.168.1.150\\database\\MATH_DB\\MJ\\");
-		try {
-			test.getListNameFromFolder();
-		} catch (FileNotFoundException e) {
-		}
 	}
 }

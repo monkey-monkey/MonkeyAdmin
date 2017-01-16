@@ -37,7 +37,7 @@ public class Menu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Menu frame = new Menu("Hello");
+					Menu frame = new Menu("159991");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -94,6 +94,28 @@ public class Menu extends JFrame {
 		 * Add action to action button
 		 */
 		actionBtn.get(0).addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText());
+//				System.out.println("From:" + dbPath + "VDO.mp4");
+//				System.out.println("To:" + Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+				copy(dbPath + "VDO.mp4", Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+				clearButton();
+				listAvailableLevel = null;
+				setColor();
+				sheetNum = "";
+				textField.setText("");
+			}
+		});
+		
+		actionBtn.get(1).addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
+		
+		actionBtn.get(2).addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
@@ -373,16 +395,40 @@ public class Menu extends JFrame {
 	
 	@SuppressWarnings("deprecation")
 	private void setColor() {
-		try {
-			for (int i = 0; i < levelBtn.size(); i++) {
-				levelBtn.get(i).setBackground(Color.WHITE);
-				levelBtn.get(i).setEnabled(false);
+		for (int i = 0; i < levelBtn.size(); i++) {
+			levelBtn.get(i).setBackground(Color.WHITE);
+			levelBtn.get(i).setEnabled(false);
+			try {
 				if (listAvailableLevel.contains(levelBtn.get(i).getLabel())) {
 					levelBtn.get(i).setBackground(new Color(119, 234, 173));
 					levelBtn.get(i).setEnabled(true);
 				}
+			} catch (Exception e) {
 			}
-		} catch (Exception e) {
 		}
 	}
+	
+	private void copy(String oriPath, String desPath){
+		FileUtil file = new FileUtil(oriPath);
+		file.copy(desPath);
+	}
+	
+	private void print(String path) {
+		
+	}
+	
+	private void clearButton(){
+		ArrayList<ArrayList<JToggleButton>> temp = new ArrayList<ArrayList<JToggleButton>>();
+		temp.add(subjectBtn);
+		temp.add(levelBtn);
+		temp.add(subLevelBtn);
+		temp.add(subSheetBtn);
+		temp.add(sheetSetBtn);
+		for (int i = 0; i < temp.size(); i++) {
+			for (int j = 0; j < temp.get(i).size(); j++) {
+				temp.get(i).get(j).setSelected(false);
+			}
+		}
+	}
+	
 }
