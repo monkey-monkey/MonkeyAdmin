@@ -69,9 +69,9 @@ public class Menu extends JFrame {
 		contentPane.add(lblWorksheetSet);
 		
 		textField = new JTextField();
-		textField.setFont(new Font("Cordia New", Font.PLAIN, 85));
+		textField.setFont(new Font("Cordia New", Font.PLAIN, 150));
 		textField.setEditable(false);
-		textField.setBounds(625, 33, 477, 80);
+		textField.setBounds(625, 33, 1200, 120);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
@@ -79,16 +79,16 @@ public class Menu extends JFrame {
 		/**
 		 * Create object action button
 		 */
-		actionBtn.add(new JButton("Print & VDO"));
-		actionBtn.add(new JButton("Print"));
 		actionBtn.add(new JButton("VDO"));
+		actionBtn.add(new JButton("Print"));
+		actionBtn.add(new JButton("Print & VDO"));
 		
 		/**
 		 * Set position of action button
 		 */
-		actionBtn.get(0).setBounds(1171, 60, 180, 50);
-		actionBtn.get(1).setBounds(1451, 60, 151, 50);
-		actionBtn.get(2).setBounds(1692, 60, 151, 50);
+		actionBtn.get(0).setBounds(1650, 400, 220, 120);
+		actionBtn.get(1).setBounds(1650, 890, 200, 100);
+		actionBtn.get(2).setBounds(1650, 200, 220, 120);
 		
 		/**
 		 * Add action to action button
@@ -104,7 +104,7 @@ public class Menu extends JFrame {
 		 * Set attribute for action button and add to content pane
 		 */
 		for (int i = 0; i < actionBtn.size(); i++) {
-			actionBtn.get(i).setFont(new Font("Cordia New", Font.PLAIN, 40));
+			actionBtn.get(i).setFont(new Font("Cordia New", Font.PLAIN, 50));
 			actionBtn.get(i).setBackground(Color.WHITE);
 			contentPane.add(actionBtn.get(i));
 		}
@@ -126,7 +126,7 @@ public class Menu extends JFrame {
 		for (int i = 0; i < subjectBtn.size(); i++) {
 			subjectBtn.get(i).setBackground((subjectBtn.get(i).getLabel().charAt(0) == 'M') ? new Color(239, 163, 21) : new Color(208, 137, 244));
 			subjectBtn.get(i).setFont(new Font("Cordia New", Font.PLAIN, 80));
-			subjectBtn.get(i).setBounds(100, 200 + (i * 110), 120, 90);
+			subjectBtn.get(i).setBounds(70, 200 + (i * 110), 120, 90);
 			final int temp = i;
 			subjectBtn.get(i).addMouseListener(new MouseAdapter() {
 				@Override
@@ -189,7 +189,7 @@ public class Menu extends JFrame {
 				try {
 					levelBtn.get(index).setBackground(Color.WHITE);
 					levelBtn.get(index).setFont(new Font("Cordia New", Font.PLAIN, 70));
-					levelBtn.get(index).setBounds(300 + (i * 160), 200 + (j * 90), 150, 80);
+					levelBtn.get(index).setBounds(240 + (i * 160), 200 + (j * 90), 150, 80);
 					levelBtn.get(index).setEnabled(false);
 					final int temp = index;
 					levelBtn.get(index).addMouseListener(new MouseAdapter() {
@@ -227,7 +227,7 @@ public class Menu extends JFrame {
 		for (int i = 0; i < subLevelBtn.size(); i++) {
 			subLevelBtn.get(i).setBackground(Color.WHITE);
 			subLevelBtn.get(i).setFont(new Font("Cordia New", Font.PLAIN, 70));
-			subLevelBtn.get(i).setBounds(1150, 200 + (i * 110), 100, 80);
+			subLevelBtn.get(i).setBounds(1080, 200 + (i * 110), 100, 80);
 			final int temp = i;
 			subLevelBtn.get(i).addMouseListener(new MouseAdapter() {
 				@Override
@@ -266,7 +266,7 @@ public class Menu extends JFrame {
 				try {
 					numpadBtn.get(index).setBackground(Color.WHITE);
 					numpadBtn.get(index).setFont(new Font("Cordia New", Font.PLAIN, 70));
-					numpadBtn.get(index).setBounds(1400 + (i * 110), 200 + (j * 110), 100, 100);
+					numpadBtn.get(index).setBounds(1250 + (i * 110), 200 + (j * 110), 100, 100);
 					final int temp = index;
 					numpadBtn.get(index).addMouseListener(new MouseAdapter() {
 						@Override
@@ -303,7 +303,7 @@ public class Menu extends JFrame {
 		for (int i = 0; i < subSheetBtn.size(); i++) {
 			subSheetBtn.get(i).setBackground(Color.WHITE);
 			subSheetBtn.get(i).setFont(new Font("Cordia New", Font.PLAIN, 70));
-			subSheetBtn.get(i).setBounds(1400 + (i * 110), 700, 100, 100);
+			subSheetBtn.get(i).setBounds(1250 + (i * 110), 700, 100, 100);
 			final int temp = i;
 			subSheetBtn.get(i).addMouseListener(new MouseAdapter() {
 				@Override
@@ -331,8 +331,8 @@ public class Menu extends JFrame {
 		 */
 		for (int i = 0; i < sheetSetBtn.size(); i++) {
 			sheetSetBtn.get(i).setBackground(Color.WHITE);
-			sheetSetBtn.get(i).setFont(new Font("Cordia New", Font.PLAIN, 60));
-			sheetSetBtn.get(i).setBounds(1100 + (200 * i), 880, 180, 80);
+			sheetSetBtn.get(i).setFont(new Font("Cordia New", Font.PLAIN, 50));
+			sheetSetBtn.get(i).setBounds(990 + (150 * i), 920, 130, 50);
 			final int temp = i;
 			sheetSetBtn.get(i).addMouseListener(new MouseAdapter() {
 				@Override
