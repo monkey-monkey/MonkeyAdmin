@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Window;
 import java.util.ArrayList;
 
 import javax.swing.JTextField;
@@ -13,6 +14,7 @@ import java.awt.Color;
 import javax.swing.JToggleButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 
 @SuppressWarnings("serial")
@@ -29,6 +31,7 @@ public class Menu extends JFrame {
 	private ArrayList<JToggleButton> sheetSetBtn = new ArrayList<JToggleButton>();
 	private ArrayList<String> listAvailableLevel;
 	private String sheetNum = "";
+	static Menu frame;
 	
 	/**
 	 * Launch the application.
@@ -37,7 +40,8 @@ public class Menu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Menu frame = new Menu("159991");
+//					frame = new Menu("159991");
+					frame = new Menu(args[0]);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,7 +55,7 @@ public class Menu extends JFrame {
 	 */
 	@SuppressWarnings("deprecation")
 	public Menu(String id) {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 1920, 1080);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -102,9 +106,10 @@ public class Menu extends JFrame {
 				copy(dbPath + "VDO.mp4", Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
 				clearButton();
 				listAvailableLevel = null;
-				setColor();
+				setLevelColor();
 				sheetNum = "";
 				textField.setText("");
+				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 			}
 		});
 		
@@ -164,7 +169,7 @@ public class Menu extends JFrame {
 					} catch (FileNotFoundException e1) {
 					}
 					if (subjectBtn.get(temp).isSelected()) {
-						setColor();
+						setLevelColor();
 					}else {
 						for (int j = 0; j < levelBtn.size(); j++) {
 							levelBtn.get(j).setBackground(Color.WHITE);
@@ -370,6 +375,9 @@ public class Menu extends JFrame {
 		}
 	}
 	
+	/**
+	 * Set text to text label
+	 */
 	@SuppressWarnings("deprecation")
 	private void setText() {
 		String temp = "";
@@ -393,8 +401,11 @@ public class Menu extends JFrame {
 		textField.setText(temp);
 	}
 	
+	/**
+	 * Set color of all button
+	 */
 	@SuppressWarnings("deprecation")
-	private void setColor() {
+	private void setLevelColor() {
 		for (int i = 0; i < levelBtn.size(); i++) {
 			levelBtn.get(i).setBackground(Color.WHITE);
 			levelBtn.get(i).setEnabled(false);
@@ -408,15 +419,23 @@ public class Menu extends JFrame {
 		}
 	}
 	
+	/**
+	 * Call copy method in file util
+	 * @param oriPath original video path
+	 * @param desPath destination to copy
+	 */
 	private void copy(String oriPath, String desPath){
 		FileUtil file = new FileUtil(oriPath);
 		file.copy(desPath);
 	}
 	
-	private void print(String path) {
-		
-	}
+//	private void print(String path) {
+//		
+//	}
 	
+	/**
+	 * Clear color of all button
+	 */
 	private void clearButton(){
 		ArrayList<ArrayList<JToggleButton>> temp = new ArrayList<ArrayList<JToggleButton>>();
 		temp.add(subjectBtn);

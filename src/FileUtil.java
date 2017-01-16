@@ -7,6 +7,7 @@ import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
 public class FileUtil {
 	
 	private String path;
@@ -74,6 +75,7 @@ public class FileUtil {
 		}
 		int index = -1;
 		double revVal = 0.0;
+		System.out.println(commonFolderName.size());
 		for (int i = 0; i < commonFolderName.size(); i++) {
 			double tempVal = Double.parseDouble(commonFolderName.get(i).charAt(commonFolderName.get(i).indexOf('V') + 1) + "." + commonFolderName.get(i).charAt(commonFolderName.get(i).indexOf('_') + 1));
 			if (tempVal > revVal) {

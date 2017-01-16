@@ -76,6 +76,7 @@ public class Index extends JFrame {
 			public void keyReleased(KeyEvent arg0) {
 				if (arg0.getKeyChar() == '\n') {
 					String idInput[] = {textField.getText()};
+					textField.setText("");
 					Menu.main(idInput);
 				}
 			}

@@ -29,9 +29,4 @@ public class DecodeSubjectName {
 	public String toString() {
 		return path;
 	}
-	
-	public static void main(String[] args) {
-		DecodeSubjectName test = new DecodeSubjectName("MH-BB01");
-		System.out.println(test);
-	}
 }
