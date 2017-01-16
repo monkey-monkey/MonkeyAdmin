@@ -5,7 +5,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.Window;
 import java.util.ArrayList;
 
 import javax.swing.JTextField;
@@ -29,7 +28,7 @@ public class Menu extends JFrame {
 	private ArrayList<JButton> numpadBtn = new ArrayList<JButton>();
 	private ArrayList<JToggleButton> subSheetBtn = new ArrayList<JToggleButton>();
 	private ArrayList<JToggleButton> sheetSetBtn = new ArrayList<JToggleButton>();
-	private ArrayList<String> listAvailableLevel;
+	private ArrayList<String> listAvailableLevel, listAvailableSubLevel;
 	private String sheetNum = "";
 	static Menu frame;
 	
@@ -40,8 +39,8 @@ public class Menu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-//					frame = new Menu("159991");
-					frame = new Menu(args[0]);
+					frame = new Menu("159991");
+//					frame = new Menu(args[0]);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -104,11 +103,7 @@ public class Menu extends JFrame {
 //				System.out.println("From:" + dbPath + "VDO.mp4");
 //				System.out.println("To:" + Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
 				copy(dbPath + "VDO.mp4", Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
-				clearButton();
-				listAvailableLevel = null;
-				setLevelColor();
-				sheetNum = "";
-				textField.setText("");
+				clear();
 				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 			}
 		});
@@ -227,6 +222,19 @@ public class Menu extends JFrame {
 								levelBtn.get(k).setSelected(false);
 							}
 							setText();
+							DecodeSubjectName path = new DecodeSubjectName(textField.getText() + "B00");
+							FileUtil folder = new FileUtil(path.getFullName());
+							listAvailableSubLevel = folder.getSubListNameFromFolder();
+							if (levelBtn.get(temp).isSelected()) {
+								setSubLevelColor();
+							}else {
+								for (int k = 0; k < subLevelBtn.size(); k++) {
+									subLevelBtn.get(k).setBackground(Color.WHITE);
+									subLevelBtn.get(k).setEnabled(false);
+									subLevelBtn.get(k).setSelected(false);
+								}
+								setText();
+							}
 						}
 					});
 					contentPane.add(levelBtn.get(index));
@@ -255,6 +263,7 @@ public class Menu extends JFrame {
 			subLevelBtn.get(i).setBackground(Color.WHITE);
 			subLevelBtn.get(i).setFont(new Font("Cordia New", Font.PLAIN, 70));
 			subLevelBtn.get(i).setBounds(1080, 200 + (i * 110), 100, 80);
+			subLevelBtn.get(i).setEnabled(false);
 			final int temp = i;
 			subLevelBtn.get(i).addMouseListener(new MouseAdapter() {
 				@Override
@@ -419,6 +428,21 @@ public class Menu extends JFrame {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
+	private void setSubLevelColor() {
+		for (int i = 0; i < subLevelBtn.size(); i++) {
+			subLevelBtn.get(i).setBackground(Color.WHITE);
+			subLevelBtn.get(i).setEnabled(false);
+			try {
+				if (listAvailableSubLevel.contains(subLevelBtn.get(i).getLabel())) {
+					subLevelBtn.get(i).setBackground(new Color(119, 234, 173));
+					subLevelBtn.get(i).setEnabled(true);
+				}
+			} catch (Exception e) {
+			}
+		}
+	}
+	
 	/**
 	 * Call copy method in file util
 	 * @param oriPath original video path
@@ -432,6 +456,17 @@ public class Menu extends JFrame {
 //	private void print(String path) {
 //		
 //	}
+	
+	/**
+	 * Clear selection on screen
+	 */
+	private void clear() {
+		sheetNum = "";
+		clearButton();
+		setLevelColor();
+		setText();
+		listAvailableLevel = null;
+	}
 	
 	/**
 	 * Clear color of all button

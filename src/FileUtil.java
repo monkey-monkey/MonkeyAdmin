@@ -13,7 +13,7 @@ public class FileUtil {
 	private String path;
 	private File[] folderList;
 	private HashMap<String, String> fileFullNameMap;
-	private ArrayList<String> folderNameList;
+	private ArrayList<String> folderNameList, folderNameSubList;
 	
 	/**
 	 * Constructor of class
@@ -62,6 +62,18 @@ public class FileUtil {
 		return folderNameList;
 	}
 	
+	public ArrayList<String> getSubListNameFromFolder() {
+		folderNameSubList = new ArrayList<String>();
+		ArrayList<String> fileNameList = getFileNameList();
+		for (int i = 0; i < fileNameList.size(); i++) {
+			int index = getIndexOfNum(fileNameList.get(i));
+			if (!folderNameSubList.contains("" + fileNameList.get(i).charAt(index - 1)) && fileNameList.get(i).charAt(index - 1) != 'V') {
+				folderNameSubList.add("" + fileNameList.get(i).charAt(index - 1));
+			}
+		}
+		return folderNameSubList;
+	}
+	
 	/**
 	 * Get most recent rev of sheet
 	 * @param levelName 
@@ -75,7 +87,6 @@ public class FileUtil {
 		}
 		int index = -1;
 		double revVal = 0.0;
-		System.out.println(commonFolderName.size());
 		for (int i = 0; i < commonFolderName.size(); i++) {
 			double tempVal = Double.parseDouble(commonFolderName.get(i).charAt(commonFolderName.get(i).indexOf('V') + 1) + "." + commonFolderName.get(i).charAt(commonFolderName.get(i).indexOf('_') + 1));
 			if (tempVal > revVal) {
@@ -126,5 +137,18 @@ public class FileUtil {
 	 */
 	private void listFile() {
 		folderList = (new File(path)).listFiles();
+	}
+	
+	private int getIndexOfNum(String levelName) {
+		int index = levelName.length();
+		for (int i = 0; i < 10; i++) {
+			try {
+				int temp = levelName.indexOf((char)(48 + i));
+				if (temp == -1) continue;
+				if (temp < index) index = temp;
+			} catch (Exception e) {
+			}
+		}
+		return index;
 	}
 }

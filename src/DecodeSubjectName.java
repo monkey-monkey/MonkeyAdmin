@@ -2,6 +2,7 @@ import java.io.FileNotFoundException;
 
 public class DecodeSubjectName {
 	private String path = "";
+	private String fullName = "";
 	
 	public DecodeSubjectName(String levelName) {
 		path += Index.DB_LOCATION;
@@ -19,14 +20,22 @@ public class DecodeSubjectName {
 		FileUtil tempFolder = new FileUtil(path);
 		try {
 			path += tempFolder.getMapFullNameFromFolder().get(levelName.substring(0, levelName.indexOf('0') - 1)) + "\\";
+			fullName = path;
 		} catch (FileNotFoundException e) {
 		}
-		FileUtil revGetter = new FileUtil(path);
-		path += levelName + revGetter.getRev(levelName) + "\\" + levelName;
+		try {
+			FileUtil revGetter = new FileUtil(path);
+			path += levelName + revGetter.getRev(levelName) + "\\" + levelName;
+		} catch (Exception e) {
+		}
 	}
 	
 	@Override
 	public String toString() {
 		return path;
+	}
+	
+	public String getFullName() {
+		return fullName;
 	}
 }

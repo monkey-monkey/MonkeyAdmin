@@ -70,7 +70,8 @@ public class Index extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		textField = new JTextField();
-		textField.setFont(new Font("Cordia New", Font.PLAIN, 50));
+		textField.setHorizontalAlignment(SwingConstants.CENTER);
+		textField.setFont(new Font("Cordia New", Font.PLAIN, 80));
 		textField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent arg0) {
