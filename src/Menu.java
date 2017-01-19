@@ -583,6 +583,9 @@ public class Menu extends JFrame {
 		setLevelColor();
 	}
 	
+	/**
+	 * Check condition to print and copy video
+	 */
 	private void checkWorksheetNumber() {
 		DecodeSubjectName path = new DecodeSubjectName(currentSheetCode.substring(0, currentSheetCode.length()) + "00");
 		FileUtil folder = new FileUtil(path.getFullName());
@@ -600,10 +603,8 @@ public class Menu extends JFrame {
 			}
 		}else {
 			actionBtn.get(0).setEnabled(false);
-//			actionBtn.get(1).setEnabled(true);
 			actionBtn.get(2).setEnabled(false);
 			actionBtn.get(0).setBackground(Color.WHITE);
-//			actionBtn.get(1).setBackground(new Color(119, 234, 173));
 			actionBtn.get(2).setBackground(Color.WHITE);
 		}
 	}

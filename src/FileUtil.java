@@ -163,14 +163,4 @@ public class FileUtil {
 		}
 		return index;
 	}
-	
-	public static void main(String[] args) {
-		DecodeSubjectName path = new DecodeSubjectName("MH-XCNB00");
-		FileUtil folder = new FileUtil(path.getFullName());
-		ArrayList<String> listAvailableSubLevel = folder.getNumberListFromFolder('E');
-		listAvailableSubLevel.sort(null);
-		for (int i = 0; i < listAvailableSubLevel.size(); i++) {
-			System.out.println(listAvailableSubLevel.get(i));
-		}
-	}
 }
