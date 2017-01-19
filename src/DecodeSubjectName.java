@@ -38,4 +38,5 @@ public class DecodeSubjectName {
 	public String getFullName() {
 		return fullName;
 	}
+	
 }

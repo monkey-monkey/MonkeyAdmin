@@ -13,7 +13,7 @@ public class FileUtil {
 	private String path;
 	private File[] folderList;
 	private HashMap<String, String> fileFullNameMap;
-	private ArrayList<String> folderNameList, folderNameSubList;
+	private ArrayList<String> folderNameList, folderNameSubList, folderNumberList;
 	
 	/**
 	 * Constructor of class
@@ -72,6 +72,18 @@ public class FileUtil {
 			}
 		}
 		return folderNameSubList;
+	}
+	
+	public ArrayList<String> getNumberListFromFolder(Character key) {
+		folderNumberList = new ArrayList<String>();
+		ArrayList<String> fileNameList = getFileNameList();
+		for (int i = 0; i < fileNameList.size(); i++) {
+			int indexOfKey = getIndexOfNum(fileNameList.get(i));
+			if (!(folderNumberList.contains(fileNameList.get(i).substring(indexOfKey, indexOfKey + 2)) && fileNameList.get(i).charAt(indexOfKey - 1) != 'V') && fileNameList.get(i).charAt(indexOfKey - 1) == key) {
+				folderNumberList.add(fileNameList.get(i).substring(indexOfKey, indexOfKey + 2));
+			}
+		}
+		return folderNumberList;
 	}
 	
 	/**
@@ -150,5 +162,15 @@ public class FileUtil {
 			}
 		}
 		return index;
+	}
+	
+	public static void main(String[] args) {
+		DecodeSubjectName path = new DecodeSubjectName("MH-XCNB00");
+		FileUtil folder = new FileUtil(path.getFullName());
+		ArrayList<String> listAvailableSubLevel = folder.getNumberListFromFolder('E');
+		listAvailableSubLevel.sort(null);
+		for (int i = 0; i < listAvailableSubLevel.size(); i++) {
+			System.out.println(listAvailableSubLevel.get(i));
+		}
 	}
 }

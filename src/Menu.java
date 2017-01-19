@@ -28,8 +28,8 @@ public class Menu extends JFrame {
 	private ArrayList<JButton> numpadBtn = new ArrayList<JButton>();
 	private ArrayList<JToggleButton> subSheetBtn = new ArrayList<JToggleButton>();
 	private ArrayList<JToggleButton> sheetSetBtn = new ArrayList<JToggleButton>();
-	private ArrayList<String> listAvailableLevel, listAvailableSubLevel;
-	private String sheetNum = "";
+	private ArrayList<String> listAvailableLevel, listAvailableSubLevel, listAvaiableLevelNumber;
+	private String sheetNum = "00";
 	static Menu frame;
 	
 	/**
@@ -157,6 +157,10 @@ public class Menu extends JFrame {
 						if (temp == j) continue;
 						subjectBtn.get(j).setSelected(false);
 					}
+					clearLevelBtn();
+					clearSubLevelButton();
+					clearSubSheetButton();
+					clearSheetSetBtn();
 					FileUtil getList = new FileUtil(Index.DB_LOCATION + ((subjectBtn.get(temp).getLabel().charAt(0) == 'M') ? "MATH_DB" : "PHYSICS_DB") + "\\" + subjectBtn.get(temp).getLabel() + "\\");
 					try {
 						listAvailableLevel = getList.getListNameFromFolder();
@@ -217,6 +221,9 @@ public class Menu extends JFrame {
 								if (temp == k) continue;
 								levelBtn.get(k).setSelected(false);
 							}
+							clearSubLevelButton();
+							clearSubSheetButton();
+							clearSheetSetBtn();
 							if (levelBtn.get(temp).isSelected()) {
 								setText();
 								DecodeSubjectName path = new DecodeSubjectName(textField.getText() + "B00");
@@ -301,7 +308,7 @@ public class Menu extends JFrame {
 						@Override
 						public void mouseClicked(MouseEvent e) {
 							if (numpadBtn.get(temp).getLabel().equals("C")) {
-								sheetNum = "";
+								sheetNum = "00";
 							} else {
 								if (sheetNum.length() < 2) {
 									sheetNum += numpadBtn.get(temp).getLabel();
@@ -395,7 +402,9 @@ public class Menu extends JFrame {
 			if (subLevelBtn.get(i).isSelected()) temp += subLevelBtn.get(i).getLabel();
 		}
 		setSubLevelColor();
-		temp += sheetNum;
+		if (!sheetNum.equals("00")) {
+			temp += sheetNum;
+		}
 		for (int i = 0; i < subSheetBtn.size(); i++) {
 			if (subSheetBtn.get(i).isSelected()) temp += subSheetBtn.get(i).getLabel();
 		}
@@ -508,6 +517,7 @@ public class Menu extends JFrame {
 			sheetSetBtn.get(i).setEnabled(false);
 			sheetSetBtn.get(i).setBackground(Color.WHITE);
 		}
+		sheetNum = "00";
 	}
 	
 	/**
@@ -530,6 +540,10 @@ public class Menu extends JFrame {
 		clearSubLevelButton();
 		clearSubSheetButton();
 		clearSheetSetBtn();
+	}
+	
+	private void checkWorksheetNumber() {
+		
 	}
 	
 }
