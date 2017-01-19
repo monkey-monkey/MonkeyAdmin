@@ -157,22 +157,18 @@ public class Menu extends JFrame {
 						if (temp == j) continue;
 						subjectBtn.get(j).setSelected(false);
 					}
-					setText();
 					FileUtil getList = new FileUtil(Index.DB_LOCATION + ((subjectBtn.get(temp).getLabel().charAt(0) == 'M') ? "MATH_DB" : "PHYSICS_DB") + "\\" + subjectBtn.get(temp).getLabel() + "\\");
 					try {
 						listAvailableLevel = getList.getListNameFromFolder();
 					} catch (FileNotFoundException e1) {
 					}
-					if (subjectBtn.get(temp).isSelected()) {
-						setLevelColor();
-					}else {
-						for (int j = 0; j < levelBtn.size(); j++) {
-							levelBtn.get(j).setBackground(Color.WHITE);
-							levelBtn.get(j).setEnabled(false);
-							levelBtn.get(j).setSelected(false);
-						}
-						setText();
+					if (!subjectBtn.get(temp).isSelected()) {
+						clearLevelBtn();
+						clearSubLevelButton();
+						clearSubSheetButton();
+						clearSheetSetBtn();
 					}
+					setText();
 					
 				}
 			});
@@ -221,20 +217,17 @@ public class Menu extends JFrame {
 								if (temp == k) continue;
 								levelBtn.get(k).setSelected(false);
 							}
-							setText();
-							DecodeSubjectName path = new DecodeSubjectName(textField.getText() + "B00");
-							FileUtil folder = new FileUtil(path.getFullName());
-							listAvailableSubLevel = folder.getSubListNameFromFolder();
 							if (levelBtn.get(temp).isSelected()) {
-								setSubLevelColor();
-							}else {
-								for (int k = 0; k < subLevelBtn.size(); k++) {
-									subLevelBtn.get(k).setBackground(Color.WHITE);
-									subLevelBtn.get(k).setEnabled(false);
-									subLevelBtn.get(k).setSelected(false);
-								}
 								setText();
+								DecodeSubjectName path = new DecodeSubjectName(textField.getText() + "B00");
+								FileUtil folder = new FileUtil(path.getFullName());
+								listAvailableSubLevel = folder.getSubListNameFromFolder();
+							}else {
+								clearSubLevelButton();
+								clearSubSheetButton();
+								clearSheetSetBtn();
 							}
+							setText();
 						}
 					});
 					contentPane.add(levelBtn.get(index));
@@ -397,9 +390,11 @@ public class Menu extends JFrame {
 		for (int i = 0; i < levelBtn.size(); i++) {
 			if (levelBtn.get(i).isSelected()) temp += levelBtn.get(i).getLabel();
 		}
+		setLevelColor();
 		for (int i = 0; i < subLevelBtn.size(); i++) {
 			if (subLevelBtn.get(i).isSelected()) temp += subLevelBtn.get(i).getLabel();
 		}
+		setSubLevelColor();
 		temp += sheetNum;
 		for (int i = 0; i < subSheetBtn.size(); i++) {
 			if (subSheetBtn.get(i).isSelected()) temp += subSheetBtn.get(i).getLabel();
@@ -457,32 +452,84 @@ public class Menu extends JFrame {
 //		
 //	}
 	
+	
+	/**
+	 * Clear subject button
+	 */
+	private void clearSubjectBtn() {
+		for (int i = 0; i < subjectBtn.size(); i++) {
+			subjectBtn.get(i).setSelected(false);
+			subjectBtn.get(i).setEnabled(false);
+			subjectBtn.get(i).setBackground(Color.WHITE);
+		}
+	}
+	
+	/**
+	 * Clear level button
+	 */
+	private void clearLevelBtn() {
+		listAvailableLevel = null;
+		for (int i = 0; i < levelBtn.size(); i++) {
+			levelBtn.get(i).setSelected(false);
+			levelBtn.get(i).setEnabled(false);
+			levelBtn.get(i).setBackground(Color.WHITE);
+		}
+	}
+	
+	/**
+	 * Clear sub level button
+	 */
+	private void clearSubLevelButton() {
+		listAvailableSubLevel = null;
+		for (int i = 0; i < subLevelBtn.size(); i++) {
+			subLevelBtn.get(i).setSelected(false);
+			subLevelBtn.get(i).setEnabled(false);
+			subLevelBtn.get(i).setBackground(Color.WHITE);
+		}
+	}
+	
+	/**
+	 * Clear sub sheet button
+	 */
+	private void clearSubSheetButton() {
+		for (int i = 0; i < subSheetBtn.size(); i++) {
+			subSheetBtn.get(i).setSelected(false);
+			subSheetBtn.get(i).setEnabled(false);
+			subSheetBtn.get(i).setBackground(Color.WHITE);
+		}
+	}
+	
+	/**
+	 * Clear sheet set button
+	 */
+	private void clearSheetSetBtn() {
+		for (int i = 0; i < sheetSetBtn.size(); i++) {
+			sheetSetBtn.get(i).setSelected(false);
+			sheetSetBtn.get(i).setEnabled(false);
+			sheetSetBtn.get(i).setBackground(Color.WHITE);
+		}
+	}
+	
 	/**
 	 * Clear selection on screen
 	 */
 	private void clear() {
-		sheetNum = "";
 		clearButton();
-		setLevelColor();
-		setText();
-		listAvailableLevel = null;
+//		sheetNum = "";
+//		setText();
+//		setLevelColor();
+//		listAvailableLevel = null;
 	}
 	
 	/**
 	 * Clear color of all button
 	 */
 	private void clearButton(){
-		ArrayList<ArrayList<JToggleButton>> temp = new ArrayList<ArrayList<JToggleButton>>();
-		temp.add(subjectBtn);
-		temp.add(levelBtn);
-		temp.add(subLevelBtn);
-		temp.add(subSheetBtn);
-		temp.add(sheetSetBtn);
-		for (int i = 0; i < temp.size(); i++) {
-			for (int j = 0; j < temp.get(i).size(); j++) {
-				temp.get(i).get(j).setSelected(false);
-			}
-		}
+		clearSubjectBtn();
+		clearLevelBtn();
+		clearSubLevelButton();
+		clearSubSheetButton();
+		clearSheetSetBtn();
 	}
 	
 }
