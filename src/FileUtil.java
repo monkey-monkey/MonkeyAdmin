@@ -17,7 +17,7 @@ public class FileUtil {
 	
 	/**
 	 * Constructor of class
-	 * @param path 
+	 * @param path path of 
 	 */
 	public FileUtil(String path) {
 		this.path = path;
@@ -62,6 +62,10 @@ public class FileUtil {
 		return folderNameList;
 	}
 	
+	/**
+	 * Get sub-level name from folder e.g. A, B, C
+	 * @return Array list of sub-level name
+	 */
 	public ArrayList<String> getSubListNameFromFolder() {
 		folderNameSubList = new ArrayList<String>();
 		ArrayList<String> fileNameList = getFileNameList();
@@ -74,6 +78,11 @@ public class FileUtil {
 		return folderNameSubList;
 	}
 	
+	/**
+	 * Get number list of folder indicate using key e.g. 'B' -> 01, 02, 03
+	 * @param key Indicator of the level wanted to get the list
+	 * @return Array list of number of levelin folder
+	 */
 	public ArrayList<String> getNumberListFromFolder(Character key) {
 		folderNumberList = new ArrayList<String>();
 		ArrayList<String> fileNameList = getFileNameList();
@@ -151,6 +160,11 @@ public class FileUtil {
 		folderList = (new File(path)).listFiles();
 	}
 	
+	/**
+	 * Get index of first number in level name
+	 * @param levelName input for the method
+	 * @return index shows the first number located in the string
+	 */
 	private int getIndexOfNum(String levelName) {
 		int index = levelName.length();
 		for (int i = 0; i < 10; i++) {

@@ -39,4 +39,8 @@ public class DecodeSubjectName {
 		return fullName;
 	}
 	
+	public static void main(String[] args) {
+		DecodeSubjectName test = new DecodeSubjectName("MK-AB08");
+		System.out.println(test);
+	}
 }
