@@ -385,8 +385,24 @@ public class Menu extends JFrame {
 						sheetSetBtn.get(j).setSelected(false);
 					}
 					setText();
+					if (sheetSetBtn.get(temp).isSelected()) {
+						actionBtn.get(0).setBackground(Color.WHITE);
+						actionBtn.get(1).setBackground(new Color(119, 234, 173));
+						actionBtn.get(2).setBackground(Color.WHITE);
+						actionBtn.get(0).setEnabled(false);
+						actionBtn.get(1).setEnabled(true);
+						actionBtn.get(2).setEnabled(false);
+					}else {
+						actionBtn.get(0).setBackground(new Color(119, 234, 173));
+						actionBtn.get(1).setBackground(Color.WHITE);
+						actionBtn.get(2).setBackground(new Color(119, 234, 173));
+						actionBtn.get(0).setEnabled(true);
+						actionBtn.get(1).setEnabled(false);
+						actionBtn.get(2).setEnabled(true);
+					}
 				}
 			});
+			
 			contentPane.add(sheetSetBtn.get(i));
 		}
 	}
@@ -573,13 +589,21 @@ public class Menu extends JFrame {
 		listAvaiableLevelNumber = folder.getNumberListFromFolder(subSheetChar);
 		if (listAvaiableLevelNumber.contains(sheetNum)) {
 			actionBtn.get(0).setEnabled(true);
-			actionBtn.get(0).setBackground(new Color(119, 234, 173));
+			actionBtn.get(1).setEnabled(false);
 			actionBtn.get(2).setEnabled(true);
+			actionBtn.get(0).setBackground(new Color(119, 234, 173));
+			actionBtn.get(1).setBackground(Color.WHITE);
 			actionBtn.get(2).setBackground(new Color(119, 234, 173));
+			for (int i = 0; i < sheetSetBtn.size(); i++) {
+				sheetSetBtn.get(i).setEnabled(true);
+				sheetSetBtn.get(i).setBackground(new Color(119, 234, 173));
+			}
 		}else {
 			actionBtn.get(0).setEnabled(false);
-			actionBtn.get(0).setBackground(Color.WHITE);
+//			actionBtn.get(1).setEnabled(true);
 			actionBtn.get(2).setEnabled(false);
+			actionBtn.get(0).setBackground(Color.WHITE);
+//			actionBtn.get(1).setBackground(new Color(119, 234, 173));
 			actionBtn.get(2).setBackground(Color.WHITE);
 		}
 	}
