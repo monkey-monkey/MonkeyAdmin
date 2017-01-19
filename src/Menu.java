@@ -29,7 +29,8 @@ public class Menu extends JFrame {
 	private ArrayList<JToggleButton> subSheetBtn = new ArrayList<JToggleButton>();
 	private ArrayList<JToggleButton> sheetSetBtn = new ArrayList<JToggleButton>();
 	private ArrayList<String> listAvailableLevel, listAvailableSubLevel, listAvaiableLevelNumber;
-	private String sheetNum = "00";
+	private Character subSheetChar;
+	private String sheetNum = "00", currentSheetCode = "";
 	static Menu frame;
 	
 	/**
@@ -108,6 +109,7 @@ public class Menu extends JFrame {
 			}
 		});
 		
+		
 		actionBtn.get(1).addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -128,6 +130,7 @@ public class Menu extends JFrame {
 		for (int i = 0; i < actionBtn.size(); i++) {
 			actionBtn.get(i).setFont(new Font("Cordia New", Font.PLAIN, 50));
 			actionBtn.get(i).setBackground(Color.WHITE);
+			actionBtn.get(i).setEnabled(false);
 			contentPane.add(actionBtn.get(i));
 		}
 		
@@ -171,6 +174,7 @@ public class Menu extends JFrame {
 						clearSubLevelButton();
 						clearSubSheetButton();
 						clearSheetSetBtn();
+						clearActionBtn();
 					}
 					setText();
 					
@@ -233,6 +237,7 @@ public class Menu extends JFrame {
 								clearSubLevelButton();
 								clearSubSheetButton();
 								clearSheetSetBtn();
+								clearActionBtn();
 							}
 							setText();
 						}
@@ -272,6 +277,7 @@ public class Menu extends JFrame {
 						if (j == temp) continue;
 						subLevelBtn.get(j).setSelected(false);
 					}
+					subSheetChar = subLevelBtn.get(temp).getLabel().charAt(0);
 					setText();
 				}
 			});
@@ -317,6 +323,7 @@ public class Menu extends JFrame {
 								}
 							}
 							setText();
+							checkWorksheetNumber();
 						}
 					});
 					contentPane.add(numpadBtn.get(index));
@@ -402,6 +409,7 @@ public class Menu extends JFrame {
 			if (subLevelBtn.get(i).isSelected()) temp += subLevelBtn.get(i).getLabel();
 		}
 		setSubLevelColor();
+		currentSheetCode = temp;
 		if (!sheetNum.equals("00")) {
 			temp += sheetNum;
 		}
@@ -517,19 +525,21 @@ public class Menu extends JFrame {
 			sheetSetBtn.get(i).setEnabled(false);
 			sheetSetBtn.get(i).setBackground(Color.WHITE);
 		}
-		sheetNum = "00";
 	}
 	
+	
 	/**
-	 * Clear selection on screen
+	 * Clear action button color
 	 */
-	private void clear() {
-		clearButton();
-//		sheetNum = "";
-//		setText();
-//		setLevelColor();
-//		listAvailableLevel = null;
+	private void clearActionBtn() {
+		for (int i = 0; i < actionBtn.size(); i++) {
+			actionBtn.get(i).setEnabled(false);
+			actionBtn.get(i).setBackground(Color.WHITE);
+		}
+		sheetNum = "00";
+		subSheetChar = null;
 	}
+	
 	
 	/**
 	 * Clear color of all button
@@ -542,8 +552,36 @@ public class Menu extends JFrame {
 		clearSheetSetBtn();
 	}
 	
+	/**
+	 * Clear all selection on screen
+	 */
+	private void clear() {
+		clearButton();
+		listAvailableLevel = null;
+		listAvailableSubLevel = null;
+		listAvaiableLevelNumber = null;
+		sheetNum = "00";
+		currentSheetCode = null;
+		subSheetChar = null;
+		setText();
+		setLevelColor();
+	}
+	
 	private void checkWorksheetNumber() {
-		
+		DecodeSubjectName path = new DecodeSubjectName(currentSheetCode.substring(0, currentSheetCode.length()) + "00");
+		FileUtil folder = new FileUtil(path.getFullName());
+		listAvaiableLevelNumber = folder.getNumberListFromFolder(subSheetChar);
+		if (listAvaiableLevelNumber.contains(sheetNum)) {
+			actionBtn.get(0).setEnabled(true);
+			actionBtn.get(0).setBackground(new Color(119, 234, 173));
+			actionBtn.get(2).setEnabled(true);
+			actionBtn.get(2).setBackground(new Color(119, 234, 173));
+		}else {
+			actionBtn.get(0).setEnabled(false);
+			actionBtn.get(0).setBackground(Color.WHITE);
+			actionBtn.get(2).setEnabled(false);
+			actionBtn.get(2).setBackground(Color.WHITE);
+		}
 	}
 	
 }
