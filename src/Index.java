@@ -26,15 +26,15 @@ import javax.swing.border.EmptyBorder;
 @SuppressWarnings("serial")
 public class Index extends JFrame {
 
-	private JTextField textField;
-	static final String VDO_LOCATION = "\\\\192.168.1.150\\vdo\\";
-	static final String DB_LOCATION = "\\\\192.168.1.150\\database\\";
+    private JTextField textField;
+    static final String VDO_LOCATION = "\\\\192.168.1.150\\vdo\\";
+    static final String DB_LOCATION = "\\\\192.168.1.150\\database\\";
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(() -> {
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(() -> {
             try {
                 Index frame = new Index();
                 frame.setVisible(true);
@@ -42,60 +42,60 @@ public class Index extends JFrame {
                 e.printStackTrace();
             }
         });
-	}
+    }
 
-	/**
-	 * Create the frame.
-	 */
-	private Index() {
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1920, 1080);
-		JPanel contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("Scan Student ID");
-		lblNewLabel.setFont(new Font("Cordia New", Font.PLAIN, 90));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(654, 321, 558, 104);
-		contentPane.add(lblNewLabel);
-		
-		textField = new JTextField();
-		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		textField.setFont(new Font("Cordia New", Font.PLAIN, 80));
-		textField.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyReleased(KeyEvent arg0) {
-				if (arg0.getKeyChar() == '\n') {
+    /**
+     * Create the frame.
+     */
+    private Index() {
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setBounds(100, 100, 1920, 1080);
+        JPanel contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+
+        JLabel lblNewLabel = new JLabel("Scan Student ID");
+        lblNewLabel.setFont(new Font("Cordia New", Font.PLAIN, 90));
+        lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        lblNewLabel.setBounds(654, 321, 558, 104);
+        contentPane.add(lblNewLabel);
+
+        textField = new JTextField();
+        textField.setHorizontalAlignment(SwingConstants.CENTER);
+        textField.setFont(new Font("Cordia New", Font.PLAIN, 80));
+        textField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent arg0) {
+                if (arg0.getKeyChar() == '\n') {
 //					String idInput[] = {textField.getText()};
 //					textField.setText("");
-					run(textField.getText());
-				}
-			}
-		});
-		textField.setBounds(514, 495, 839, 95);
-		contentPane.add(textField);
-		textField.setColumns(10);
-	}
-	
-	private void run(String id) {
-		if (!isValid(id)) {
-			JOptionPane.showMessageDialog(null, "Wrong student ID", "Error: ID input not found", JOptionPane.INFORMATION_MESSAGE);
-			textField.setText("");
-			return;
-		}
-		textField.setText("");
-		this.setVisible(false);
-		String[] input = {id};
-		Menu.main(input);
-		this.setVisible(true);
-	}
-	
-	private boolean isValid(String id) {
+                    run(textField.getText());
+                }
+            }
+        });
+        textField.setBounds(514, 495, 839, 95);
+        contentPane.add(textField);
+        textField.setColumns(10);
+    }
+
+    private void run(String id) {
+        if (!isValid(id)) {
+            JOptionPane.showMessageDialog(null, "Wrong student ID", "Error: ID input not found", JOptionPane.INFORMATION_MESSAGE);
+            textField.setText("");
+            return;
+        }
+        textField.setText("");
+        this.setVisible(false);
+        String[] input = {id};
+        Menu.main(input);
+        this.setVisible(true);
+    }
+
+    private boolean isValid(String id) {
         return id.length() == 6 && (id.charAt(id.length() - 1) == '1' || id.charAt(id.length() - 1) == '2') /* && isInDB(id)*/;
     }
-	
+
 //	private boolean isInDB(String id) {
 //		try {
 //			File folder = new File(VDO_LOCATION + id);

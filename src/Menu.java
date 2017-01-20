@@ -108,7 +108,7 @@ public class Menu extends JFrame {
         actionBtn.get(2).setBounds(1650, 200, 220, 120);
 
 		/*
-		 * Add action to action button
+         * Add action to action button
 		 */
         actionBtn.get(0).addMouseListener(new MouseAdapter() {
             @Override
@@ -146,9 +146,9 @@ public class Menu extends JFrame {
             anActionBtn.setEnabled(false);
             contentPane.add(anActionBtn);
         }
-		
+
 		/*
-		 * Create object subject button
+         * Create object subject button
 		 */
         subjectBtn.add(new JToggleButton("MK"));
         subjectBtn.add(new JToggleButton("MJ"));
@@ -157,9 +157,9 @@ public class Menu extends JFrame {
         subjectBtn.add(new JToggleButton("PJ"));
         subjectBtn.add(new JToggleButton("PH"));
 //		subjectBtn.add(new JToggleButton("PI"));
-		
+
 		/*
-		 * Set attribute, position, event listener to level button
+         * Set attribute, position, event listener to level button
 		 */
         for (int i = 0; i < subjectBtn.size(); i++) {
             subjectBtn.get(i).setBackground((subjectBtn.get(i).getLabel().charAt(0) == 'M') ? new Color(239, 163, 21) : new Color(208, 137, 244));
