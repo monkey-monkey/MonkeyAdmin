@@ -1,4 +1,4 @@
-/**
+/*
 Copyright [2017] [Chutipon]
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,47 +18,39 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.File;
+//import java.io.File;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
 public class Index extends JFrame {
 
-	private JPanel contentPane;
 	private JTextField textField;
-	public static final String VDO_LOCATION = "\\\\192.168.1.150\\vdo\\";
-	public static final String DB_LOCATION = "\\\\192.168.1.150\\database\\";
+	static final String VDO_LOCATION = "\\\\192.168.1.150\\vdo\\";
+	static final String DB_LOCATION = "\\\\192.168.1.150\\database\\";
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Index frame = new Index();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		EventQueue.invokeLater(() -> {
+            try {
+                Index frame = new Index();
+                frame.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
 	}
 
 	/**
 	 * Create the frame.
 	 */
-	public Index() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	private Index() {
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1920, 1080);
-		contentPane = new JPanel();
+		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -76,9 +68,9 @@ public class Index extends JFrame {
 			@Override
 			public void keyReleased(KeyEvent arg0) {
 				if (arg0.getKeyChar() == '\n') {
-					String idInput[] = {textField.getText()};
-					textField.setText("");
-					Menu.main(idInput);
+//					String idInput[] = {textField.getText()};
+//					textField.setText("");
+					run(textField.getText());
 				}
 			}
 		});
@@ -87,37 +79,34 @@ public class Index extends JFrame {
 		textField.setColumns(10);
 	}
 	
-	public void run(String id) {
+	private void run(String id) {
 		if (!isValid(id)) {
 			JOptionPane.showMessageDialog(null, "Wrong student ID", "Error: ID input not found", JOptionPane.INFORMATION_MESSAGE);
 			textField.setText("");
 			return;
 		}
+		textField.setText("");
 		this.setVisible(false);
 		String[] input = {id};
 		Menu.main(input);
 		this.setVisible(true);
 	}
 	
-	public boolean isValid(String id) {
-		if (id.length() == 6 && (id.charAt(id.length() - 1) == '1' || id.charAt(id.length() - 1) == '2') && isInDB(id)) {
-			return true;
-		}
-		return false;
-	}
+	private boolean isValid(String id) {
+        return id.length() == 6 && (id.charAt(id.length() - 1) == '1' || id.charAt(id.length() - 1) == '2') /* && isInDB(id)*/;
+    }
 	
-	public boolean isInDB(String id) {
-		try {
-			File folder = new File(VDO_LOCATION + id);
-			File[] listOfFiles = folder.listFiles();
-			for (int i = 0; i < listOfFiles.length; i++) {
-				if (listOfFiles[i].isFile()) {
-				} else if (listOfFiles[i].isDirectory()) {
-				}
-			}
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
-	}
+//	private boolean isInDB(String id) {
+//		try {
+//			File folder = new File(VDO_LOCATION + id);
+//			File[] listOfFiles = folder.listFiles();
+//            for (File listOfFile : listOfFiles != null ? listOfFiles : new File[0]) {
+//                if (listOfFile.isFile() || listOfFile.isDirectory()) {
+//                }
+//            }
+//			return true;
+//		} catch (Exception e) {
+//			return false;
+//		}
+//	}
 }

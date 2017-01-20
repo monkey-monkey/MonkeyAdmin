@@ -1,10 +1,26 @@
+/*
+Copyright [2017] [Chutipon]
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+ */
+
 import java.io.FileNotFoundException;
 
 public class DecodeSubjectName {
 	private String path = "";
 	private String fullName = "";
 	
-	public DecodeSubjectName(String levelName) {
+	DecodeSubjectName(String levelName) {
 		path += Index.DB_LOCATION;
 		switch (levelName.charAt(0)) {
 		case 'M':
@@ -21,12 +37,12 @@ public class DecodeSubjectName {
 		try {
 			path += tempFolder.getMapFullNameFromFolder().get(levelName.substring(0, levelName.indexOf('0') - 1)) + "\\";
 			fullName = path;
-		} catch (FileNotFoundException e) {
+		} catch (FileNotFoundException ignored) {
 		}
 		try {
 			FileUtil revGetter = new FileUtil(path);
 			path += levelName + revGetter.getRev(levelName) + "\\" + levelName;
-		} catch (Exception e) {
+		} catch (Exception ignored) {
 		}
 	}
 	
@@ -35,12 +51,8 @@ public class DecodeSubjectName {
 		return path;
 	}
 	
-	public String getFullName() {
+	String getFullName() {
 		return fullName;
 	}
-	
-	public static void main(String[] args) {
-		DecodeSubjectName test = new DecodeSubjectName("MK-AB08");
-		System.out.println(test);
-	}
+
 }

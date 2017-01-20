@@ -1,3 +1,19 @@
+/*
+Copyright [2017] [Chutipon]
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+ */
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -8,39 +24,37 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class FileUtil {
+class FileUtil {
 	
 	private String path;
 	private File[] folderList;
-	private HashMap<String, String> fileFullNameMap;
-	private ArrayList<String> folderNameList, folderNameSubList, folderNumberList;
-	
-	/**
+
+    /**
 	 * Constructor of class
 	 * @param path path of 
 	 */
-	public FileUtil(String path) {
+	FileUtil(String path) {
 		this.path = path;
 	}
 	
-	public ArrayList<String> getFileNameList() {
-		ArrayList<String> fileNameList = new ArrayList<String>();
+	private ArrayList<String> getFileNameList() {
+		ArrayList<String> fileNameList = new ArrayList<>();
 		listFile();
-		for (int i = 0; i < folderList.length; i++) {
-			fileNameList.add(folderList[i].getName());
-		}
+        for (File aFolderList : folderList) {
+            fileNameList.add(aFolderList.getName());
+        }
 		return fileNameList;
 	}
 	
-	public HashMap<String, String> getMapFullNameFromFolder() throws FileNotFoundException{
-		fileFullNameMap = new HashMap<String, String>();
+	HashMap<String, String> getMapFullNameFromFolder() throws FileNotFoundException{
+        HashMap<String, String> fileFullNameMap = new HashMap<>();
 		ArrayList<String> fileNameList = getFileNameList();
-		for (int i = 0; i < fileNameList.size(); i++) {
-			try {
-				fileFullNameMap.put(fileNameList.get(i).substring(0, fileNameList.get(i).indexOf('_')), fileNameList.get(i));
-			} catch (Exception e) {
-			}
-		}
+        for (String aFileNameList : fileNameList) {
+            try {
+                fileFullNameMap.put(aFileNameList.substring(0, aFileNameList.indexOf('_')), aFileNameList);
+            } catch (Exception ignored) {
+            }
+        }
 		return fileFullNameMap;
 	}
 	
@@ -49,14 +63,14 @@ public class FileUtil {
 	 * @return ArrayList of all available name in subject
 	 * @throws FileNotFoundException error occur from invalid file location
 	 */
-	public ArrayList<String> getListNameFromFolder() throws FileNotFoundException {
-		folderNameList = new ArrayList<String>();
+	ArrayList<String> getListNameFromFolder() throws FileNotFoundException {
+        ArrayList<String> folderNameList = new ArrayList<>();
 		ArrayList<String> fileNameList = getFileNameList();
-		for (int i = 0; i < fileNameList.size(); i++) {
+		for (String aFileNameList : fileNameList) {
 			try {
 //				System.out.println(fileNameList.get(i).substring(fileNameList.get(i).indexOf('-') + 1, fileNameList.get(i).indexOf('_')));
-				folderNameList.add(fileNameList.get(i).substring(fileNameList.get(i).indexOf('-') + 1, fileNameList.get(i).indexOf('_')));
-			} catch (Exception e) {
+				folderNameList.add(aFileNameList.substring(aFileNameList.indexOf('-') + 1, aFileNameList.indexOf('_')));
+			} catch (Exception ignored) {
 			}
 		}
 		return folderNameList;
@@ -66,13 +80,13 @@ public class FileUtil {
 	 * Get sub-level name from folder e.g. A, B, C
 	 * @return Array list of sub-level name
 	 */
-	public ArrayList<String> getSubListNameFromFolder() {
-		folderNameSubList = new ArrayList<String>();
+	ArrayList<String> getSubListNameFromFolder() {
+        ArrayList<String> folderNameSubList = new ArrayList<>();
 		ArrayList<String> fileNameList = getFileNameList();
-		for (int i = 0; i < fileNameList.size(); i++) {
-			int index = getIndexOfNum(fileNameList.get(i));
-			if (!folderNameSubList.contains("" + fileNameList.get(i).charAt(index - 1)) && fileNameList.get(i).charAt(index - 1) != 'V') {
-				folderNameSubList.add("" + fileNameList.get(i).charAt(index - 1));
+		for (String aFileNameList : fileNameList) {
+			int index = getIndexOfNum(aFileNameList);
+			if (!folderNameSubList.contains("" + aFileNameList.charAt(index - 1)) && aFileNameList.charAt(index - 1) != 'V') {
+				folderNameSubList.add("" + aFileNameList.charAt(index - 1));
 			}
 		}
 		return folderNameSubList;
@@ -81,31 +95,32 @@ public class FileUtil {
 	/**
 	 * Get number list of folder indicate using key e.g. 'B' -> 01, 02, 03
 	 * @param key Indicator of the level wanted to get the list
-	 * @return Array list of number of levelin folder
+	 * @return Array list of number of level in folder
 	 */
-	public ArrayList<String> getNumberListFromFolder(Character key) {
-		folderNumberList = new ArrayList<String>();
+    ArrayList<String> getNumberListFromFolder(Character key) {
+        ArrayList<String> folderNumberList = new ArrayList<>();
 		ArrayList<String> fileNameList = getFileNameList();
-		for (int i = 0; i < fileNameList.size(); i++) {
-			int indexOfKey = getIndexOfNum(fileNameList.get(i));
-			if (!(folderNumberList.contains(fileNameList.get(i).substring(indexOfKey, indexOfKey + 2)) && fileNameList.get(i).charAt(indexOfKey - 1) != 'V') && fileNameList.get(i).charAt(indexOfKey - 1) == key) {
-				folderNumberList.add(fileNameList.get(i).substring(indexOfKey, indexOfKey + 2));
-			}
-		}
+        for (String aFileNameList : fileNameList) {
+            int indexOfKey = getIndexOfNum(aFileNameList);
+            if (!(folderNumberList.contains(aFileNameList.substring(indexOfKey, indexOfKey + 2)) && aFileNameList.charAt(indexOfKey - 1) != 'V') && aFileNameList.charAt(indexOfKey - 1) == key) {
+                folderNumberList.add(aFileNameList.substring(indexOfKey, indexOfKey + 2));
+            }
+        }
 		return folderNumberList;
 	}
 	
 	/**
 	 * Get most recent rev of sheet
-	 * @param levelName 
+	 * @param levelName name of level to get most recent revision
 	 * @return most recent rev in format (REVx_x) e.g. (REV1_0)
 	 */
-	public String getRev(String levelName) {
-		ArrayList<String> commonFolderName = new ArrayList<String>();
+    String getRev(String levelName) {
+		ArrayList<String> commonFolderName = new ArrayList<>();
 		listFile();
-		for (int i = 0; i < folderList.length; i++) {
-			if(folderList[i].getName().substring(0, folderList[i].getName().indexOf('(')).equals(levelName)) commonFolderName.add(folderList[i].getName().substring(folderList[i].getName().indexOf('(')));
-		}
+        for (File aFolderList : folderList) {
+            if (aFolderList.getName().substring(0, aFolderList.getName().indexOf('(')).equals(levelName))
+                commonFolderName.add(aFolderList.getName().substring(aFolderList.getName().indexOf('(')));
+        }
 		int index = -1;
 		double revVal = 0.0;
 		for (int i = 0; i < commonFolderName.size(); i++) {
@@ -123,7 +138,7 @@ public class FileUtil {
 	 * @param destinationPath location of file to be copied to
 	 * @return boolean if file is copy success
 	 */
-	public boolean copy(String destinationPath) {
+    boolean copy(String destinationPath) {
 		try {
 			copyFileUsingFileChannels(new File(path), new File(destinationPath));
 			return true;
@@ -133,16 +148,9 @@ public class FileUtil {
 	}
 	
 	private void copyFileUsingFileChannels(File source, File dest) throws IOException {
-		FileChannel inputChannel = null;
-		FileChannel outputChannel = null;
-		try {
-			inputChannel = inputExtracted(source).getChannel();
-			outputChannel = outputExtracted(dest).getChannel();
-			outputChannel.transferFrom(inputChannel, 0, inputChannel.size());
-		} finally {
-			inputChannel.close();
-			outputChannel.close();
-		}
+        try (FileChannel inputChannel = inputExtracted(source).getChannel(); FileChannel outputChannel = outputExtracted(dest).getChannel()) {
+            outputChannel.transferFrom(inputChannel, 0, inputChannel.size());
+        }
 	}
 
 	private FileOutputStream outputExtracted(File dest) throws FileNotFoundException {
@@ -172,7 +180,7 @@ public class FileUtil {
 				int temp = levelName.indexOf((char)(48 + i));
 				if (temp == -1) continue;
 				if (temp < index) index = temp;
-			} catch (Exception e) {
+			} catch (Exception ignored) {
 			}
 		}
 		return index;
