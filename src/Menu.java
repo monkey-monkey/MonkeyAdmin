@@ -54,8 +54,8 @@ public class Menu extends JFrame {
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
             try {
-//                frame = new Menu("159991");
-                frame = new Menu(args[0]);
+                frame = new Menu("159991");
+//                frame = new Menu(args[0]);
                 frame.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -218,6 +218,7 @@ public class Menu extends JFrame {
         levelBtn.add(new JToggleButton("XST"));
         levelBtn.add(new JToggleButton("XT"));
         levelBtn.add(new JToggleButton("XV"));
+        levelBtn.add(new JToggleButton("MK"));
 
 		/*
 		 * Set attribute, position, event listener to level button

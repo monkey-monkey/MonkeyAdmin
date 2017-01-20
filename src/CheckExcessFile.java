@@ -14,11 +14,56 @@ See the License for the specific language governing permissions and
 limitations under the License.
  */
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
 public class CheckExcessFile {
-    String path = Index.VDO_LOCATION;
+    private String path = Index.VDO_LOCATION;
+    private File folder;
+    private ArrayList<File> fileList = new ArrayList<>();
+    private ArrayList<String> fileNameList = new ArrayList<>();
+    private ArrayList<String[]> fileLog = new ArrayList<>();
 
     public CheckExcessFile(String id) {
         path += id + "\\";
+        folder = new File(path);
+        listFile();
+        getHistoryFromFile();
+        listFileName();
     }
-    
+
+    public ArrayList<String[]> getFileLog() {
+        return fileLog;
+    }
+
+    private void listFile() {
+        File temp[] = folder.listFiles();
+        if (temp != null) {
+            Collections.addAll(fileList, temp);
+        }
+    }
+
+    private void listFileName() {
+        for (File aFileList : fileList) {
+            fileNameList.add(aFileList.getName());
+        }
+    }
+
+    private void getHistoryFromFile() {
+        File storageLog = new File(path + "log.csv");
+        ArrayList<String> temp = new ArrayList<>();
+        try {
+            Scanner logReader = new Scanner(storageLog);
+            while (logReader.hasNextLine()) {
+                temp.add(logReader.next());
+            }
+            for (String aTemp : temp) {
+                fileLog.add(new String[]{aTemp.substring(0, aTemp.indexOf(',')), aTemp.substring(aTemp.indexOf(',') + 1, aTemp.length())});
+            }
+        } catch (FileNotFoundException ignored) {
+        }
+    }
 }
