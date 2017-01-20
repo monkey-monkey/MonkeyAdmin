@@ -199,7 +199,7 @@ public class Menu extends JFrame {
 		/*
 		 * Create object level button
 		 */
-        for (int i = 0; i < 26; i++) {
+        for (int i = 0; i < 23; i++) {
             levelBtn.add(new JToggleButton(Character.toString((char) (65 + i))));
         }
         levelBtn.add(new JToggleButton("XC"));
@@ -219,6 +219,8 @@ public class Menu extends JFrame {
         levelBtn.add(new JToggleButton("XT"));
         levelBtn.add(new JToggleButton("XV"));
         levelBtn.add(new JToggleButton("MK"));
+        levelBtn.add(new JToggleButton("MS"));
+        levelBtn.add(new JToggleButton("MD"));
 
 		/*
 		 * Set attribute, position, event listener to level button

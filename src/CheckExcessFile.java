@@ -14,8 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
  */
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -37,6 +38,24 @@ public class CheckExcessFile {
 
     public ArrayList<String[]> getFileLog() {
         return fileLog;
+    }
+
+    public void addVideo(String fileName) {
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
+        BufferedWriter writer = null;
+        try {
+            writer = new BufferedWriter(new FileWriter("log.csv", true));
+            writer.write("\n" + fileName + ",");
+        } catch (IOException ignored) {
+        } finally {
+            if (writer != null) {
+                try {
+                    writer.close();
+                } catch (IOException ignored) {
+                }
+            }
+        }
+
     }
 
     private void listFile() {
