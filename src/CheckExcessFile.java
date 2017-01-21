@@ -58,28 +58,30 @@ public class CheckExcessFile {
     private void getLogFromFile() {
         File storageLog = new File(path + "log.csv");
         ArrayList<String> temp = new ArrayList<>();
+        Scanner logReader = null;
         try {
-            Scanner logReader = new Scanner(storageLog);
-            while (logReader.hasNextLine()) {
-                temp.add(logReader.next());
-            }
-            for (String aTemp : temp) {
-                fileLog.add(new String[]{
-                        aTemp.substring(0, aTemp.indexOf(',')),
-                        aTemp.substring(aTemp.indexOf(',') + 1, aTemp.length())
-                });
-            }
-        } catch (FileNotFoundException ignored) {
+            logReader = new Scanner(storageLog);
+        } catch (FileNotFoundException e) {
+            logGenerator();
+        }
+        while (logReader != null && logReader.hasNextLine()) {
+            temp.add(logReader.next());
+        }
+        for (String aTemp : temp) {
+            fileLog.add(new String[]{
+                    aTemp.substring(0, aTemp.indexOf(',')),
+                    aTemp.substring(aTemp.indexOf(',') + 1, aTemp.length())
+            });
         }
     }
 
     private void removeLog() throws IOException {
         String tempData = "";
         Scanner reader = new Scanner(new File(path + "log.csv"));
-        reader.nextLine();
-        while (reader.hasNextLine()){
+        deleteFile(reader.nextLine());
+        while (reader.hasNextLine()) {
             tempData += reader.nextLine();
-            if (reader.hasNextLine()){
+            if (reader.hasNextLine()) {
                 tempData += "\n";
             }
         }
@@ -88,6 +90,33 @@ public class CheckExcessFile {
         BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile, false));
         writer.write(tempData);
         writer.close();
+    }
+
+    private void deleteFile(String fileName) {
+        File targetFile = new File(path + fileName.substring(0, fileName.indexOf(',')));
+        if (targetFile.exists()) targetFile.delete();
+        System.out.println(fileName);
+    }
+
+    private void logGenerator() {
+        File fileList[] = folder.listFiles();
+        String logStore = "";
+        for (int i = 0; i < (fileList != null ? fileList.length : 0); i++) {
+            if (fileList[i].getName().equals("log.csv")) continue;
+            logStore += fileList[i].getName() + ",null";
+            if (i != fileList.length - 1) logStore += "\n";
+        }
+        BufferedWriter writer = null;
+        try {
+            writer = new BufferedWriter(new FileWriter(path + "log.csv", true));
+            writer.write(logStore);
+        } catch (IOException ignored) {
+        } finally {
+            try {
+                if (writer != null) writer.close();
+            } catch (IOException ignored) {
+            }
+        }
     }
 
     private boolean isExcess() {
@@ -119,6 +148,6 @@ public class CheckExcessFile {
 
     public static void main(String[] args) {
         CheckExcessFile temp = new CheckExcessFile("159991");
-        temp.addFileToLog("abc1234.mp4");
+//        temp.addFileToLog("test07.txt");
     }
 }
