@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2353a3e1-8d76-48ff-92a7-236069ec48ef" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/.idea/dictionaries/adminmac.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/log.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/log.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/CheckExcessFile.class" afterPath="$PROJECT_DIR$/bin/CheckExcessFile.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/.idea/misc.xml" afterPath="$PROJECT_DIR$/bin/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/.idea/workspace.xml" afterPath="$PROJECT_DIR$/bin/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/CheckExcessFile.java" afterPath="$PROJECT_DIR$/src/CheckExcessFile.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FileUtil.java" afterPath="$PROJECT_DIR$/src/FileUtil.java" />
     </list>
@@ -76,8 +82,8 @@
       <file leaf-file-name="CheckExcessFile.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/CheckExcessFile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="624">
-              <caret line="87" column="17" lean-forward="true" selection-start-line="87" selection-start-column="17" selection-end-line="87" selection-end-column="17" />
+            <state relative-caret-position="233">
+              <caret line="64" column="39" lean-forward="true" selection-start-line="64" selection-start-column="39" selection-end-line="64" selection-end-column="39" />
               <folding>
                 <element signature="e#0#3008#0" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -612,8 +618,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/CheckExcessFile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="624">
-          <caret line="87" column="17" lean-forward="true" selection-start-line="87" selection-start-column="17" selection-end-line="87" selection-end-column="17" />
+        <state relative-caret-position="233">
+          <caret line="64" column="39" lean-forward="true" selection-start-line="64" selection-start-column="39" selection-end-line="64" selection-end-column="39" />
           <folding>
             <element signature="e#0#3008#0" expanded="true" />
             <element signature="imports" expanded="true" />
