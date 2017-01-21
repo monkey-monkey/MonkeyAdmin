@@ -39,6 +39,7 @@ class FileUtil {
     }
 
     private ArrayList<String> getFileNameList() {
+        System.out.println("FileUtil.getFileNameList() is called");
         ArrayList<String> fileNameList = new ArrayList<>();
         listFile();
         for (File aFolderList : folderList) {
@@ -154,6 +155,8 @@ class FileUtil {
      * @return boolean if file is copy success
      */
     boolean copy(String destinationPath) {
+        CheckExcessFile addFileLog = new CheckExcessFile(destinationPath.substring(0, destinationPath.lastIndexOf('\\')));
+        addFileLog.addFileToLog(destinationPath.substring(destinationPath.lastIndexOf('\\') + 1));
         try {
             copyFileUsingFileChannels(new File(path), new File(destinationPath));
             return true;

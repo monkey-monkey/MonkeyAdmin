@@ -488,6 +488,7 @@ public class Menu extends JFrame {
      * @param desPath destination to copy
      */
     private void copy(String oriPath, String desPath) {
+        System.out.println("Menu.copy() -> oriPath:" + oriPath + " desPath: " + desPath);
         FileUtil file = new FileUtil(oriPath);
         file.copy(desPath);
     }

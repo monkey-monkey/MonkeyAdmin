@@ -80,6 +80,7 @@ public class Index extends JFrame {
     }
 
     private void run(String id) {
+        System.out.println("Index.run() is called");
         if (!isValid(id)) {
             JOptionPane.showMessageDialog(null, "Wrong student ID", "Error: ID input not found", JOptionPane.INFORMATION_MESSAGE);
             textField.setText("");
@@ -93,6 +94,7 @@ public class Index extends JFrame {
     }
 
     private boolean isValid(String id) {
+        System.out.println("Index.isValid() is called");
         return id.length() == 6 && (id.charAt(id.length() - 1) == '1' || id.charAt(id.length() - 1) == '2') /* && isInDB(id)*/;
     }
 

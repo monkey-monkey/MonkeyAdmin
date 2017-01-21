@@ -29,16 +29,16 @@ public class CheckExcessFile {
     private ArrayList<String> fileNameList = new ArrayList<>();
     private ArrayList<String[]> fileLog = new ArrayList<>();
 
-    public CheckExcessFile(String id) {
-        path += id + "\\";
+    public CheckExcessFile(String path) {
+        this.path = path;
         folder = new File(path);
+        System.out.println(folder.listFiles().length);
         listFile();
         getLogFromFile();
         listFileName();
     }
 
     public ArrayList<String[]> getFileLog() {
-        getLogFromFile();
         return fileLog;
     }
 
@@ -47,12 +47,14 @@ public class CheckExcessFile {
         if (temp != null) {
             Collections.addAll(fileList, temp);
         }
+        System.out.println("CheckExcessFile.listFile() >>> CheckExcessFile.fileList: ArrayList<File> -> CheckExcessFile.fileList.size() = " + fileList.size());
     }
 
     private void listFileName() {
         for (File aFileList : fileList) {
             fileNameList.add(aFileList.getName());
         }
+        System.out.println("CheckExcessFile.listFileName() >>> CheckExcessFile.fileNameList: ArrayList<String> -> CheckExcessFile.fileNameList.size() = " + fileNameList.size());
     }
 
     private void getLogFromFile() {
@@ -73,6 +75,7 @@ public class CheckExcessFile {
                     aTemp.substring(aTemp.indexOf(',') + 1, aTemp.length())
             });
         }
+        System.out.println("CheckExcessFile.getLogFromFile() >>> CheckExcessFile.fileLog: ArrayList<String[]> -> CheckExcessFile.fileLog.size() = " + fileLog.size());
     }
 
     private void removeLog() throws IOException {
@@ -147,7 +150,10 @@ public class CheckExcessFile {
     }
 
     public static void main(String[] args) {
-        CheckExcessFile temp = new CheckExcessFile("159991");
-//        temp.addFileToLog("test07.txt");
+        String destinationPath = "\\\\192.168.1.150\\vdo\\159991\\MJ-BB01VDO.mp4";
+        System.out.println(destinationPath.substring(0, destinationPath.lastIndexOf('\\')) + "\\");
+        System.out.println(destinationPath.substring(destinationPath.lastIndexOf('\\') + 1));
+        CheckExcessFile addFileLog = new CheckExcessFile(destinationPath.substring(0, destinationPath.lastIndexOf('\\')) + "\\");
+        addFileLog.addFileToLog(destinationPath.substring(destinationPath.lastIndexOf('\\') + 1));
     }
 }
