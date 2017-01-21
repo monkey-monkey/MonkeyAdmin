@@ -38,6 +38,7 @@ public class CheckExcessFile {
     }
 
     public ArrayList<String[]> getFileLog() {
+        getLogFromFile();
         return fileLog;
     }
 
@@ -64,15 +65,41 @@ public class CheckExcessFile {
             }
             for (String aTemp : temp) {
                 fileLog.add(new String[]{
-                    aTemp.substring(0, aTemp.indexOf(',')),
-                    aTemp.substring(aTemp.indexOf(',') + 1, aTemp.length())
+                        aTemp.substring(0, aTemp.indexOf(',')),
+                        aTemp.substring(aTemp.indexOf(',') + 1, aTemp.length())
                 });
             }
         } catch (FileNotFoundException ignored) {
         }
     }
 
-    public void addFileToLog(String fileName){
+    private void removeLog() throws IOException {
+        String tempData = "";
+        Scanner reader = new Scanner(new File(path + "log.csv"));
+        reader.nextLine();
+        while (reader.hasNextLine()){
+            tempData += reader.nextLine();
+            if (reader.hasNextLine()){
+                tempData += "\n";
+            }
+        }
+        reader.close();
+        File tempFile = new File(path + "log.csv");
+        BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile, false));
+        writer.write(tempData);
+        writer.close();
+    }
+
+    private boolean isExcess() {
+        return fileLog.size() > 5;
+    }
+
+    public void addFileToLog(String fileName) {
+        getLogFromFile();
+        if (isExcess()) try {
+            removeLog();
+        } catch (IOException ignored) {
+        }
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
         Date dateObj = new Date();
         BufferedWriter writer = null;
@@ -91,7 +118,7 @@ public class CheckExcessFile {
     }
 
     public static void main(String[] args) {
-//        CheckExcessFile temp = new CheckExcessFile("159991");
-//        temp.addFileToLog("abc1234.mp4");
+        CheckExcessFile temp = new CheckExcessFile("159991");
+        temp.addFileToLog("abc1234.mp4");
     }
 }
