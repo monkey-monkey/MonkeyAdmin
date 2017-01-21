@@ -71,7 +71,10 @@ class FileUtil {
         for (String aFileNameList : fileNameList) {
             try {
 //				System.out.println(fileNameList.get(i).substring(fileNameList.get(i).indexOf('-') + 1, fileNameList.get(i).indexOf('_')));
-                folderNameList.add(aFileNameList.substring(aFileNameList.indexOf('-') + 1, aFileNameList.indexOf('_')));
+                folderNameList.add(
+                        aFileNameList.substring(aFileNameList.indexOf('-') + 1,
+                                aFileNameList.indexOf('_'))
+                );
             } catch (Exception ignored) {
             }
         }
@@ -106,7 +109,9 @@ class FileUtil {
         ArrayList<String> fileNameList = getFileNameList();
         for (String aFileNameList : fileNameList) {
             int indexOfKey = getIndexOfNum(aFileNameList);
-            if (!(folderNumberList.contains(aFileNameList.substring(indexOfKey, indexOfKey + 2)) && aFileNameList.charAt(indexOfKey - 1) != 'V') && aFileNameList.charAt(indexOfKey - 1) == key) {
+            if (!(folderNumberList.contains(aFileNameList.substring(indexOfKey, indexOfKey + 2)) &&
+                    aFileNameList.charAt(indexOfKey - 1) != 'V') &&
+                    aFileNameList.charAt(indexOfKey - 1) == key) {
                 folderNumberList.add(aFileNameList.substring(indexOfKey, indexOfKey + 2));
             }
         }
@@ -129,7 +134,11 @@ class FileUtil {
         int index = -1;
         double revVal = 0.0;
         for (int i = 0; i < commonFolderName.size(); i++) {
-            double tempVal = Double.parseDouble(commonFolderName.get(i).charAt(commonFolderName.get(i).indexOf('V') + 1) + "." + commonFolderName.get(i).charAt(commonFolderName.get(i).indexOf('_') + 1));
+            double tempVal = Double.parseDouble(
+                    commonFolderName.get(i).charAt(commonFolderName.get(i).indexOf('V') + 1) +
+                            "." +
+                            commonFolderName.get(i).charAt(commonFolderName.get(i).indexOf('_') + 1)
+            );
             if (tempVal > revVal) {
                 index = i;
                 revVal = tempVal;
@@ -154,7 +163,8 @@ class FileUtil {
     }
 
     private void copyFileUsingFileChannels(File source, File dest) throws IOException {
-        try (FileChannel inputChannel = inputExtracted(source).getChannel(); FileChannel outputChannel = outputExtracted(dest).getChannel()) {
+        try (FileChannel inputChannel = inputExtracted(source).getChannel();
+             FileChannel outputChannel = outputExtracted(dest).getChannel()) {
             outputChannel.transferFrom(inputChannel, 0, inputChannel.size());
         }
     }

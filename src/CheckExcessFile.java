@@ -19,6 +19,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Scanner;
 
 public class CheckExcessFile {
@@ -32,30 +33,12 @@ public class CheckExcessFile {
         path += id + "\\";
         folder = new File(path);
         listFile();
-        getHistoryFromFile();
+        getLogFromFile();
         listFileName();
     }
 
     public ArrayList<String[]> getFileLog() {
         return fileLog;
-    }
-
-    public void addVideo(String fileName) {
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
-        BufferedWriter writer = null;
-        try {
-            writer = new BufferedWriter(new FileWriter("log.csv", true));
-            writer.write("\n" + fileName + ",");
-        } catch (IOException ignored) {
-        } finally {
-            if (writer != null) {
-                try {
-                    writer.close();
-                } catch (IOException ignored) {
-                }
-            }
-        }
-
     }
 
     private void listFile() {
@@ -71,7 +54,7 @@ public class CheckExcessFile {
         }
     }
 
-    private void getHistoryFromFile() {
+    private void getLogFromFile() {
         File storageLog = new File(path + "log.csv");
         ArrayList<String> temp = new ArrayList<>();
         try {
@@ -80,9 +63,35 @@ public class CheckExcessFile {
                 temp.add(logReader.next());
             }
             for (String aTemp : temp) {
-                fileLog.add(new String[]{aTemp.substring(0, aTemp.indexOf(',')), aTemp.substring(aTemp.indexOf(',') + 1, aTemp.length())});
+                fileLog.add(new String[]{
+                    aTemp.substring(0, aTemp.indexOf(',')),
+                    aTemp.substring(aTemp.indexOf(',') + 1, aTemp.length())
+                });
             }
         } catch (FileNotFoundException ignored) {
         }
+    }
+
+    public void addFileToLog(String fileName){
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        Date dateObj = new Date();
+        BufferedWriter writer = null;
+        try {
+            writer = new BufferedWriter(new FileWriter(path + "log.csv", true));
+            writer.write("\n" + fileName + "," + format.format(dateObj));
+        } catch (IOException ignored) {
+        } finally {
+            if (writer != null) {
+                try {
+                    writer.close();
+                } catch (IOException ignored) {
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+//        CheckExcessFile temp = new CheckExcessFile("159991");
+//        temp.addFileToLog("abc1234.mp4");
     }
 }
