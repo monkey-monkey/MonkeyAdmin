@@ -55,4 +55,10 @@ public class DecodeSubjectName {
         return fullName;
     }
 
+    public static void main(String[] args) {
+        DecodeSubjectName math = new DecodeSubjectName("MJ-DB01");
+        System.out.println(math);
+        DecodeSubjectName phy = new DecodeSubjectName("PJ-BB01");
+        System.out.println(phy);
+    }
 }
