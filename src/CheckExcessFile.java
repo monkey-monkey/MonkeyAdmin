@@ -165,7 +165,6 @@ public class CheckExcessFile {
      * @param fileName file name of file to be add
      */
     public void addFileToLog(String fileName) {
-        getLogFromFile();
         if (isExcess()) try {
             removeLog();
         } catch (IOException ignored) {
@@ -189,7 +188,7 @@ public class CheckExcessFile {
     }
 
     public static void main(String[] args) {
-        String destinationPath = "\\\\192.168.1.150\\vdo\\159991\\MJ-BB02VDO.mp4";
+        String destinationPath = "\\\\192.168.1.150\\vdo\\159991\\MJ-BB01VDO.mp4";
         System.out.println(destinationPath.substring(0, destinationPath.lastIndexOf('\\')) + "\\");
         System.out.println(destinationPath.substring(destinationPath.lastIndexOf('\\') + 1));
         CheckExcessFile addFileLog = new CheckExcessFile(destinationPath.substring(0, destinationPath.lastIndexOf('\\')) + "\\");
