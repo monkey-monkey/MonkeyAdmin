@@ -39,8 +39,12 @@ public class DecodeSubjectName {
             fullName = path;
         } catch (FileNotFoundException ignored) {
         }
+        System.out.println("Code Checking: " + path);
         try {
             FileUtil revGetter = new FileUtil(path);
+            System.out.println("Status >>> success");
+            System.out.println("Check input for revGetter: " + levelName);
+            System.out.println("revGetter -> " + revGetter.getRev(levelName));
             path += levelName + revGetter.getRev(levelName) + "\\" + levelName;
         } catch (Exception ignored) {
         }
@@ -55,10 +59,4 @@ public class DecodeSubjectName {
         return fullName;
     }
 
-    public static void main(String[] args) {
-        DecodeSubjectName math = new DecodeSubjectName("MJ-DB01");
-        System.out.println(math);
-        DecodeSubjectName phy = new DecodeSubjectName("PJ-BB01");
-        System.out.println(phy);
-    }
 }

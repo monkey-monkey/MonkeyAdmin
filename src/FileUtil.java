@@ -128,9 +128,12 @@ class FileUtil {
     String getRev(String levelName) {
         ArrayList<String> commonFolderName = new ArrayList<>();
         listFile();
+        System.out.println("FileUtil.getRev() >>> for each loop times = " + folderList.length);
         for (File aFolderList : folderList) {
-            if (aFolderList.getName().substring(0, aFolderList.getName().indexOf('(')).equals(levelName))
+            if (aFolderList.getName().substring(0, aFolderList.getName().indexOf('(')).equals(levelName)){
                 commonFolderName.add(aFolderList.getName().substring(aFolderList.getName().indexOf('(')));
+                System.out.println("FileUtil.getRev() >>> common folder add " + aFolderList.getName().substring(aFolderList.getName().indexOf('(')));
+            }
         }
         int index = -1;
         double revVal = 0.0;
