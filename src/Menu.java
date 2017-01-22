@@ -195,9 +195,9 @@ public class Menu extends JFrame {
             });
             contentPane.add(subjectBtn.get(i));
         }
-		
+
 		/*
-		 * Create object level button
+         * Create object level button
 		 */
         for (int i = 0; i < 23; i++) {
             levelBtn.add(new JToggleButton(Character.toString((char) (65 + i))));
@@ -223,7 +223,7 @@ public class Menu extends JFrame {
         levelBtn.add(new JToggleButton("MD"));
 
 		/*
-		 * Set attribute, position, event listener to level button
+         * Set attribute, position, event listener to level button
 		 */
         int index = 0;
         for (int i = 0; i < 5; i++) {
@@ -264,9 +264,9 @@ public class Menu extends JFrame {
                 }
             }
         }
-		
+
 		/*
-		  Create object sub level button
+          Create object sub level button
 		 */
         subLevelBtn.add(new JToggleButton("B"));
         subLevelBtn.add(new JToggleButton("I"));
@@ -274,7 +274,7 @@ public class Menu extends JFrame {
         subLevelBtn.add(new JToggleButton("P"));
         subLevelBtn.add(new JToggleButton("A"));
         subLevelBtn.add(new JToggleButton("T"));
-		
+
 		
 		/*
 		  Set attribute, position, event listener to sub level button
