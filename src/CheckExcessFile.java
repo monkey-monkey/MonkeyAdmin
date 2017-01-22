@@ -22,18 +22,20 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Scanner;
 
-public class CheckExcessFile {
+class CheckExcessFile {
     private String path = Index.VDO_LOCATION;
     private File folder;
     private ArrayList<File> fileList = new ArrayList<>();
     private ArrayList<String> fileNameList = new ArrayList<>();
     private ArrayList<String[]> fileLog = new ArrayList<>();
+    private boolean hasLog = true;
 
     /**
      * Constructor of class CheckExcessFile
+     *
      * @param path destination path of student
      */
-    public CheckExcessFile(String path) {
+    CheckExcessFile(String path) {
         this.path = path;
         folder = new File(path);
         listFile();
@@ -42,11 +44,11 @@ public class CheckExcessFile {
     }
 
     /**
-     * Getter of FileLog
-     * @return ArrayList contain array of string FileLog
+     * Getter of status of log
+     * @return boolean hasLog
      */
-    public ArrayList<String[]> getFileLog() {
-        return fileLog;
+    boolean getHasLog(){
+        return hasLog;
     }
 
     /**
@@ -81,6 +83,7 @@ public class CheckExcessFile {
             logReader = new Scanner(storageLog);
         } catch (FileNotFoundException e) {
             logGenerator();
+            hasLog = false;
         }
         while (logReader != null && logReader.hasNextLine()) {
             temp.add(logReader.next());
@@ -96,6 +99,7 @@ public class CheckExcessFile {
 
     /**
      * Delete file log that excess capacity of folder
+     *
      * @throws IOException cause from log file not found or unable to write log to file
      */
     private void removeLog() throws IOException {
@@ -118,12 +122,16 @@ public class CheckExcessFile {
 
     /**
      * Delete target file from folder
+     *
      * @param fileLog log of file to be delete read from file log
      */
     private void deleteFile(String fileLog) {
         File targetFile = new File(path + fileLog.substring(0, fileLog.indexOf(',')));
-        if (targetFile.exists()) targetFile.delete();
-        System.out.println("CheckExcessFile.deleteFile() >>> File to delete = " + fileLog.substring(0, fileLog.indexOf(',')));
+        boolean delete = false;
+        if (targetFile.exists()) {
+            delete = targetFile.delete();
+        }
+        System.out.println("CheckExcessFile.deleteFile() >>> File to delete = " + fileLog.substring(0, fileLog.indexOf(',')) + " -> " + delete);
     }
 
     /**
@@ -133,7 +141,11 @@ public class CheckExcessFile {
         File fileList[] = folder.listFiles();
         String logStore = "";
         for (int i = 0; i < (fileList != null ? fileList.length : 0); i++) {
-            if (fileList[i].getName().equals("log.csv")) continue;
+            if (fileList[i].getName().equals("log.csv") ||
+                    fileList[i].getName().equals(path.substring(
+                            path.lastIndexOf('\\'))
+                    )
+                    ) continue;
             logStore += fileList[i].getName() + ",null";
             if (i != fileList.length - 1) logStore += "\n";
         }
@@ -153,6 +165,7 @@ public class CheckExcessFile {
 
     /**
      * Check if the file in folder is excess the capacity
+     *
      * @return boolean show status of file in folder
      */
     private boolean isExcess() {
@@ -162,10 +175,18 @@ public class CheckExcessFile {
 
     /**
      * Add file to file log
+     *
      * @param fileName file name of file to be add
      */
-    public void addFileToLog(String fileName) {
+    void addFileToLog(String fileName) {
+        if (!hasLog && isExcess()) try {
+            System.out.println("CheckExcessFile.addFileToLog() -> first condition: !hasLog && .isExcess() -> true");
+            removeLog();
+            return;
+        } catch (IOException ignored) {
+        }
         if (isExcess()) try {
+            System.out.println("CheckExcessFile.addFileToLog() -> second condition: .isExcess() -> true");
             removeLog();
         } catch (IOException ignored) {
         }
@@ -185,13 +206,5 @@ public class CheckExcessFile {
             }
         }
         System.out.println("CheckExcessFile.addFileToLog() >>> Write data:\n" + fileName + "," + format.format(dateObj));
-    }
-
-    public static void main(String[] args) {
-        String destinationPath = "\\\\192.168.1.150\\vdo\\159991\\MJ-BB01VDO.mp4";
-        System.out.println(destinationPath.substring(0, destinationPath.lastIndexOf('\\')) + "\\");
-        System.out.println(destinationPath.substring(destinationPath.lastIndexOf('\\') + 1));
-        CheckExcessFile addFileLog = new CheckExcessFile(destinationPath.substring(0, destinationPath.lastIndexOf('\\')) + "\\");
-        addFileLog.addFileToLog(destinationPath.substring(destinationPath.lastIndexOf('\\') + 1));
     }
 }

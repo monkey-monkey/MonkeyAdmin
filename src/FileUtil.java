@@ -158,7 +158,8 @@ class FileUtil {
         try {
             copyFileUsingFileChannels(new File(path), new File(destinationPath));
             CheckExcessFile addFileLog = new CheckExcessFile(destinationPath.substring(0, destinationPath.lastIndexOf('\\')) + "\\");
-            addFileLog.addFileToLog(destinationPath.substring(destinationPath.lastIndexOf('\\') + 1));
+            if (addFileLog.getHasLog())
+                addFileLog.addFileToLog(destinationPath.substring(destinationPath.lastIndexOf('\\') + 1));
             return true;
         } catch (IOException e) {
             return false;
