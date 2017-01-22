@@ -49,7 +49,7 @@ public class PrintUtil {
         System.out.println("PrintUtil.print() >>> Printer list:");
         int indexKey = -1;
         for (int i = 0; i < services.length; i++){
-            System.out.println(services[i].getName());
+            System.out.println("\t" + services[i].getName());
             if (services[i].getName().equals(key)) indexKey = i;
         }
         System.out.println("-----------------------------------------------------------");
@@ -58,11 +58,13 @@ public class PrintUtil {
         if (indexKey != -1){
             DocPrintJob job = services[indexKey].createPrintJob();
             System.out.println("Job Created");
+            System.out.print("Print status: ");
             try {
                 job.print(doc, asset);
                 System.out.println("Print success");
             } catch (PrintException e) {
                 System.out.println(e.getMessage());
+                e.printStackTrace();
             }
         }
     }
