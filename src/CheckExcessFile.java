@@ -160,7 +160,7 @@ class CheckExcessFile {
             } catch (IOException ignored) {
             }
         }
-        System.out.println("CheckExcessFile.logGenerator() >>> Generated log:\n" + logStore);
+        System.out.println("CheckExcessFile.logGenerator() >>> Generated log:\n" + logStore + "\n");
     }
 
     /**
