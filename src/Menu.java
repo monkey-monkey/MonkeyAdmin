@@ -493,9 +493,14 @@ public class Menu extends JFrame {
         file.copy(desPath);
     }
 
-//	private void print(String path) {
-//		
-//	}
+    /**
+     * The method that call print() from printUtil
+     * @param path path of the file to be print
+     */
+	private void print(String path) {
+        PrintUtil printer = new PrintUtil(path);
+        printer.print();
+	}
 
 
     /*
@@ -596,7 +601,7 @@ public class Menu extends JFrame {
     }
 
     /*
-     * Check condition to print and copy video
+     * Check condition for printing and copying video
      */
     private void checkWorksheetNumber() {
         DecodeSubjectName path = new DecodeSubjectName(currentSheetCode.substring(0, currentSheetCode.length()) + "00");
