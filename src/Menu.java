@@ -126,7 +126,15 @@ public class Menu extends JFrame {
         actionBtn.get(1).addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText());
+                String levelLabel = null;
+                for (JToggleButton aSheetSetBtn : sheetSetBtn) {
+                    if (aSheetSetBtn.isSelected()) levelLabel = aSheetSetBtn.getLabel();
+                }
+                System.out.println(dbPath);
+                print(dbPath + ((levelLabel == null) ? "FULL" : levelLabel) + ".pdf");
+                clear();
+                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
             }
         });
 
@@ -137,6 +145,7 @@ public class Menu extends JFrame {
                 System.out.println("From:" + dbPath + "VDO.mp4");
                 System.out.println("To:" + Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
                 copy(dbPath + "VDO.mp4", Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+                System.out.println(dbPath);
                 print(dbPath + "FULL.pdf");
                 clear();
                 frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
