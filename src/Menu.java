@@ -134,8 +134,8 @@ public class Menu extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText());
-				System.out.println("From:" + dbPath + "VDO.mp4");
-				System.out.println("To:" + Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+                System.out.println("From:" + dbPath + "VDO.mp4");
+                System.out.println("To:" + Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
                 copy(dbPath + "VDO.mp4", Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
                 print(dbPath + "FULL.pdf");
                 clear();
@@ -283,7 +283,7 @@ public class Menu extends JFrame {
 
 		
 		/*
-		  Set attribute, position, event listener to sub level button
+          Set attribute, position, event listener to sub level button
 		 */
 
         for (int i = 0; i < subLevelBtn.size(); i++) {
@@ -501,12 +501,13 @@ public class Menu extends JFrame {
 
     /**
      * The method that call print() from printUtil
+     *
      * @param path path of the file to be print
      */
-	private void print(String path) {
+    private void print(String path) {
         PrintUtil printer = new PrintUtil(path);
         printer.print();
-	}
+    }
 
 
     /*
