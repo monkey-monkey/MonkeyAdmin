@@ -96,18 +96,4 @@ public class Index extends JFrame {
         System.out.println("Index.isValid() is called");
         return id.length() == 6 && (id.charAt(id.length() - 1) == '1' || id.charAt(id.length() - 1) == '2') /* && isInDB(id)*/;
     }
-
-//	private boolean isInDB(String id) {
-//		try {
-//			File folder = new File(VDO_LOCATION + id);
-//			File[] listOfFiles = folder.listFiles();
-//            for (File listOfFile : listOfFiles != null ? listOfFiles : new File[0]) {
-//                if (listOfFile.isFile() || listOfFile.isDirectory()) {
-//                }
-//            }
-//			return true;
-//		} catch (Exception e) {
-//			return false;
-//		}
-//	}
 }

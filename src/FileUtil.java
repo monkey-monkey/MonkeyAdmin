@@ -32,7 +32,7 @@ class FileUtil {
     /**
      * Constructor of class
      *
-     * @param path path of
+     * @param path path of folder location for file util
      */
     FileUtil(String path) {
         this.path = path;

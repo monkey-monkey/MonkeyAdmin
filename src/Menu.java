@@ -354,7 +354,7 @@ public class Menu extends JFrame {
         numberPadBtn.add(new JButton("3"));
 
 		/*
-		 * Set attribute, position, event listener to sub level button
+         * Set attribute, position, event listener to sub level button
 		 */
         index = 0;
         for (int i = 0; i < 3; i++) {
@@ -372,6 +372,7 @@ public class Menu extends JFrame {
                             else sheetNum = sheetNum.substring(1) + numberPadBtn.get(temp).getLabel();
                             setText();
                             checkWorksheetNumber();
+                            setEnableOfSubSheetSet();
                         }
                     });
                     contentPane.add(numberPadBtn.get(index));
@@ -640,7 +641,7 @@ public class Menu extends JFrame {
      * Check condition for printing and copying video
      */
     private void checkWorksheetNumber() {
-        DecodeSubjectName path = new DecodeSubjectName(currentSheetCode.substring(0, currentSheetCode.length()) + "00");
+        DecodeSubjectName path = new DecodeSubjectName(currentSheetCode + "00");
         FileUtil folder = new FileUtil(path.getFullName());
         listAvailableLevelNumber = folder.getNumberListFromFolder(subSheetChar);
         if (listAvailableLevelNumber.contains(sheetNum)) {
@@ -662,8 +663,13 @@ public class Menu extends JFrame {
         }
     }
 
+    private void setEnableOfSubSheetSet(){
+
+    }
+
     /**
      * Check if the sub sheet button is selected
+     *
      * @return boolean status of sub sheet set button
      */
     private boolean isSubSheetBtnIsSelected() {
