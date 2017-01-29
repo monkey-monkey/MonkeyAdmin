@@ -645,4 +645,11 @@ public class Menu extends JFrame {
             actionBtn.get(2).setBackground(Color.WHITE);
         }
     }
+
+    private boolean isSubSheetBtnIsSelected(){
+        for (JToggleButton aSubSheetBtn : subSheetBtn){
+            if (aSubSheetBtn.isSelected()) return true;
+        }
+        return false;
+    }
 }
