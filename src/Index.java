@@ -18,7 +18,6 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-//import java.io.File;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

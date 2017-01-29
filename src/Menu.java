@@ -114,8 +114,6 @@ public class Menu extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText());
-//				System.out.println("From:" + dbPath + "VDO.mp4");
-//				System.out.println("To:" + Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
                 copy(dbPath + "VDO.mp4", Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
                 clear();
                 frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
@@ -126,13 +124,13 @@ public class Menu extends JFrame {
         actionBtn.get(1).addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText());
+                DecodeSubjectName dbPath = new DecodeSubjectName(currentSheetCode);
                 String levelLabel = null;
                 for (JToggleButton aSheetSetBtn : sheetSetBtn) {
                     if (aSheetSetBtn.isSelected()) levelLabel = aSheetSetBtn.getLabel();
                 }
                 System.out.println(dbPath);
-                print(dbPath + ((levelLabel == null) ? "FULL" : levelLabel) + ".pdf");
+                print(dbPath + levelLabel + ".pdf");
                 clear();
                 frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
             }
@@ -152,9 +150,9 @@ public class Menu extends JFrame {
             }
         });
 
-        //
-        //* Set attribute for action button and add to content pane
-        //
+        /*
+          Set attribute for action button and add to content pane
+         */
         for (JButton anActionBtn : actionBtn) {
             anActionBtn.setFont(new Font("Cordia New", Font.PLAIN, 50));
             anActionBtn.setBackground(Color.WHITE);
@@ -518,7 +516,6 @@ public class Menu extends JFrame {
         printer.print();
     }
 
-
     /*
      * Clear subject button
      */
@@ -576,7 +573,6 @@ public class Menu extends JFrame {
         }
     }
 
-
     /*
      * Clear action button color
      */
@@ -588,7 +584,6 @@ public class Menu extends JFrame {
         sheetNum = "00";
         subSheetChar = null;
     }
-
 
     /*
      * Clear color of all button
@@ -641,5 +636,4 @@ public class Menu extends JFrame {
             actionBtn.get(2).setBackground(Color.WHITE);
         }
     }
-
 }
