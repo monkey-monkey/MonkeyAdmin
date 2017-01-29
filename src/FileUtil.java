@@ -38,7 +38,7 @@ class FileUtil {
         this.path = path;
     }
 
-    private ArrayList<String> getFileNameList() {
+    ArrayList<String> getFileNameList() {
         System.out.println("FileUtil.getFileNameList() is called");
         ArrayList<String> fileNameList = new ArrayList<>();
         listFile();

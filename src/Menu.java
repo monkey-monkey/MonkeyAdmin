@@ -31,6 +31,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
+import java.util.Objects;
 
 @SuppressWarnings("serial")
 public class Menu extends JFrame {
@@ -118,6 +119,8 @@ public class Menu extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText());
+                System.out.println("\tIf condition status >>> " + isSubSheetBtnIsSelected());
+                System.out.println(dbPath657);
                 if (isSubSheetBtnIsSelected()) {
                     copy(dbPath + textField.getText() + "VDO.mp4", Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
                 } else {
@@ -381,9 +384,9 @@ public class Menu extends JFrame {
                 index++;
             }
         }
-		
+
 		/*
-		 * Create object sub sheet button
+         * Create object sub sheet button
 		 */
         for (int i = 0; i < 3; i++) {
             subSheetBtn.add(new JToggleButton(Character.toString((char) (i + 97))));
@@ -663,8 +666,27 @@ public class Menu extends JFrame {
         }
     }
 
-    private void setEnableOfSubSheetSet(){
-
+    @SuppressWarnings("deprecation")
+    private void setEnableOfSubSheetSet() {
+        DecodeSubjectName path = new DecodeSubjectName(textField.getText());
+        FileUtil folder = new FileUtil(path.toString().substring(0, path.toString().lastIndexOf('\\')));
+        ArrayList<String> fileNameInFolder = folder.getFileNameList();
+        ArrayList<String> availableSubSheetSet = new ArrayList<>();
+        for (String aFileNameInFolder : fileNameInFolder) {
+            if (aFileNameInFolder.charAt(aFileNameInFolder.length() - 1) == 'a' ||
+                    aFileNameInFolder.charAt(aFileNameInFolder.length() - 1) == 'b' ||
+                    aFileNameInFolder.charAt(aFileNameInFolder.length() - 1) == 'c') {
+                availableSubSheetSet.add(String.valueOf(aFileNameInFolder.charAt(aFileNameInFolder.length() - 1)));
+            }
+        }
+        for (String anAvailableSubSheetSet : availableSubSheetSet) {
+            for (JToggleButton aSubSheetBtn : subSheetBtn) {
+                if ((Objects.equals(anAvailableSubSheetSet, aSubSheetBtn.getLabel()))) {
+                    aSubSheetBtn.setEnabled(true);
+                    aSubSheetBtn.setBackground(new Color(119, 234, 173));
+                }
+            }
+        }
     }
 
     /**
