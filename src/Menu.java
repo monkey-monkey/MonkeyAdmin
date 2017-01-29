@@ -110,6 +110,10 @@ public class Menu extends JFrame {
 		/*
          * Add action to action button
 		 */
+
+        /*
+         * VDO button
+         */
         actionBtn.get(0).addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -120,11 +124,13 @@ public class Menu extends JFrame {
             }
         });
 
-
+        /*
+         * Print button
+         */
         actionBtn.get(1).addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                DecodeSubjectName dbPath = new DecodeSubjectName(currentSheetCode);
+                DecodeSubjectName dbPath = new DecodeSubjectName(currentSheetCode + sheetNum);
                 String levelLabel = null;
                 for (JToggleButton aSheetSetBtn : sheetSetBtn) {
                     if (aSheetSetBtn.isSelected()) levelLabel = aSheetSetBtn.getLabel();
@@ -136,6 +142,9 @@ public class Menu extends JFrame {
             }
         });
 
+        /*
+         * Print and VDO button
+         */
         actionBtn.get(2).addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
