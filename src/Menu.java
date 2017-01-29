@@ -118,7 +118,11 @@ public class Menu extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText());
-                copy(dbPath + "VDO.mp4", Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+                if (isSubSheetBtnIsSelected()) {
+                    copy(dbPath + textField.getText() + "VDO.mp4", Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+                } else {
+                    copy(dbPath + "VDO.mp4", Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+                }
                 clear();
                 frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
             }
@@ -136,7 +140,11 @@ public class Menu extends JFrame {
                     if (aSheetSetBtn.isSelected()) levelLabel = aSheetSetBtn.getLabel();
                 }
                 System.out.println(dbPath);
-                print(dbPath + levelLabel + ".pdf");
+                if (isSubSheetBtnIsSelected()) {
+                    print(dbPath + textField.getText() + levelLabel + ".pdf");
+                } else {
+                    print(dbPath + levelLabel + ".pdf");
+                }
                 clear();
                 frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
             }
@@ -151,9 +159,17 @@ public class Menu extends JFrame {
                 DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText());
                 System.out.println("From:" + dbPath + "VDO.mp4");
                 System.out.println("To:" + Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
-                copy(dbPath + "VDO.mp4", Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+                if (isSubSheetBtnIsSelected()) {
+                    copy(dbPath + textField.getText() + "VDO.mp4", Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+                } else {
+                    copy(dbPath + "VDO.mp4", Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+                }
                 System.out.println(dbPath);
-                print(dbPath + "FULL.pdf");
+                if (isSubSheetBtnIsSelected()) {
+                    print(dbPath + textField.getText() + "FULL.pdf");
+                } else {
+                    print(dbPath + "FULL.pdf");
+                }
                 clear();
                 frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
             }
@@ -321,9 +337,9 @@ public class Menu extends JFrame {
             });
             contentPane.add(subLevelBtn.get(i));
         }
-		
+
 		/*
-		 * Create object number pad button
+         * Create object number pad button
 		 */
         numberPadBtn.add(new JButton("7"));
         numberPadBtn.add(new JButton("4"));
@@ -336,7 +352,7 @@ public class Menu extends JFrame {
         numberPadBtn.add(new JButton("9"));
         numberPadBtn.add(new JButton("6"));
         numberPadBtn.add(new JButton("3"));
-		
+
 		/*
 		 * Set attribute, position, event listener to sub level button
 		 */
@@ -371,7 +387,7 @@ public class Menu extends JFrame {
         for (int i = 0; i < 3; i++) {
             subSheetBtn.add(new JToggleButton(Character.toString((char) (i + 97))));
         }
-		
+
 		/*
 		 * Set attribute, position, event listener to sub sheet button
 		 */
@@ -392,7 +408,7 @@ public class Menu extends JFrame {
             });
             contentPane.add(subSheetBtn.get(i));
         }
-		
+
 		/*
 		 * Create object sheet set button
 		 */
@@ -400,7 +416,7 @@ public class Menu extends JFrame {
         sheetSetBtn.add(new JToggleButton("SKILL"));
         sheetSetBtn.add(new JToggleButton("HW"));
         sheetSetBtn.add(new JToggleButton("TEST"));
-		
+
 		/*
 		 * Set attribute, position, event listener to sheet set button
 		 */
@@ -646,8 +662,12 @@ public class Menu extends JFrame {
         }
     }
 
-    private boolean isSubSheetBtnIsSelected(){
-        for (JToggleButton aSubSheetBtn : subSheetBtn){
+    /**
+     * Check if the sub sheet button is selected
+     * @return boolean status of sub sheet set button
+     */
+    private boolean isSubSheetBtnIsSelected() {
+        for (JToggleButton aSubSheetBtn : subSheetBtn) {
             if (aSubSheetBtn.isSelected()) return true;
         }
         return false;
