@@ -14,8 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
  */
 
-import java.awt.EventQueue;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -36,6 +35,7 @@ public class Index extends JFrame {
         EventQueue.invokeLater(() -> {
             try {
                 Index frame = new Index();
+                frame.setExtendedState(MAXIMIZED_BOTH);
                 frame.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();

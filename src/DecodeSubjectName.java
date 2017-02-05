@@ -35,7 +35,8 @@ public class DecodeSubjectName {
         path += "\\" + levelName.substring(0, levelName.indexOf('-')) + "\\";
         FileUtil tempFolder = new FileUtil(path);
         try {
-            path += tempFolder.getMapFullNameFromFolder().get(levelName.substring(0, levelName.indexOf('0') - 1)) + "\\";
+            System.out.println(levelName.substring(0, indexOfFirstNum(levelName) - 1));
+            path += tempFolder.getMapFullNameFromFolder().get(levelName.substring(0, indexOfFirstNum(levelName) - 1)) + "\\";
             fullName = path;
         } catch (FileNotFoundException ignored) {
         }
@@ -59,4 +60,13 @@ public class DecodeSubjectName {
         return fullName;
     }
 
+
+    private int indexOfFirstNum(String levelName){
+        for (int i = 0; i < levelName.length(); i++){
+            for (int j = 0; j < 10; j ++){
+                if (Character.toString(levelName.charAt(i)).equals(Integer.toString(j))) return i;
+            }
+        }
+        return -1;
+    }
 }

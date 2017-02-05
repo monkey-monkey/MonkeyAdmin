@@ -14,18 +14,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
  */
 
-import java.awt.EventQueue;
+import java.awt.*;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import java.awt.Color;
 import javax.swing.JToggleButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -57,6 +55,7 @@ public class Menu extends JFrame {
             try {
 //                frame = new Menu("159991");
                 frame = new Menu(args[0]);
+                frame.setExtendedState(MAXIMIZED_BOTH);
                 frame.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -162,6 +161,7 @@ public class Menu extends JFrame {
         actionBtn.get(2).addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                textField.setBackground(new Color(119, 234, 173));
                 if (isSubSheetBtnIsSelected()) {
                     DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText().substring(0, textField.getText().length() - 1));
                     copy(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
