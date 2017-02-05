@@ -55,8 +55,8 @@ public class Menu extends JFrame {
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
             try {
-                frame = new Menu("159991");
-//                frame = new Menu(args[0]);
+//                frame = new Menu("159991");
+                frame = new Menu(args[0]);
                 frame.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -118,12 +118,14 @@ public class Menu extends JFrame {
         actionBtn.get(0).addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText());
                 System.out.println("\tIf condition status >>> " + isSubSheetBtnIsSelected());
-                System.out.println(dbPath);
                 if (isSubSheetBtnIsSelected()) {
-                    copy(dbPath + textField.getText() + "VDO.mp4", Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+                    DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText().substring(0, textField.getText().length() - 1));
+                    copy(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
+                                    textField.getText().substring(0, textField.getText().length() - 1) + "VDO.mp4",
+                            Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
                 } else {
+                    DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText());
                     copy(dbPath + "VDO.mp4", Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
                 }
                 clear();
@@ -144,7 +146,8 @@ public class Menu extends JFrame {
                 }
                 System.out.println(dbPath);
                 if (isSubSheetBtnIsSelected()) {
-                    print(dbPath + textField.getText() + levelLabel + ".pdf");
+                    print(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
+                            textField.getText().substring(0, textField.getText().length()) + levelLabel + ".pdf");
                 } else {
                     print(dbPath + levelLabel + ".pdf");
                 }
@@ -159,18 +162,16 @@ public class Menu extends JFrame {
         actionBtn.get(2).addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText());
-                System.out.println("From:" + dbPath + "VDO.mp4");
-                System.out.println("To:" + Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
                 if (isSubSheetBtnIsSelected()) {
-                    copy(dbPath + textField.getText() + "VDO.mp4", Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+                    DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText().substring(0, textField.getText().length() - 1));
+                    copy(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
+                            textField.getText().substring(0, textField.getText().length() - 1) + "VDO.mp4",
+                            Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+                    print(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
+                            textField.getText().substring(0, textField.getText().length()) + "FULL.pdf");
                 } else {
+                    DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText());
                     copy(dbPath + "VDO.mp4", Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
-                }
-                System.out.println(dbPath);
-                if (isSubSheetBtnIsSelected()) {
-                    print(dbPath + textField.getText() + "FULL.pdf");
-                } else {
                     print(dbPath + "FULL.pdf");
                 }
                 clear();

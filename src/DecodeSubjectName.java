@@ -59,9 +59,4 @@ public class DecodeSubjectName {
         return fullName;
     }
 
-    public static void main(String[] args) {
-        DecodeSubjectName path = new DecodeSubjectName("MK-BB01");
-        FileUtil folder = new FileUtil(path.getFullName());
-        System.out.println(path);
-    }
 }
