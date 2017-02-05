@@ -117,6 +117,7 @@ public class Menu extends JFrame {
         actionBtn.get(0).addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                textField.setBackground(new Color(229, 66, 66));
                 System.out.println("\tIf condition status >>> " + isSubSheetBtnIsSelected());
                 if (isSubSheetBtnIsSelected()) {
                     DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText().substring(0, textField.getText().length() - 1));
@@ -138,6 +139,7 @@ public class Menu extends JFrame {
         actionBtn.get(1).addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                textField.setBackground(new Color(229, 66, 66));
                 DecodeSubjectName dbPath = new DecodeSubjectName(currentSheetCode + sheetNum);
                 String levelLabel = null;
                 for (JToggleButton aSheetSetBtn : sheetSetBtn) {
@@ -161,11 +163,11 @@ public class Menu extends JFrame {
         actionBtn.get(2).addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                textField.setBackground(new Color(119, 234, 173));
+                textField.setBackground(new Color(229, 66, 66));
                 if (isSubSheetBtnIsSelected()) {
                     DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText().substring(0, textField.getText().length() - 1));
                     copy(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
-                            textField.getText().substring(0, textField.getText().length() - 1) + "VDO.mp4",
+                                    textField.getText().substring(0, textField.getText().length() - 1) + "VDO.mp4",
                             Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
                     print(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
                             textField.getText().substring(0, textField.getText().length()) + "FULL.pdf");
