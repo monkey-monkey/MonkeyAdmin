@@ -120,7 +120,7 @@ public class Menu extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText());
                 System.out.println("\tIf condition status >>> " + isSubSheetBtnIsSelected());
-                System.out.println(dbPath657);
+                System.out.println(dbPath);
                 if (isSubSheetBtnIsSelected()) {
                     copy(dbPath + textField.getText() + "VDO.mp4", Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
                 } else {

@@ -16,6 +16,8 @@ limitations under the License.
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.printing.PDFPageable;
+import org.apache.pdfbox.printing.PDFPrintable;
+import org.apache.pdfbox.printing.Scaling;
 
 import javax.print.attribute.*;
 import javax.print.attribute.standard.MediaSizeName;
@@ -24,6 +26,7 @@ import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.IOException;
+
 
 class PrintUtil {
     private String path;
@@ -40,7 +43,8 @@ class PrintUtil {
             e.printStackTrace();
         }
         PrinterJob job = PrinterJob.getPrinterJob();
-        job.setPageable(new PDFPageable(doc));
+        job.setPrintable(new PDFPrintable(doc, Scaling.SCALE_TO_FIT));
+//        job.setPageable(new PDFPageable(doc));
         PrintRequestAttributeSet attr = new HashPrintRequestAttributeSet();
         attr.add(Sides.DUPLEX);
         attr.add(MediaSizeName.ISO_A4);
