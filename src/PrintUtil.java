@@ -15,10 +15,11 @@ limitations under the License.
  */
 
 import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.printing.PDFPageable;
 import org.apache.pdfbox.printing.PDFPrintable;
 import org.apache.pdfbox.printing.Scaling;
 
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
 import javax.print.attribute.*;
 import javax.print.attribute.standard.MediaSizeName;
 import javax.print.attribute.standard.Sides;
@@ -30,9 +31,11 @@ import java.io.IOException;
 
 class PrintUtil {
     private String path;
+    private PrinterJob job = PrinterJob.getPrinterJob();
 
     PrintUtil(String path) {
         this.path = path;
+        setPrinter();
     }
 
     void print(){
@@ -42,7 +45,6 @@ class PrintUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        PrinterJob job = PrinterJob.getPrinterJob();
         job.setPrintable(new PDFPrintable(doc, Scaling.SCALE_TO_FIT));
 //        job.setPageable(new PDFPageable(doc));
         PrintRequestAttributeSet attr = new HashPrintRequestAttributeSet();
@@ -52,6 +54,38 @@ class PrintUtil {
             job.print(attr);
         } catch (PrinterException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void setPrinter(){
+        String printerName[] = {"Samsung K7600 Series", "Brother MFC-7860DW Printer"};
+        int index = -1, nameIndex;
+
+        System.out.println("First condition: " + path.contains("TEST"));
+        System.out.println("Second condition: " + (path.substring(path.indexOf('-', path.indexOf('-') + 1)).charAt(2) == 'T'));
+        if (path.contains("TEST") || path.substring(path.indexOf('-', path.indexOf('-') + 1)).charAt(2) == 'T'){
+            nameIndex = 1;
+        }else {
+            nameIndex = 0;
+        }
+
+        PrintRequestAttributeSet attr = new HashPrintRequestAttributeSet();
+        attr.add(Sides.DUPLEX);
+        attr.add(MediaSizeName.ISO_A4);
+
+        PrintService[] service = PrintServiceLookup.lookupPrintServices(null, attr);
+        for (int i = 0; i < service.length; i++){
+            System.out.println("Printer List -> " + service[i].getName());
+            if (service[i].getName().equals(printerName[nameIndex])){
+                index = i;
+            }
+        }
+
+        try {
+            job.setPrintService(service[index]);
+            System.out.println("Destination Printer -> " + job.getPrintService().getName());
+        } catch (PrinterException e) {
+            System.out.println("Printer not found");
         }
     }
 }
