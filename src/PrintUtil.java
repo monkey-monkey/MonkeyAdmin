@@ -54,6 +54,13 @@ class PrintUtil {
             job.print(attr);
         } catch (PrinterException e) {
             e.printStackTrace();
+        }finally {
+            if (doc != null){
+                try {
+                    doc.close();
+                } catch (IOException ignored) {
+                }
+            }
         }
     }
 
