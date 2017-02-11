@@ -6,13 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aad9b7da-237c-485b-a2c0-ec45e68d8c78" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/PrintUtil.class" afterPath="$PROJECT_DIR$/bin/PrintUtil.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/MonkeyAdmin_jar/MonkeyAdmin.jar" afterPath="$PROJECT_DIR$/out/artifacts/MonkeyAdmin_jar/MonkeyAdmin.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/.idea/workspace.xml" afterPath="$PROJECT_DIR$/bin/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/PrintUtil.java" afterPath="$PROJECT_DIR$/src/PrintUtil.java" />
-    </list>
+    <list default="true" id="aad9b7da-237c-485b-a2c0-ec45e68d8c78" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
