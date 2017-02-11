@@ -50,18 +50,18 @@ class PrintUtil {
         PrintRequestAttributeSet attr = new HashPrintRequestAttributeSet();
         attr.add(Sides.DUPLEX);
         attr.add(MediaSizeName.ISO_A4);
-//        try {
-//            job.print(attr);
-//        } catch (PrinterException e) {
-//            e.printStackTrace();
-//        }finally {
-//            if (doc != null){
-//                try {
-//                    doc.close();
-//                } catch (IOException ignored) {
-//                }
-//            }
-//        }
+        try {
+            job.print(attr);
+        } catch (PrinterException e) {
+            e.printStackTrace();
+        }finally {
+            if (doc != null){
+                try {
+                    doc.close();
+                } catch (IOException ignored) {
+                }
+            }
+        }
     }
 
     private void setPrinter(){
