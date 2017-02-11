@@ -50,18 +50,18 @@ class PrintUtil {
         PrintRequestAttributeSet attr = new HashPrintRequestAttributeSet();
         attr.add(Sides.DUPLEX);
         attr.add(MediaSizeName.ISO_A4);
-        try {
-            job.print(attr);
-        } catch (PrinterException e) {
-            e.printStackTrace();
-        }finally {
-            if (doc != null){
-                try {
-                    doc.close();
-                } catch (IOException ignored) {
-                }
-            }
-        }
+//        try {
+//            job.print(attr);
+//        } catch (PrinterException e) {
+//            e.printStackTrace();
+//        }finally {
+//            if (doc != null){
+//                try {
+//                    doc.close();
+//                } catch (IOException ignored) {
+//                }
+//            }
+//        }
     }
 
     private void setPrinter(){
@@ -103,15 +103,16 @@ class PrintUtil {
         }
     }
     private int getFirstNumIndexFromPath(){
-        int index = path.length();
+        String tempPath = path.substring(17);
+        int index = tempPath.length();
         for (int i = 0; i < 10; i++) {
             try {
-                int temp = path.indexOf((char) (48 + i));
+                int temp = tempPath.indexOf((char) (48 + i));
                 if (temp == -1) continue;
                 if (temp < index) index = temp;
             } catch (Exception ignored) {
             }
         }
-        return index;
+        return index + 17;
     }
 }
