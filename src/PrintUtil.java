@@ -70,7 +70,8 @@ class PrintUtil {
 
         System.out.println("First condition: " + path.contains("TEST"));
         System.out.println("Second condition: " + (path.substring(path.indexOf('-', path.indexOf('-') + 1)).charAt(2) == 'T'));
-        if (path.contains("TEST") || path.substring(path.indexOf('-', path.indexOf('-') + 1)).charAt(2) == 'T'){
+        System.out.println("Third condition: " + (path.substring(path.indexOf('-', path.indexOf('-') + 1)).charAt(1) != 'X'));
+        if (path.contains("TEST") || ((path.substring(path.indexOf('-', path.indexOf('-') + 1)).charAt(2) == 'T') && (path.substring(path.indexOf('-', path.indexOf('-') + 1)).charAt(1) != 'X'))){
             nameIndex = 1;
         }else {
             nameIndex = 0;
