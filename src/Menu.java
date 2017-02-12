@@ -149,7 +149,7 @@ public class Menu extends JFrame {
                 System.out.println(dbPath);
                 if (isSubSheetBtnIsSelected()) {
                     print(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
-                            textField.getText().substring(0, textField.getText().length()) + levelLabel + ".pdf");
+                            textField.getText() + levelLabel + ".pdf");
                 } else {
                     print(dbPath + levelLabel + ".pdf");
                 }
