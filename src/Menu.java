@@ -55,7 +55,7 @@ public class Menu extends JFrame {
             try {
 //                frame = new Menu("159991");
                 frame = new Menu(args[0]);
-                frame.setTitle("Monkey Admin Version 1.1.1");
+                frame.setTitle("Monkey Admin Version 1.1.2");
                 frame.setExtendedState(MAXIMIZED_BOTH);
                 frame.setVisible(true);
             } catch (Exception e) {
@@ -148,8 +148,21 @@ public class Menu extends JFrame {
                 }
                 System.out.println(dbPath);
                 if (isSubSheetBtnIsSelected()) {
-                    print(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
-                            textField.getText() + levelLabel + ".pdf");
+                    System.out.println((dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\").substring(
+                            0,
+                            (dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\").length() - levelLabel.length() - 1
+                            )
+                    );
+                    System.out.println(textField.getText());
+                    System.out.println(levelLabel);
+//                    print(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
+//                            textField.getText() + ".pdf");
+                    print((dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\").substring(
+                            0,
+                            (dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\").length() - levelLabel.length() - 1)
+                            + "\\" +
+                            textField.getText() + ".pdf"
+                    );
                 } else {
                     print(dbPath + levelLabel + ".pdf");
                 }

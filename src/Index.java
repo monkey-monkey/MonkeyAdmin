@@ -35,7 +35,7 @@ public class Index extends JFrame {
         EventQueue.invokeLater(() -> {
             try {
                 Index frame = new Index();
-                frame.setTitle("Monkey Admin Version 1.1.1");
+                frame.setTitle("Monkey Admin Version 1.1.2");
                 frame.setExtendedState(MAXIMIZED_BOTH);
                 frame.setVisible(true);
             } catch (Exception e) {
