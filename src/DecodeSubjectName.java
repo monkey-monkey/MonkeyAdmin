@@ -60,14 +60,12 @@ public class DecodeSubjectName {
         return fullName;
     }
 
-
-    private int indexOfFirstNum(String levelName){
-        for (int i = 0; i < levelName.length(); i++){
-            for (int j = 0; j < 10; j ++){
+    private int indexOfFirstNum(String levelName) {
+        for (int i = 0; i < levelName.length(); i++) {
+            for (int j = 0; j < 10; j++) {
                 if (Character.toString(levelName.charAt(i)).equals(Integer.toString(j))) return i;
             }
         }
         return -1;
     }
-
 }

@@ -397,7 +397,7 @@ public class Menu extends JFrame {
         }
 
 		/*
-		 * Set attribute, position, event listener to sub sheet button
+         * Set attribute, position, event listener to sub sheet button
 		 */
         for (int i = 0; i < subSheetBtn.size(); i++) {
             subSheetBtn.get(i).setBackground(Color.WHITE);

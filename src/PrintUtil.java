@@ -38,7 +38,7 @@ class PrintUtil {
         setPrinter();
     }
 
-    void print(){
+    void print() {
         PDDocument doc = null;
         try {
             doc = PDDocument.load(new File(path));
@@ -46,25 +46,24 @@ class PrintUtil {
             e.printStackTrace();
         }
         job.setPrintable(new PDFPrintable(doc, Scaling.SCALE_TO_FIT));
-//        job.setPageable(new PDFPageable(doc));
         PrintRequestAttributeSet attr = new HashPrintRequestAttributeSet();
         attr.add(Sides.DUPLEX);
         attr.add(MediaSizeName.ISO_A4);
-        try {
-            job.print(attr);
-        } catch (PrinterException e) {
-            e.printStackTrace();
-        }finally {
-            if (doc != null){
-                try {
-                    doc.close();
-                } catch (IOException ignored) {
-                }
-            }
-        }
+//        try {
+//            job.print(attr);
+//        } catch (PrinterException e) {
+//            e.printStackTrace();
+//        } finally {
+//            if (doc != null) {
+//                try {
+//                    doc.close();
+//                } catch (IOException ignored) {
+//                }
+//            }
+//        }
     }
 
-    private void setPrinter(){
+    private void setPrinter() {
         String printerName[] = {"Samsung K7600 Series", "Brother MFC-7860DW Printer"};
         int index = -1, nameIndex;
 
@@ -77,9 +76,11 @@ class PrintUtil {
 //            nameIndex = 0;
 //        }
 
-        if (path.contains("TEST") || (path.charAt(getFirstNumIndexFromPath() - 1) == 'T')){
+        System.out.println(path);
+        System.out.println("test" + (path.charAt(getFirstNumIndexFromPath() - 1)));
+        if (path.contains("TEST") || (path.charAt(getFirstNumIndexFromPath() - 1) == 'T')) {
             nameIndex = 1;
-        }else {
+        } else {
             nameIndex = 0;
         }
 
@@ -88,9 +89,9 @@ class PrintUtil {
         attr.add(MediaSizeName.ISO_A4);
 
         PrintService[] service = PrintServiceLookup.lookupPrintServices(null, attr);
-        for (int i = 0; i < service.length; i++){
+        for (int i = 0; i < service.length; i++) {
             System.out.println("Printer List -> " + service[i].getName());
-            if (service[i].getName().equals(printerName[nameIndex])){
+            if (service[i].getName().equals(printerName[nameIndex])) {
                 index = i;
             }
         }
@@ -102,7 +103,8 @@ class PrintUtil {
             System.out.println("Printer not found");
         }
     }
-    private int getFirstNumIndexFromPath(){
+
+    private int getFirstNumIndexFromPath() {
         String tempPath = path.substring(17);
         int index = tempPath.length();
         for (int i = 0; i < 10; i++) {
