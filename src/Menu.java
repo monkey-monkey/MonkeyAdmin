@@ -268,6 +268,7 @@ public class Menu extends JFrame {
         levelBtn.add(new JToggleButton("XC"));
         levelBtn.add(new JToggleButton("XCA"));
         levelBtn.add(new JToggleButton("XCN"));
+        levelBtn.add(new JToggleButton("XDE"));
         levelBtn.add(new JToggleButton("XEL"));
         levelBtn.add(new JToggleButton("XF"));
         levelBtn.add(new JToggleButton("XG"));
