@@ -120,14 +120,18 @@ public class Menu extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 textField.setBackground(new Color(229, 66, 66));
                 System.out.println("\tIf condition status >>> " + isSubSheetBtnIsSelected());
+                String levelLabel = null;
+                for (JToggleButton aSheetSetBtn : sheetSetBtn) {
+                    if (aSheetSetBtn.isSelected()) levelLabel = aSheetSetBtn.getLabel();
+                }
                 if (isSubSheetBtnIsSelected()) {
                     DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText().substring(0, textField.getText().length() - 1));
                     copy(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
-                                    textField.getText().substring(0, textField.getText().length() - 1) + "VDO.mp4",
+                                    textField.getText().substring(0, textField.getText().length() - 1) + levelLabel + "VDO.mp4",
                             Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
                 } else {
                     DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText());
-                    copy(dbPath + "VDO.mp4", Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+                    copy(dbPath +"VDO.mp4", Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
                 }
                 clear();
                 frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
@@ -150,16 +154,13 @@ public class Menu extends JFrame {
                 if (isSubSheetBtnIsSelected()) {
                     System.out.println((dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\").substring(
                             0,
-                            (dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\").length() - levelLabel.length() - 1
-                            )
+                            (dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\").length() - (levelLabel != null ? levelLabel.length() : 0) - 1)
                     );
                     System.out.println(textField.getText());
                     System.out.println(levelLabel);
-//                    print(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
-//                            textField.getText() + ".pdf");
                     print((dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\").substring(
                             0,
-                            (dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\").length() - levelLabel.length() - 1)
+                            (dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\").length() - (levelLabel != null ? levelLabel.length() : 0) - 1)
                             + "\\" +
                             textField.getText() + ".pdf"
                     );
@@ -178,10 +179,14 @@ public class Menu extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 textField.setBackground(new Color(229, 66, 66));
+                String levelLabel = null;
+                for (JToggleButton aSheetSetBtn : sheetSetBtn) {
+                    if (aSheetSetBtn.isSelected()) levelLabel = aSheetSetBtn.getLabel();
+                }
                 if (isSubSheetBtnIsSelected()) {
                     DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText().substring(0, textField.getText().length() - 1));
                     copy(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
-                                    textField.getText().substring(0, textField.getText().length() - 1) + "VDO.mp4",
+                                    textField.getText().substring(0, textField.getText().length() - 1) + levelLabel +"VDO.mp4",
                             Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
                     print(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
                             textField.getText().substring(0, textField.getText().length()) + "FULL.pdf");
