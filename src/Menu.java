@@ -16,15 +16,11 @@ limitations under the License.
 
 import java.awt.*;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
+import java.io.File;
 import java.util.ArrayList;
 
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JToggleButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
@@ -128,12 +124,22 @@ public class Menu extends JFrame {
                 }
                 if (isSubSheetBtnIsSelected()) {
                     DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText().substring(0, textField.getText().length() - 1));
-                    copy(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
-                                    textField.getText().substring(0, textField.getText().length() - 1) + subSheetLabel + "VDO.mp4",
-                            Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+                    File temp = new File(Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+                    if (!temp.exists()) {
+                        copy(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
+                                        textField.getText().substring(0, textField.getText().length() - 1) + subSheetLabel + "VDO.mp4",
+                                Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Can't copy file", "Error: File already exist", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 } else {
                     DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText());
-                    copy(dbPath + "VDO.mp4", Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+                    File temp = new File(Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+                    if (!temp.exists()) {
+                        copy(dbPath + "VDO.mp4", Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Can't copy file", "Error: File already exist", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
                 clear();
                 frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
@@ -187,15 +193,25 @@ public class Menu extends JFrame {
                 }
                 if (isSubSheetBtnIsSelected()) {
                     DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText().substring(0, textField.getText().length() - 1));
-                    copy(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
-                                    textField.getText().substring(0, textField.getText().length() - 1) + subSheetLabel + "VDO.mp4",
-                            Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
-                    print(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
-                            textField.getText().substring(0, textField.getText().length()) + "FULL.pdf");
+                    File temp = new File(Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+                    if (!temp.exists()) {
+                        copy(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
+                                        textField.getText().substring(0, textField.getText().length() - 1) + subSheetLabel + "VDO.mp4",
+                                Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+                        print(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
+                                textField.getText().substring(0, textField.getText().length()) + "FULL.pdf");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Can't copy file", "Error: File already exist", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 } else {
                     DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText());
-                    copy(dbPath + "VDO.mp4", Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
-                    print(dbPath + "FULL.pdf");
+                    File temp = new File(Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+                    if (!temp.exists()) {
+                        copy(dbPath + "VDO.mp4", Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+                        print(dbPath + "FULL.pdf");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Can't copy file", "Error: File already exist", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
                 clear();
                 frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
@@ -215,15 +231,25 @@ public class Menu extends JFrame {
                 }
                 if (isSubSheetBtnIsSelected()) {
                     DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText().substring(0, textField.getText().length() - 1));
-                    copy(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
-                                    textField.getText().substring(0, textField.getText().length() - 1) + subSheetLabel + "VDO.mp4",
-                            Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
-                    expressPrint(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
-                            textField.getText().substring(0, textField.getText().length()) + "FULL.pdf");
+                    File temp = new File(Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+                    if (!temp.exists()) {
+                        copy(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
+                                        textField.getText().substring(0, textField.getText().length() - 1) + subSheetLabel + "VDO.mp4",
+                                Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+                        expressPrint(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
+                                textField.getText().substring(0, textField.getText().length()) + "FULL.pdf");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Can't copy file", "Error: File already exist", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 } else {
                     DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText());
-                    copy(dbPath + "VDO.mp4", Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
-                    expressPrint(dbPath + "FULL.pdf");
+                    File temp = new File(Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+                    if (!temp.exists()) {
+                        copy(dbPath + "VDO.mp4", Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+                        expressPrint(dbPath + "FULL.pdf");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Can't copy file", "Error: File already exist", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
                 clear();
                 frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
