@@ -203,6 +203,34 @@ public class Menu extends JFrame {
         });
 
         /*
+         * Express button
+         */
+        actionBtn.get(3).addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                textField.setBackground(new Color(229, 66, 66));
+                String subSheetLabel = null;
+                for (JToggleButton aSubSheetButton : subSheetBtn) {
+                    if (aSubSheetButton.isSelected()) subSheetLabel = aSubSheetButton.getLabel();
+                }
+                if (isSubSheetBtnIsSelected()) {
+                    DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText().substring(0, textField.getText().length() - 1));
+                    copy(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
+                                    textField.getText().substring(0, textField.getText().length() - 1) + subSheetLabel + "VDO.mp4",
+                            Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+                    expressPrint(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
+                            textField.getText().substring(0, textField.getText().length()) + "FULL.pdf");
+                } else {
+                    DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText());
+                    copy(dbPath + "VDO.mp4", Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+                    expressPrint(dbPath + "FULL.pdf");
+                }
+                clear();
+                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+            }
+        });
+
+        /*
           Set attribute for action button and add to content pane
          */
         for (JButton anActionBtn : actionBtn) {
@@ -447,7 +475,7 @@ public class Menu extends JFrame {
         sheetSetBtn.add(new JToggleButton("TEST"));
 
 		/*
-		 * Set attribute, position, event listener to sheet set button
+         * Set attribute, position, event listener to sheet set button
 		 */
         for (int i = 0; i < sheetSetBtn.size(); i++) {
             sheetSetBtn.get(i).setBackground(Color.WHITE);
@@ -566,7 +594,17 @@ public class Menu extends JFrame {
      * @param path path of the file to be print
      */
     private void print(String path) {
-        PrintUtil printer = new PrintUtil(path);
+        PrintUtil printer = new PrintUtil(path, false);
+        printer.print();
+    }
+
+    /**
+     * The method that call print() from printUtil
+     *
+     * @param path path of the file to be print
+     */
+    private void expressPrint(String path) {
+        PrintUtil printer = new PrintUtil(path, true);
         printer.print();
     }
 
@@ -676,9 +714,11 @@ public class Menu extends JFrame {
             actionBtn.get(0).setEnabled(true);
             actionBtn.get(1).setEnabled(false);
             actionBtn.get(2).setEnabled(true);
+            actionBtn.get(3).setEnabled(true);
             actionBtn.get(0).setBackground(new Color(119, 234, 173));
             actionBtn.get(1).setBackground(Color.WHITE);
             actionBtn.get(2).setBackground(new Color(119, 234, 173));
+            actionBtn.get(3).setBackground(new Color(119, 234, 173));
             for (JToggleButton aSheetSetBtn : sheetSetBtn) {
                 aSheetSetBtn.setEnabled(true);
                 aSheetSetBtn.setBackground(new Color(119, 234, 173));
@@ -686,8 +726,10 @@ public class Menu extends JFrame {
         } else {
             actionBtn.get(0).setEnabled(false);
             actionBtn.get(2).setEnabled(false);
+            actionBtn.get(3).setEnabled(false);
             actionBtn.get(0).setBackground(Color.WHITE);
             actionBtn.get(2).setBackground(Color.WHITE);
+            actionBtn.get(3).setBackground(Color.WHITE);
         }
     }
 

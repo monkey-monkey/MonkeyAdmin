@@ -33,9 +33,13 @@ class PrintUtil {
     private String path;
     private PrinterJob job = PrinterJob.getPrinterJob();
 
-    PrintUtil(String path) {
+    PrintUtil(String path, boolean isExpress) {
         this.path = path;
-        setPrinter();
+        if (isExpress) {
+            setExpressPrinter();
+        } else {
+            setPrinter();
+        }
     }
 
     void print() {
@@ -49,22 +53,52 @@ class PrintUtil {
         PrintRequestAttributeSet attr = new HashPrintRequestAttributeSet();
         attr.add(Sides.DUPLEX);
         attr.add(MediaSizeName.ISO_A4);
-//        try {
-//            job.print(attr);
-//        } catch (PrinterException e) {
-//            e.printStackTrace();
-//        } finally {
-//            if (doc != null) {
-//                try {
-//                    doc.close();
-//                } catch (IOException ignored) {
-//                }
-//            }
-//        }
+        try {
+            job.print(attr);
+        } catch (PrinterException e) {
+            e.printStackTrace();
+        } finally {
+            if (doc != null) {
+                try {
+                    doc.close();
+                } catch (IOException ignored) {
+                }
+            }
+        }
     }
 
     private void setPrinter() {
         String printerName[] = {"Samsung K7600 Series", "Brother MFC-7860DW Printer"};
+        int index = -1, nameIndex;
+
+        if (path.contains("TEST") || (path.charAt(getFirstNumIndexFromPath() - 1) == 'T')) {
+            nameIndex = 1;
+        } else {
+            nameIndex = 0;
+        }
+
+        PrintRequestAttributeSet attr = new HashPrintRequestAttributeSet();
+        attr.add(Sides.DUPLEX);
+        attr.add(MediaSizeName.ISO_A4);
+
+        PrintService[] service = PrintServiceLookup.lookupPrintServices(null, attr);
+        for (int i = 0; i < service.length; i++) {
+            System.out.println("Printer List -> " + service[i].getName());
+            if (service[i].getName().equals(printerName[nameIndex])) {
+                index = i;
+            }
+        }
+
+        try {
+            job.setPrintService(service[index]);
+            System.out.println("Destination Printer -> " + job.getPrintService().getName());
+        } catch (PrinterException e) {
+            System.out.println("Printer not found");
+        }
+    }
+
+    private void setExpressPrinter() {
+        String printerName[] = {"Brother MFC-L2700DW series", "Brother MFC-7860DW Printer"};
         int index = -1, nameIndex;
 
         if (path.contains("TEST") || (path.charAt(getFirstNumIndexFromPath() - 1) == 'T')) {
