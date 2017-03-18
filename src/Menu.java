@@ -100,6 +100,7 @@ public class Menu extends JFrame {
         actionBtn.add(new JButton("VDO"));
         actionBtn.add(new JButton("Print"));
         actionBtn.add(new JButton("Print & VDO"));
+        actionBtn.add(new JButton("Express"));
 
 		/*
          * Set position of action button
@@ -107,6 +108,7 @@ public class Menu extends JFrame {
         actionBtn.get(0).setBounds(1650, 400, 220, 120);
         actionBtn.get(1).setBounds(1650, 890, 200, 100);
         actionBtn.get(2).setBounds(1650, 200, 220, 120);
+        actionBtn.get(3).setBounds(1650, 650, 220, 120);
 
 		/*
          * Add action to action button
