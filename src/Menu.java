@@ -120,18 +120,18 @@ public class Menu extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 textField.setBackground(new Color(229, 66, 66));
                 System.out.println("\tIf condition status >>> " + isSubSheetBtnIsSelected());
-                String levelLabel = null;
-                for (JToggleButton aSheetSetBtn : sheetSetBtn) {
-                    if (aSheetSetBtn.isSelected()) levelLabel = aSheetSetBtn.getLabel();
+                String subSheetLabel = null;
+                for (JToggleButton aSubSheetButton : subSheetBtn) {
+                    if (aSubSheetButton.isSelected()) subSheetLabel = aSubSheetButton.getLabel();
                 }
                 if (isSubSheetBtnIsSelected()) {
                     DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText().substring(0, textField.getText().length() - 1));
                     copy(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
-                                    textField.getText().substring(0, textField.getText().length() - 1) + levelLabel + "VDO.mp4",
+                                    textField.getText().substring(0, textField.getText().length() - 1) + subSheetLabel + "VDO.mp4",
                             Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
                 } else {
                     DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText());
-                    copy(dbPath +"VDO.mp4", Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+                    copy(dbPath + "VDO.mp4", Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
                 }
                 clear();
                 frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
@@ -179,14 +179,14 @@ public class Menu extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 textField.setBackground(new Color(229, 66, 66));
-                String levelLabel = null;
-                for (JToggleButton aSheetSetBtn : sheetSetBtn) {
-                    if (aSheetSetBtn.isSelected()) levelLabel = aSheetSetBtn.getLabel();
+                String subSheetLabel = null;
+                for (JToggleButton aSubSheetButton : subSheetBtn) {
+                    if (aSubSheetButton.isSelected()) subSheetLabel = aSubSheetButton.getLabel();
                 }
                 if (isSubSheetBtnIsSelected()) {
                     DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText().substring(0, textField.getText().length() - 1));
                     copy(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
-                                    textField.getText().substring(0, textField.getText().length() - 1) + levelLabel +"VDO.mp4",
+                                    textField.getText().substring(0, textField.getText().length() - 1) + subSheetLabel + "VDO.mp4",
                             Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
                     print(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
                             textField.getText().substring(0, textField.getText().length()) + "FULL.pdf");
@@ -436,7 +436,7 @@ public class Menu extends JFrame {
         }
 
 		/*
-		 * Create object sheet set button
+         * Create object sheet set button
 		 */
         sheetSetBtn.add(new JToggleButton("VDO"));
         sheetSetBtn.add(new JToggleButton("SKILL"));

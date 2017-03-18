@@ -12,7 +12,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/pdfbox-app-2.0.4.jar!/" />
+          <root url="jar://C:/download/pdfbox-app-2.0.4.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
