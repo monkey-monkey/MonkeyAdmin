@@ -67,15 +67,6 @@ class PrintUtil {
         String printerName[] = {"Samsung K7600 Series", "Brother MFC-7860DW Printer"};
         int index = -1, nameIndex;
 
-//        System.out.println("First condition: " + path.contains("TEST"));
-//        System.out.println("Second condition: " + (path.substring(path.indexOf('-', path.indexOf('-') + 1)).charAt(2) == 'T'));
-//        System.out.println("Third condition: " + (path.substring(path.indexOf('-', path.indexOf('-') + 1)).charAt(1) != 'X'));
-//        if (path.contains("TEST") || ((path.substring(path.indexOf('-', path.indexOf('-') + 1)).charAt(2) == 'T') && (path.substring(path.indexOf('-', path.indexOf('-') + 1)).charAt(1) != 'X'))){
-//            nameIndex = 1;
-//        }else {
-//            nameIndex = 0;
-//        }
-
         if (path.contains("TEST") || (path.charAt(getFirstNumIndexFromPath() - 1) == 'T')) {
             nameIndex = 1;
         } else {
