@@ -29,6 +29,9 @@ public class DecodeSubjectName {
             case 'P':
                 path += "PHYSICS_DB";
                 break;
+            case 'C':
+                path += "CHEMISTRY_DB";
+                break;
             default:
                 break;
         }

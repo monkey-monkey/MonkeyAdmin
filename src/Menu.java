@@ -275,13 +275,14 @@ public class Menu extends JFrame {
 //		subjectBtn.add(new JToggleButton("MI"));
         subjectBtn.add(new JToggleButton("PJ"));
         subjectBtn.add(new JToggleButton("PH"));
+        subjectBtn.add(new JToggleButton("CH"));
 //		subjectBtn.add(new JToggleButton("PI"));
 
 		/*
          * Set attribute, position, event listener to level button
 		 */
         for (int i = 0; i < subjectBtn.size(); i++) {
-            subjectBtn.get(i).setBackground((subjectBtn.get(i).getLabel().charAt(0) == 'M') ? new Color(239, 163, 21) : new Color(208, 137, 244));
+            subjectBtn.get(i).setBackground((subjectBtn.get(i).getLabel().charAt(0) == 'M') ? new Color(239, 163, 21) : (subjectBtn.get(i).getLabel().charAt(0) == 'P') ? new Color(208, 137, 244) : new Color(179, 179, 179));
             subjectBtn.get(i).setFont(new Font("Cordia New", Font.PLAIN, 80));
             subjectBtn.get(i).setBounds(70, 200 + (i * 110), 120, 90);
             final int temp = i;
@@ -296,7 +297,7 @@ public class Menu extends JFrame {
                     clearSubLevelButton();
                     clearSubSheetButton();
                     clearSheetSetBtn();
-                    FileUtil getList = new FileUtil(Index.DB_LOCATION + ((subjectBtn.get(temp).getLabel().charAt(0) == 'M') ? "MATH_DB" : "PHYSICS_DB") + "\\" + subjectBtn.get(temp).getLabel() + "\\");
+                    FileUtil getList = new FileUtil(Index.DB_LOCATION + ((subjectBtn.get(temp).getLabel().charAt(0) == 'M') ? "MATH_DB" : (subjectBtn.get(temp).getLabel().charAt(0) == 'P') ? "PHYSICS_DB" : "CHEMISTRY_DB") + "\\" + subjectBtn.get(temp).getLabel() + "\\");
                     try {
                         listAvailableLevel = getList.getListNameFromFolder();
                     } catch (FileNotFoundException ignored) {
@@ -331,6 +332,7 @@ public class Menu extends JFrame {
         levelBtn.add(new JToggleButton("XL"));
         levelBtn.add(new JToggleButton("XM"));
         levelBtn.add(new JToggleButton("XN"));
+        levelBtn.add(new JToggleButton("XO"));
         levelBtn.add(new JToggleButton("XP"));
         levelBtn.add(new JToggleButton("XR"));
         levelBtn.add(new JToggleButton("XS"));
