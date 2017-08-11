@@ -334,6 +334,7 @@ public class Menu extends JFrame {
         levelBtn.add(new JToggleButton("XN"));
         levelBtn.add(new JToggleButton("XO"));
         levelBtn.add(new JToggleButton("XP"));
+        levelBtn.add(new JToggleButton("XPS"));
         levelBtn.add(new JToggleButton("XR"));
         levelBtn.add(new JToggleButton("XS"));
         levelBtn.add(new JToggleButton("XSS"));
@@ -405,7 +406,7 @@ public class Menu extends JFrame {
         for (int i = 0; i < subLevelBtn.size(); i++) {
             subLevelBtn.get(i).setBackground(Color.WHITE);
             subLevelBtn.get(i).setFont(new Font("Cordia New", Font.PLAIN, 70));
-            subLevelBtn.get(i).setBounds(1080, 200 + (i * 110), 100, 80);
+            subLevelBtn.get(i).setBounds(1070, 200 + (i * 110), 100, 80);
             subLevelBtn.get(i).setEnabled(false);
             final int temp = i;
             subLevelBtn.get(i).addMouseListener(new MouseAdapter() {
@@ -508,7 +509,7 @@ public class Menu extends JFrame {
         for (int i = 0; i < sheetSetBtn.size(); i++) {
             sheetSetBtn.get(i).setBackground(Color.WHITE);
             sheetSetBtn.get(i).setFont(new Font("Cordia New", Font.PLAIN, 50));
-            sheetSetBtn.get(i).setBounds(990 + (150 * i), 920, 130, 50);
+            sheetSetBtn.get(i).setBounds(105z0 + (150 * i), 920, 130, 50);
             final int temp = i;
             sheetSetBtn.get(i).addMouseListener(new MouseAdapter() {
                 @Override

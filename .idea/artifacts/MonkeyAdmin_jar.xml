@@ -6,7 +6,6 @@
         <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
       </element>
       <element id="module-output" name="MonkeyAdmin" />
-      <element id="extracted-dir" path="C:/download/pdfbox-app-2.0.4.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>
