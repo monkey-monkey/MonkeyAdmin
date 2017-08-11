@@ -509,7 +509,7 @@ public class Menu extends JFrame {
         for (int i = 0; i < sheetSetBtn.size(); i++) {
             sheetSetBtn.get(i).setBackground(Color.WHITE);
             sheetSetBtn.get(i).setFont(new Font("Cordia New", Font.PLAIN, 50));
-            sheetSetBtn.get(i).setBounds(105z0 + (150 * i), 920, 130, 50);
+            sheetSetBtn.get(i).setBounds(1050 + (150 * i), 920, 130, 50);
             final int temp = i;
             sheetSetBtn.get(i).addMouseListener(new MouseAdapter() {
                 @Override
@@ -546,30 +546,30 @@ public class Menu extends JFrame {
      */
     @SuppressWarnings("deprecation")
     private void setText() {
-        String temp = "";
+        StringBuilder temp = new StringBuilder();
         for (JToggleButton aSubjectBtn : subjectBtn) {
-            if (aSubjectBtn.isSelected()) temp += aSubjectBtn.getLabel();
+            if (aSubjectBtn.isSelected()) temp.append(aSubjectBtn.getLabel());
         }
-        temp += "-";
+        temp.append("-");
         for (JToggleButton aLevelBtn : levelBtn) {
-            if (aLevelBtn.isSelected()) temp += aLevelBtn.getLabel();
+            if (aLevelBtn.isSelected()) temp.append(aLevelBtn.getLabel());
         }
         setLevelColor();
         for (JToggleButton aSubLevelBtn : subLevelBtn) {
-            if (aSubLevelBtn.isSelected()) temp += aSubLevelBtn.getLabel();
+            if (aSubLevelBtn.isSelected()) temp.append(aSubLevelBtn.getLabel());
         }
         setSubLevelColor();
-        currentSheetCode = temp;
+        currentSheetCode = temp.toString();
         if (!sheetNum.equals("00")) {
-            temp += sheetNum;
+            temp.append(sheetNum);
         }
         for (JToggleButton aSubSheetBtn : subSheetBtn) {
-            if (aSubSheetBtn.isSelected()) temp += aSubSheetBtn.getLabel();
+            if (aSubSheetBtn.isSelected()) temp.append(aSubSheetBtn.getLabel());
         }
         for (JToggleButton aSheetSetBtn : sheetSetBtn) {
-            if (aSheetSetBtn.isSelected()) temp += aSheetSetBtn.getLabel();
+            if (aSheetSetBtn.isSelected()) temp.append(aSheetSetBtn.getLabel());
         }
-        textField.setText(temp);
+        textField.setText(temp.toString());
     }
 
     /*
