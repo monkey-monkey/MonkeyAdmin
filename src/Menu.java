@@ -203,7 +203,16 @@ public class Menu extends JFrame {
                         print(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
                                 textField.getText().substring(0, textField.getText().length()) + "FULL.pdf");
                     } else {
-                        JOptionPane.showMessageDialog(null, "Can't copy file", "Error: File already exist", JOptionPane.INFORMATION_MESSAGE);
+                        JDialog.setDefaultLookAndFeelDecorated(true);
+                        int response = JOptionPane.showConfirmDialog(null, "File already exist, do you want to continue?", "Confirm",
+                                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                        if (response == JOptionPane.YES_OPTION) {
+                            copy(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
+                                            textField.getText().substring(0, textField.getText().length() - 1) + subSheetLabel + "VDO.mp4",
+                                    Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+                            print(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
+                                    textField.getText().substring(0, textField.getText().length()) + "FULL.pdf");
+                        }
                     }
                 } else {
                     DecodeSubjectName dbPath = new DecodeSubjectName(textField.getText());
@@ -212,7 +221,16 @@ public class Menu extends JFrame {
                         copy(dbPath + "VDO.mp4", Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
                         print(dbPath + "FULL.pdf");
                     } else {
-                        JOptionPane.showMessageDialog(null, "Can't copy file", "Error: File already exist", JOptionPane.INFORMATION_MESSAGE);
+                        JDialog.setDefaultLookAndFeelDecorated(true);
+                        int response = JOptionPane.showConfirmDialog(null, "File already exist, do you want to continue?", "Confirm",
+                                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                        if (response == JOptionPane.YES_OPTION) {
+                            copy(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
+                                            textField.getText().substring(0, textField.getText().length() - 1) + subSheetLabel + "VDO.mp4",
+                                    Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+//                            print(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
+//                                    textField.getText().substring(0, textField.getText().length()) + "FULL.pdf");
+                        }
                     }
                 }
                 clear();
