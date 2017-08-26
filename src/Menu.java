@@ -97,7 +97,7 @@ public class Menu extends JFrame {
         actionBtn.add(new JButton("Print"));
         actionBtn.add(new JButton("Print & VDO"));
         actionBtn.add(new JButton("Express"));
-        actionBtn.add(new JButton("Replace"));
+//        actionBtn.add(new JButton("Replace"));
 
 		/*
          * Set position of action button
@@ -106,7 +106,7 @@ public class Menu extends JFrame {
         actionBtn.get(1).setBounds(1650, 730, 220, 120);
         actionBtn.get(2).setBounds(1650, 200, 220, 120);
         actionBtn.get(3).setBounds(1650, 550, 220, 120);
-        actionBtn.get(4).setBounds(1650, 880, 220, 120);
+//        actionBtn.get(4).setBounds(1650, 880, 220, 120);
 
 		/*
          * Add action to action button
@@ -636,7 +636,7 @@ public class Menu extends JFrame {
     private void copy(String oriPath, String desPath) {
         System.out.println("Menu.copy() -> oriPath:" + oriPath + " desPath: " + desPath);
         FileUtil file = new FileUtil(oriPath);
-//        file.copy(desPath);
+        file.copy(desPath);
     }
 
     /**
