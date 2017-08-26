@@ -53,6 +53,7 @@ class PrintUtil {
         PrintRequestAttributeSet attr = new HashPrintRequestAttributeSet();
         attr.add(Sides.DUPLEX);
         attr.add(MediaSizeName.ISO_A4);
+        System.out.println("Printing =>" + path);
         try {
             job.print(attr);
         } catch (PrinterException e) {

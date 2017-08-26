@@ -51,7 +51,7 @@ public class Menu extends JFrame {
             try {
 //                frame = new Menu("159991");
                 frame = new Menu(args[0]);
-                frame.setTitle("Monkey Admin Version 1.3.0 ");
+                frame.setTitle("Monkey Admin Version 1.5.0 ");
                 frame.setExtendedState(MAXIMIZED_BOTH);
                 frame.setVisible(true);
             } catch (Exception e) {
@@ -225,11 +225,8 @@ public class Menu extends JFrame {
                         int response = JOptionPane.showConfirmDialog(null, "File already exist, do you want to continue?", "Confirm",
                                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                         if (response == JOptionPane.YES_OPTION) {
-                            copy(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
-                                            textField.getText().substring(0, textField.getText().length() - 1) + subSheetLabel + "VDO.mp4",
-                                    Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
-//                            print(dbPath.toString().substring(0, dbPath.toString().lastIndexOf('\\')) + "\\" + textField.getText() + "\\" +
-//                                    textField.getText().substring(0, textField.getText().length()) + "FULL.pdf");
+                            copy(dbPath + "VDO.mp4", Index.VDO_LOCATION + id + "\\" + textField.getText() + "VDO.mp4");
+                            print(dbPath + "FULL.pdf");
                         }
                     }
                 }
