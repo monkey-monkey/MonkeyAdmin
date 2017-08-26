@@ -414,8 +414,9 @@ public class Menu extends JFrame {
         subLevelBtn.add(new JToggleButton("P"));
         subLevelBtn.add(new JToggleButton("A"));
         subLevelBtn.add(new JToggleButton("T"));
+        subLevelBtn.add(new JToggleButton("C"));
 
-		
+
 		/*
           Set attribute, position, event listener to sub level button
 		 */
@@ -423,7 +424,7 @@ public class Menu extends JFrame {
         for (int i = 0; i < subLevelBtn.size(); i++) {
             subLevelBtn.get(i).setBackground(Color.WHITE);
             subLevelBtn.get(i).setFont(new Font("Cordia New", Font.PLAIN, 70));
-            subLevelBtn.get(i).setBounds(1070, 200 + (i * 110), 100, 80);
+            subLevelBtn.get(i).setBounds(1070, 200 + (i * 100), 100, 80);
             subLevelBtn.get(i).setEnabled(false);
             final int temp = i;
             subLevelBtn.get(i).addMouseListener(new MouseAdapter() {
@@ -487,29 +488,33 @@ public class Menu extends JFrame {
 		/*
          * Create object sub sheet button
 		 */
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 6; i++) {
             subSheetBtn.add(new JToggleButton(Character.toString((char) (i + 97))));
         }
 
 		/*
          * Set attribute, position, event listener to sub sheet button
 		 */
-        for (int i = 0; i < subSheetBtn.size(); i++) {
-            subSheetBtn.get(i).setBackground(Color.WHITE);
-            subSheetBtn.get(i).setFont(new Font("Cordia New", Font.PLAIN, 70));
-            subSheetBtn.get(i).setBounds(1250 + (i * 110), 700, 100, 100);
-            final int temp = i;
-            subSheetBtn.get(i).addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    for (int j = 0; j < subSheetBtn.size(); j++) {
-                        if (j == temp) continue;
-                        subSheetBtn.get(j).setSelected(false);
+        index = 0;
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 3; j++) {
+                subSheetBtn.get(index).setBackground(Color.WHITE);
+                subSheetBtn.get(index).setFont(new Font("Cordia New", Font.PLAIN, 70));
+                subSheetBtn.get(index).setBounds(1250 + (j * 110), 690 + (i * 110), 100, 100);
+                final int temp = index;
+                subSheetBtn.get(index).addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        for (int j = 0; j < subSheetBtn.size(); j++) {
+                            if (j == temp) continue;
+                            subSheetBtn.get(j).setSelected(false);
+                        }
+                        setText();
                     }
-                    setText();
-                }
-            });
-            contentPane.add(subSheetBtn.get(i));
+                });
+                contentPane.add(subSheetBtn.get(index));
+                index++;
+            }
         }
 
 		/*
@@ -526,7 +531,7 @@ public class Menu extends JFrame {
         for (int i = 0; i < sheetSetBtn.size(); i++) {
             sheetSetBtn.get(i).setBackground(Color.WHITE);
             sheetSetBtn.get(i).setFont(new Font("Cordia New", Font.PLAIN, 50));
-            sheetSetBtn.get(i).setBounds(1050 + (150 * i), 920, 130, 50);
+            sheetSetBtn.get(i).setBounds(1050 + (150 * i), 950, 130, 50);
             final int temp = i;
             sheetSetBtn.get(i).addMouseListener(new MouseAdapter() {
                 @Override
@@ -631,7 +636,7 @@ public class Menu extends JFrame {
     private void copy(String oriPath, String desPath) {
         System.out.println("Menu.copy() -> oriPath:" + oriPath + " desPath: " + desPath);
         FileUtil file = new FileUtil(oriPath);
-        file.copy(desPath);
+//        file.copy(desPath);
     }
 
     /**
