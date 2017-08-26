@@ -51,7 +51,7 @@ public class Menu extends JFrame {
             try {
 //                frame = new Menu("159991");
                 frame = new Menu(args[0]);
-                frame.setTitle("Monkey Admin Version 1.5.0 ");
+                frame.setTitle("Monkey Admin Version 1.4.0 ");
                 frame.setExtendedState(MAXIMIZED_BOTH);
                 frame.setVisible(true);
             } catch (Exception e) {

@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact name="MonkeyAdmin:jar2">
+    <output-path>$PROJECT_DIR$/out/artifacts/MonkeyAdmin_jar2</output-path>
+    <root id="root">
+      <element id="archive" name="MonkeyAdmin.jar">
+        <element id="module-output" name="MonkeyAdmin" />
+      </element>
+      <element id="library" level="project" name="org.apache.pdfbox:pdfbox:2.0.4" />
+    </root>
+  </artifact>
+</component>
