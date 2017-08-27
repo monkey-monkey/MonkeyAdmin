@@ -15,8 +15,7 @@ limitations under the License.
  */
 
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -35,7 +34,7 @@ public class Index extends JFrame {
         EventQueue.invokeLater(() -> {
             try {
                 Index frame = new Index();
-                frame.setTitle("Monkey Admin Version 1.4.0");
+                frame.setTitle("Monkey Admin Version 1.4.1");
                 frame.setExtendedState(MAXIMIZED_BOTH);
                 frame.setVisible(true);
             } catch (Exception e) {
@@ -77,6 +76,19 @@ public class Index extends JFrame {
         textField.setBounds(514, 495, 839, 95);
         contentPane.add(textField);
         textField.setColumns(10);
+
+
+        JButton button = new JButton("159991");
+        button.setFont(new Font("Cordia New", Font.PLAIN, 70));
+        button.setBounds(1600, 850, 250, 150);
+        button.setBackground(new Color(255,255,255));
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                run("159991");
+            }
+        });
+        contentPane.add(button);
     }
 
     private void run(String id) {
