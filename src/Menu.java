@@ -289,19 +289,32 @@ public class Menu extends JFrame {
         subjectBtn.add(new JToggleButton("MK"));
         subjectBtn.add(new JToggleButton("MJ"));
         subjectBtn.add(new JToggleButton("MH"));
-//		subjectBtn.add(new JToggleButton("MI"));
         subjectBtn.add(new JToggleButton("PJ"));
         subjectBtn.add(new JToggleButton("PH"));
         subjectBtn.add(new JToggleButton("CH"));
-//		subjectBtn.add(new JToggleButton("PI"));
+        subjectBtn.add(new JToggleButton("EJ"));
+        subjectBtn.add(new JToggleButton("EH"));
 
 		/*
          * Set attribute, position, event listener to level button
 		 */
         for (int i = 0; i < subjectBtn.size(); i++) {
-            subjectBtn.get(i).setBackground((subjectBtn.get(i).getLabel().charAt(0) == 'M') ? new Color(239, 163, 21) : (subjectBtn.get(i).getLabel().charAt(0) == 'P') ? new Color(208, 137, 244) : new Color(179, 179, 179));
+            switch (subjectBtn.get(i).getLabel().charAt(0)) {
+                case 'M':
+                    subjectBtn.get(i).setBackground(new Color(239, 163, 21));
+                    break;
+                case 'P':
+                    subjectBtn.get(i).setBackground(new Color(208, 137, 244));
+                    break;
+                case 'E':
+                    subjectBtn.get(i).setBackground(new Color(179, 179, 179));
+                    break;
+                case 'C':
+                    subjectBtn.get(i).setBackground(new Color(0, 71, 171));
+                    break;
+            }
             subjectBtn.get(i).setFont(new Font("Cordia New", Font.PLAIN, 80));
-            subjectBtn.get(i).setBounds(70, 200 + (i * 110), 120, 90);
+            subjectBtn.get(i).setBounds(70, 200 + (i * 100), 120, 80);
             final int temp = i;
             subjectBtn.get(i).addMouseListener(new MouseAdapter() {
                 @Override
@@ -314,9 +327,28 @@ public class Menu extends JFrame {
                     clearSubLevelButton();
                     clearSubSheetButton();
                     clearSheetSetBtn();
-                    FileUtil getList = new FileUtil(Index.DB_LOCATION + ((subjectBtn.get(temp).getLabel().charAt(0) == 'M') ? "MATH_DB" : (subjectBtn.get(temp).getLabel().charAt(0) == 'P') ? "PHYSICS_DB" : "CHEMISTRY_DB") + "\\" + subjectBtn.get(temp).getLabel() + "\\");
+                    FileUtil getList;
+                    switch (subjectBtn.get(temp).getLabel().charAt(0)) {
+                        case 'M':
+                            getList = new FileUtil(Index.DB_LOCATION + "MATH_DB" + "\\" + subjectBtn.get(temp).getLabel() + "\\");
+                            break;
+                        case 'P':
+                            getList = new FileUtil(Index.DB_LOCATION + "PHYSICS_DB" + "\\" + subjectBtn.get(temp).getLabel() + "\\");
+                            break;
+                        case 'E':
+                            getList = new FileUtil(Index.DB_LOCATION + "ENGLISH_DB" + "\\" + subjectBtn.get(temp).getLabel() + "\\");
+                            break;
+                        case 'C':
+                            getList = new FileUtil(Index.DB_LOCATION + "CHEMISTRY_DB" + "\\" + subjectBtn.get(temp).getLabel() + "\\");
+                            break;
+                        default:
+                            getList = null;
+                            break;
+                    }
                     try {
-                        listAvailableLevel = getList.getListNameFromFolder();
+                        if (getList != null) {
+                            listAvailableLevel = getList.getListNameFromFolder();
+                        }
                     } catch (FileNotFoundException ignored) {
                     }
                     if (!subjectBtn.get(temp).isSelected()) {
